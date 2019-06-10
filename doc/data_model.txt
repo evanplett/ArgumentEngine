@@ -1,0 +1,40 @@
+@startuml
+
+
+class Postulate {
+   TruthProbability : bool
+}
+
+class Opinion {
+   Belief : bool
+}
+
+class Reference {
+   Link : URL
+}
+
+enum ReasoningMethod {
+   ABDUCTION
+   DEDUCTION
+   INDUCTION
+}
+
+Postulate <|-- Argument
+Argument o-- "1..*" Statement : Premise
+Argument o-- "1" Statement : Conclusion
+Statement o-- "1" Postulate
+
+Argument <|-- Counterargument
+Counterargument o-- "1" Postulate
+
+Postulate <|-- Reference
+
+Argument +-- ReasoningMethod
+Argument "1" o-- ReasoningMethod
+
+User "0..*" - "1" Postulate
+(User, Postulate) .. Opinion
+
+
+
+@enduml
