@@ -1,0 +1,31 @@
+@startuml
+
+database Database
+note right of Database: Provides persistence.
+
+package Interfaces {
+   [REST]
+   [SOAP]
+}
+note right of Interfaces: The interfaces available\nto outside systems.
+
+package Façade {
+   component datamodel1 [
+      Entities from
+      Data Model]
+}
+note left of Façade: The 'pretty' view of the Data Model.\nAllows the Interfaces to have a\nsimplified view of the data.
+
+package BusinessObjects {
+   component datamodel2 [
+      Entities from
+      Data Model]
+}
+
+note right of BusinessObjects: Handles the nitty gritty\nof the data model.
+
+Interfaces --> Façade
+Façade --> BusinessObjects
+BusinessObjects --> Database
+
+@enduml
