@@ -1,5 +1,8 @@
 # Development Chunks
-* Simple Arguments
-* Users opinions
-* Rebutals
-* Identifying Logical Fallacies
+* Increment 1
+ * Simple Arguments
+ * Testing (Jest)
+* Unassigned
+ * Users opinions
+ * Rebutals
+ * Identifying Logical Fallacies
