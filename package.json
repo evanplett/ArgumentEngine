@@ -17,7 +17,7 @@
   },
   "author": "Evan Plett",
   "license": "ISC",
-  "engines": { "node": "8.11.4" },
+  "engines": { "node": "10.16.0" },
   "bugs": {
     "url": "https://github.com/evanplett/ArgumentEngine/issues"
   },
