@@ -35,7 +35,7 @@
 		"json",
 		"node"
 	]
-  }
+  },
   "bugs": {
     "url": "https://github.com/evanplett/ArgumentEngine/issues"
   },
