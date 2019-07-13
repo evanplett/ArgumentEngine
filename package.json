@@ -6,6 +6,7 @@
   "scripts": {
     "build-ts": "tsc",
     "start": "npm run serve",
+    "postinstall": "npm run build-ts",
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w"
@@ -16,6 +17,7 @@
   },
   "author": "Evan Plett",
   "license": "ISC",
+  "engines": { "node": "8.11.4" },
   "bugs": {
     "url": "https://github.com/evanplett/ArgumentEngine/issues"
   },
