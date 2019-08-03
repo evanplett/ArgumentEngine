@@ -4,14 +4,14 @@
   "description": "A project",
   "main": "src/dist/server.js",
   "scripts": {
-    "build-ts": "tsc",
+    "build-ts": "tsc -p src",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "npm run serve",
     "postinstall": "npm run build-ts",
     "serve": "node src/dist/server.js",
     "test": "jest src",
     "watch-node": "nodemon src/dist/server.js",
-    "watch-ts": "tsc -w"
+    "watch-ts": "tsc -w -p src"
   },
   "repository": {
     "type": "git",
