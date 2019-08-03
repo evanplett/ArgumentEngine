@@ -4,7 +4,7 @@
   "description": "A project",
   "main": "src/dist/server.js",
   "scripts": {
-    "build-ts": "tsc --showConfig",
+    "build-ts": "tsc --showConfig --diagnostics",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "npm run serve",
     "postinstall": "npm run build-ts",
