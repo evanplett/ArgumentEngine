@@ -2,15 +2,15 @@
   "name": "argumentengine",
   "version": "1.0.0",
   "description": "A project",
-  "main": "dist/server.js",
+  "main": "src/dist/server.js",
   "scripts": {
     "build-ts": "tsc",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "npm run serve",
     "postinstall": "npm run build-ts",
-    "serve": "node dist/server.js",
+    "serve": "node src/dist/server.js",
     "test": "jest src",
-    "watch-node": "nodemon dist/server.js",
+    "watch-node": "nodemon src/dist/server.js",
     "watch-ts": "tsc -w"
   },
   "repository": {
