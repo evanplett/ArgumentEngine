@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, ManyToOne} from "typeorm";
 
 import {Statement} from "./Statement";
 
@@ -6,13 +6,13 @@ import {Statement} from "./Statement";
 export class Argument {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @ManyToOne(type => Statement) 
     @JoinTable()
-    conclusion: Statement;
+    conclusion!: Statement;
     
     @ManyToMany(type => Statement, statement => statement.arguments)
     @JoinTable() 
-    premises: Statement[];
+    premises!: Statement[];
 }
