@@ -1,4 +1,4 @@
-import {UserController} from "./controller/UserController";
+import {UserController} from "./business_model_typeorm/controller/UserController";
 
 export const Routes = [{
     method: "get",

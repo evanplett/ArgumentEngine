@@ -4,7 +4,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
-import {User} from "./entity/User";
+import {User} from "./business_model_typeorm/entity/User";
 
 createConnection().then(async connection => {
 
