@@ -8,17 +8,17 @@
    "synchronize": true,
    "logging": false,
    "entities": [
-      "src/entity/**/*.ts"
+      "src/business_model_typeorm/entity/**/*.ts"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "src/business_model_typeorm/migration/**/*.ts"
    ],
    "subscribers": [
-      "src/subscriber/**/*.ts"
+      "src/business_model_typeorm/subscriber/**/*.ts"
    ],
    "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
+      "entitiesDir": "src/business_model_typeorm/entity",
+      "migrationsDir": "src/business_model_typeorm/migration",
+      "subscribersDir": "src/business_model_typeorm/subscriber"
    }
 }
