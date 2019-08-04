@@ -13,16 +13,16 @@ export class Argument
   
   getList(limit: number = 100, after_id: number = 0) 
   {
-    return bma.getList(limit, after_id);
+    return this.bma.getList(limit, after_id);
   }
   
   getFromId(id: number)
   {
-    return bma.getFromId(id);
+    return this.bma.getFromId(id);
   }
   
   treeFromId(id: number, max_depth: number = 100)
   {
-    return bma.treeFromId(id, max_depth);
+    return this.bma.treeFromId(id, max_depth);
   }
 }
