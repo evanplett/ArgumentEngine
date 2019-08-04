@@ -4,9 +4,9 @@
    "description": "A project",
    "main": "dist/server.js",
    "scripts": {
-      "build": "tsc",
+      "build-ts": "tsc",
       "lint": "tslint -c tslint.json 'src/**/*.ts'",
-      "start": "ts-node src/index.ts",
+      "start": "node dist/server.js",
       "postinstall": "npm run build-ts",
       "serve": "node dist/server.js",
       "test": "jest src",
