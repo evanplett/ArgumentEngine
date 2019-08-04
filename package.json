@@ -41,6 +41,7 @@
    },
    "homepage": "https://github.com/evanplett/ArgumentEngine#readme",
    "devDependencies": {
+      "@types/jest": "^24.0.16",
       "@types/node": "^8.0.29",
       "jest": "^24.8.0",
       "nodemon": "^1.19.1",
