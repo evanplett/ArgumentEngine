@@ -4,7 +4,7 @@
    "description": "A project",
    "main": "dist/server.js",
    "scripts": {
-      "build-ts": "tsc",
+      "build": "tsc",
       "lint": "tslint -c tslint.json 'src/**/*.ts'",
       "start": "ts-node src/index.ts",
       "postinstall": "npm run build-ts",
