@@ -12,7 +12,7 @@ import {Routes} from "./routes";
 import {User} from "./business_model_typeorm/entity/User";
 
 
-
+/*
 createConnection().then(async connection => {
 
     // create express app
@@ -53,3 +53,4 @@ createConnection().then(async connection => {
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
 
 }).catch(error => console.log(error));
+*/
