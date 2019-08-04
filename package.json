@@ -10,7 +10,7 @@
     "postinstall": "npm run build-ts",
     "serve": "node dist/server.js",
     "test": "jest src",
-	"watch-node": "nodemon dist/server.js",
+    "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w"
   },
   "repository": {
@@ -23,36 +23,41 @@
     "node": "10.16.0"
   },
   "jest": {
-	"transform": {
-		"^.+\\.tsx?$": "ts-jest"
-	},
-	"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-	"moduleFileExtensions": [
-		"ts",
-		"tsx",
-		"js",
-		"jsx",
-		"json",
-		"node"
-	]
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "bugs": {
     "url": "https://github.com/evanplett/ArgumentEngine/issues"
   },
   "homepage": "https://github.com/evanplett/ArgumentEngine#readme",
   "devDependencies": {
+    "@types/node": "^12.6.9",
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
     "ts-jest": "^23.1.4",
-	"tslint": "^5.18.0",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "@types/express": "^4.17.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "postgresql": "0.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.18"
   }
 }
