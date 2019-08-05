@@ -1,2 +1,12 @@
+<<<<<<< HEAD
 src/node_modules/*
 src/dist
+=======
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+dist/
+>>>>>>> Increment1_FixAttempt

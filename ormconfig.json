@@ -1,0 +1,24 @@
+{
+   "type": "postgres",
+   "host": "ec2-54-235-96-48.compute-1.amazonaws.com",
+   "port": 5432,
+   "username": "fsnnmuemtggcje",
+   "password": "a5433e2ef6dcdf1cc60ec04951c44bd5672bc37619ad90ccdd8de954e64f5111",
+   "database": "duvt12dvhi8or",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "dist/business_model_typeorm/entity/**/*.js"
+   ],
+   "migrations": [
+      "dist/business_model_typeorm/migration/**/*.js"
+   ],
+   "subscribers": [
+      "dist/business_model_typeorm/subscriber/**/*.js"
+   ],
+   "cli": {
+      "entitiesDir": "dst/business_model_typeorm/entity",
+      "migrationsDir": "dst/business_model_typeorm/migration",
+      "subscribersDir": "dst/business_model_typeorm/subscriber"
+   }
+}
