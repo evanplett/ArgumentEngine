@@ -1,6 +1,6 @@
-import {Routes} from "./routes
+import {Routes} from "./routes";
 import express from 'express';
-import { MapRoutesOnApp } from "../routing_utils"
+import { MapRoutesOnApp } from "../routing_utils";
 
 const app = express();
 
