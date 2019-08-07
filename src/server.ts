@@ -10,9 +10,9 @@ import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
 import {User} from "./business_model_typeorm/entity/User";
-
-
 import { MapRoutesOnApp } from "./routing_utils"
+
+import { app as restApp } from "./rest/app"
 
 const PORT = process.env.PORT || "5000";
 
@@ -22,7 +22,10 @@ createConnection().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
 
-    MapRoutesOnApp(app, Routes);
+    app.use('/rest', restApp);
+
+
+    //MapRoutesOnApp(app, Routes);
 /*
     // register express routes from defined application routes
     Routes.forEach(route => {
