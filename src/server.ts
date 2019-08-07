@@ -11,6 +11,9 @@ import {Request, Response} from "express";
 import {Routes} from "./routes";
 import {User} from "./business_model_typeorm/entity/User";
 
+
+import { MapRoutesOnApp } from "./routing_utils"
+
 const PORT = process.env.PORT || "5000";
 
 createConnection().then(async connection => {
@@ -19,6 +22,8 @@ createConnection().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
 
+    MapRoutesOnApp(app, Routes);
+/*
     // register express routes from defined application routes
     Routes.forEach(route => {
         (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
@@ -31,7 +36,7 @@ createConnection().then(async connection => {
             }
         });
     });
-
+*/
     // setup express app here
     // ...
 
