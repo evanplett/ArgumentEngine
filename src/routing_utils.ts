@@ -1,4 +1,4 @@
-import * as express from "express
+import * as express from "express"
 
 export function MapRoutesOnApp(app: express.Application, routes : any  )
 {
