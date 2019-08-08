@@ -5,6 +5,7 @@ import { MapRoutesOnApp } from "../routing_utils";
 export function RestApp() {
      const app = express();
      MapRoutesOnApp(app, Routes);
+     return app;
 }
 
 //MapRoutesOnApp(app, Routes);
