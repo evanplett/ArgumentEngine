@@ -12,7 +12,7 @@ import {Routes} from "./routes";
 import {User} from "./business_model_typeorm/entity/User";
 import { MapRoutesOnApp } from "./routing_utils"
 
-import { app as restApp } from "./rest/app"
+import { RestApp } from "./rest/app"
 
 const PORT = process.env.PORT || "5000";
 
@@ -22,7 +22,7 @@ createConnection().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
 
-    app.use('/rest', restApp);
+    app.use('/rest', RestApp());
 
 
     //MapRoutesOnApp(app, Routes);
