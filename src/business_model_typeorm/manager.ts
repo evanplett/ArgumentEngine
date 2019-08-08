@@ -1,6 +1,6 @@
 import {createConnection} from "typeorm";
 
-export EnsureConnection = createConnection;
+export { createConnection as EnsureConnection } from "typeorm";
 
 export function FillWithTestData(connection: Connection)
 {
