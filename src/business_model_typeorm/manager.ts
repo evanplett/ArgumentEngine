@@ -1,4 +1,6 @@
 import {createConnection, Connection } from "typeorm";
+import {User} from "./entity/User";
+
 
 export { createConnection as EnsureConnection } from "typeorm";
 
