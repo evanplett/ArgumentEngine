@@ -2,7 +2,7 @@ import {Routes} from "./routes";
 import * as express from "express";
 import { MapRoutesOnApp } from "../routing_utils";
 
-export default function RestApp() {
+export function RestApp() {
      const app = express();
      MapRoutesOnApp(app, Routes);
 }
