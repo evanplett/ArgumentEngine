@@ -4,7 +4,6 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
-import {User} from "./business_model_typeorm/entity/User";
 import { MapRoutesOnApp } from "./routing_utils";
 import { RestApp } from "./rest/app";
 
