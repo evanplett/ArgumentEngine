@@ -16,6 +16,5 @@ connection.manager.clear(User).then( result => {
 		        lastName: "Assassin",
 		        age: 24
 		    }));
-    }
-
+    });
 }
