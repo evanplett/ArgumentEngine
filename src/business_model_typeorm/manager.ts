@@ -1,4 +1,4 @@
-import {createConnection} from "typeorm";
+import {createConnection, Connection } from "typeorm";
 
 export { createConnection as EnsureConnection } from "typeorm";
 
