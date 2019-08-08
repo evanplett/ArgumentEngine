@@ -2,41 +2,27 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import {Request, Response} from "express";
-import {Routes} from "./routes";
-import { MapRoutesOnApp } from "./routing_utils";
+import {Request, Response} from "express";";
 import { RestApp } from "./rest/app";
-
-import { FillDatabase } from "./dev_database_filler";
+import { EnsureConnection, FillWithTestData } from "./business_model_typeorm/manager";
 
 const PORT = process.env.PORT || "5000";
 
-createConnection().then(async connection => {
+EnsureConnection().then(async connection => {
+
+    // put some values in the database
+    FillWithTestData(connection);
 
     // create express app
     const app = express();
     app.use(bodyParser.json());
 
+						// route to the rest app
     app.use('/rest', RestApp());
 
     // start express server
     app.listen(PORT);
     
-    FillDatabase(connection);
-    
-/*
-    // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Timber",
-        lastName: "Saw",
-        age: 27
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        age: 24
-    }));*/
-
     console.log("Express server has started on port " + PORT + ".");
 
 }).catch(error => console.log(error));
