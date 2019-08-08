@@ -2,7 +2,7 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import {Request, Response} from "express";";
+import {Request, Response} from "express";
 import { RestApp } from "./rest/app";
 import { EnsureConnection, FillWithTestData } from "./business_model_typeorm/manager";
 
