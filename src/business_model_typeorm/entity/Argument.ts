@@ -12,7 +12,7 @@ export class Argument {
     @JoinTable()
     conclusion!: Statement;
     
-    @ManyToMany(type => Statement, statement => statement.supportedArguments, { cascade: true})
+    @ManyToMany(type => Statement, statement => statement.supportedArguments )
     @JoinTable() 
     premises!: Statement[];
 }

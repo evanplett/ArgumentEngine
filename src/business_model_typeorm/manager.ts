@@ -35,7 +35,9 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		       text: "Conclusion"
 		    });
 		    
-		    
+		    connection.manager.save(p1);
+		    connection.manager.save(p2);
+		    connection.manager.save(conc);
 		    connection.manager.save(connection.manager.create(Argument, {
 		      conclusion: conc,
 		      premises: [p1, p2]
