@@ -8,11 +8,11 @@ export class Argument {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(type => Statement, statement => statement.supportingArguments) 
+    @ManyToOne(type => Statement, statement => statement.supportingArguments, { cascade: true}) 
     @JoinTable()
     conclusion!: Statement;
     
-    @ManyToMany(type => Statement, statement => statement.supportedArguments)
+    @ManyToMany(type => Statement, statement => statement.supportedArguments, { cascade: true})
     @JoinTable() 
     premises!: Statement[];
 }
