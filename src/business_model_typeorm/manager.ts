@@ -17,11 +17,14 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		        lastName: "Assassin",
 		        age: 24
 		    }));
-    });
-    
-    
-    connection.manager.save(connection.manager.create(Argument, {
+		    
+		    connection.manager.save(connection.manager.create(Argument, {
 		    }));
-    });
+ 
+ 
+   });
+    
+    
+    
     
 }
