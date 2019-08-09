@@ -1,4 +1,6 @@
 import {UserController} from "../business_model_typeorm/controller/UserController";
+import {ArgumentController} from "../business_model_typeorm/controller/ArgumentController";
+
 
 export const Routes = [{
     method: "get",
@@ -19,5 +21,29 @@ export const Routes = [{
     method: "delete",
     route: "/users/:id",
     controller: UserController,
+    action: "remove"
+},
+
+
+
+{
+    method: "get",
+    route: "/argument",
+    controller: ArgumentController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/argument/:id",
+    controller: ArgumentController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/argument",
+    controller: ArgumentController,
+    action: "save"
+}, {
+    method: "delete",
+    route: "/argument/:id",
+    controller: ArgumentController,
     action: "remove"
 }];

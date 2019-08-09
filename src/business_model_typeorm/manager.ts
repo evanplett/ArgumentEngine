@@ -1,5 +1,6 @@
 import {createConnection, Connection } from "typeorm";
 import {User} from "./entity/User";
+import {Argument} from "./entity/Argument";
 
 
 export { createConnection as EnsureConnection } from "typeorm";
@@ -17,4 +18,10 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		        age: 24
 		    }));
     });
+    
+    
+    connection.manager.save(connection.manager.create(Argument, {
+		    }));
+    });
+    
 }
