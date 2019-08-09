@@ -46,4 +46,31 @@ export const Routes = [{
     route: "/argument/:id",
     controller: ArgumentController,
     action: "remove"
-}];
+},
+
+
+
+{
+    method: "get",
+    route: "/statement",
+    controller: StatementController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/statement/:id",
+    controller: StatementController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/statement",
+    controller: StatementController,
+    action: "save"
+}, {
+    method: "delete",
+    route: "/statement/:id",
+    controller: StatementController,
+    action: "remove"
+}
+
+
+];

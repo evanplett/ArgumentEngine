@@ -1,6 +1,7 @@
 import {createConnection, Connection } from "typeorm";
 import {User} from "./entity/User";
 import {Argument} from "./entity/Argument";
+import {Statement} from "./entity/Statement";
 
 
 export { createConnection as EnsureConnection } from "typeorm";
@@ -18,7 +19,26 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		        age: 24
 		    }));
 		    
+		   
+		   
+		   
+		   
+		   let p1 = connection.manager.create(Statement, {
+		       text: "Premis 1"
+		    });
+		    
+		    let p2 = connection.manager.create(Statement, {
+		       text: "Premis 2"
+		    });
+		    
+		    let conc = connection.manager.create(Statement, {
+		       text: "Conclusion"
+		    });
+		    
+		    
 		    connection.manager.save(connection.manager.create(Argument, {
+		      conclusion: conc,
+		      premises: [p1, p2]
 		    }));
  
  
