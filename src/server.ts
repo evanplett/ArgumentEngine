@@ -7,7 +7,7 @@ import { EnsureConnection, FillWithTestData } from "./business_model_typeorm/man
 
 const PORT = process.env.PORT || "5000";
 
-EnsureConnection({dropSchema: true}).then(async connection => {
+EnsureConnection().then(async connection => {
 
     // put some values in the database
     FillWithTestData(connection);
