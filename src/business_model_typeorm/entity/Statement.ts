@@ -4,6 +4,10 @@ import {Argument} from "./Argument";
 
 @Entity()
 export class Statement {
+    constructor(text: string)
+    {
+      this.text = text;
+    }
 
     @PrimaryGeneratedColumn()
     id!: number;
