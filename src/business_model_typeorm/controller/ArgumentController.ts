@@ -7,8 +7,9 @@ export class ArgumentController {
     private argumentRepository = getRepository(Argument);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.argumentRepository.find({ relations: ["conclusion", "premises"] });
+        return this.argumentRepository.find();
     }
+    // { relations: ["conclusion", "premises"]}
 
     async one(request: Request, response: Response, next: NextFunction) {
         return this.argumentRepository.findOne(request.params.id, { relations: ["conclusion", "premises"] });
