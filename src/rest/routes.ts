@@ -3,6 +3,9 @@ import {ArgumentController} from "../business_model_typeorm/controller/ArgumentC
 import {StatementController} from "../business_model_typeorm/controller/StatementController";
 
 
+import { Argument } from "./Argument";
+
+
 export const Routes = [{
     method: "get",
     route: "/users",
@@ -30,7 +33,7 @@ export const Routes = [{
 {
     method: "get",
     route: "/argument",
-    controller: ArgumentController,
+    controller: Argument,
     action: "all"
 }, {
     method: "get",

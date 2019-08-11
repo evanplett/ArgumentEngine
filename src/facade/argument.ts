@@ -1,21 +1,17 @@
 // Façade
 
-import { Argument as Argument_bm } from "../business_model/argument";
+import { ArgumentController } from "../business_model_typeorm/controller/ArgumentController";
 
 export class Argument
 {
-  private bma : Argument_bm;
+  private ac = ArgumentController();
 
-  constructor() 
-  {
-    this.bma = new Argument_bm();
-  }
-  
   getList(limit: number = 100, after_id: number = 0) 
   {
-    return this.bma.getList(limit, after_id);
+    return ac.many(after_id, limit):
   }
   
+  /*
   getFromId(id: number)
   {
     return this.bma.getFromId(id);
@@ -24,5 +20,5 @@ export class Argument
   treeFromId(id: number, max_depth: number = 100)
   {
     return this.bma.treeFromId(id, max_depth);
-  }
+  }*/
 }
