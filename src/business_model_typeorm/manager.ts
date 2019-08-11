@@ -19,17 +19,17 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		        age: 24
 		    }));
 		   
-		    let p1 = new Statement("Premis 1"); 
-		    let p2 = new Statement("Premis 2"); 
-		    let conc = new Statement("Conclusion"); 
+		    let p1 = connection.manager.create( Statement, { text: "Premis 1" });
+		    let p2 = connection.manager.create( Statement, { text: "Premis 1" });
+		    let conc = connection.manager.create( Statement, { text: "Conclusion" }); 
 		    
-		    await connection.manager.save(p1);
-		    await connection.manager.save(p2);
-		    await connection.manager.save(conc);
+		    connection.manager.save(p1);
+		    connection.manager.save(p2);
+		    connection.manager.save(conc);
 		    
 		    
 		    let a1 = new Argument(conc, [p1, p2]);
 		    
-		    await connection.manager.save(a1);
+		    connection.manager.save(a1);
    });
 }
