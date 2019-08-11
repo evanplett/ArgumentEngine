@@ -23,13 +23,13 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		    let p2 = new Statement("Premis 2"); 
 		    let conc = new Statement("Conclusion"); 
 		    
-		    connection.manager.save(p1);
-		    connection.manager.save(p2);
-		    connection.manager.save(conc);
+		    await connection.manager.save(p1);
+		    await connection.manager.save(p2);
+		    await connection.manager.save(conc);
 		    
 		    
 		    let a1 = new Argument(conc, [p1, p2]);
 		    
-		    connection.manager.save(a1);
+		    await connection.manager.save(a1);
    });
 }
