@@ -17,7 +17,7 @@ export function FillWithTestData(connection: Connection)
 		    connection.manager.save(conc);
 		    
 		    
-		    let a1 = connection.manager.create(
+		    let a1 = connection.manager.create( Argument,
 		       {
 		          conclusion: conc,
 		          premises: [p1, p2]
