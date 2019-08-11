@@ -28,9 +28,7 @@ connection.manager.clear(User).then( result => { 	connection.manager.save(connec
 		    connection.manager.save(conc);
 		    
 		    
-		    let a1 = new Argument();
-		    a1.conclusion = conc;
-		    a1.premises = [p1, p2]; 
+		    let a1 = new Argument(conc, [p1, p2]);
 		    
 		    connection.manager.save(a1);
    });

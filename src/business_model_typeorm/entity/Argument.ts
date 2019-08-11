@@ -4,6 +4,11 @@ import {Statement} from "./Statement";
 
 @Entity()
 export class Argument {
+    constructor(conclusion: Statement, premises: Statement[]) {
+       this.conclusion = conclusion;
+       this.premises = premises;
+    }
+
 
     @PrimaryGeneratedColumn()
     id!: number;
