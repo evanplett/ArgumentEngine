@@ -1,15 +1,17 @@
 // rest
+import {NextFunction, Request, Response} from "express";
 
-import { Argument as ArgumentFacade } from "../facade/Argument";
+
+import { Argument as ArgumentFacade } from "../facade/argument";
 
 
 export class Argument {
 
-   private af = ArgumentFacade();
+   private af = new ArgumentFacade();
 
 
    async all(request: Request, response: Response, next: NextFunction) {
-        return af.getList()
+        return this.af.getList()
     }
     
     

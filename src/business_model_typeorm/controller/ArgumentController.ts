@@ -10,7 +10,9 @@ export class ArgumentController {
     async many(startingId: number, maxCount: number) {
         
      return this.argumentRepository.find({ 
-       id: MoreThanOrEqual(startingId),
+       where: {
+          id: MoreThanOrEqual(startingId)
+       },
        take: maxCount,
        relations: ["conclusion", "premises"]});
     }

@@ -3,7 +3,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import { RestApp } from "./rest/app";
-import { EnsureConnection, FillWithTestData } from "./business_model_typeorm/manager";
+import { EnsureConnection } from "./business_model_typeorm/manager";
 
 import {Argument} from "./business_model_typeorm/entity/Argument";
 import {Statement} from "./business_model_typeorm/entity/Statement";

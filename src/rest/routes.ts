@@ -3,7 +3,7 @@ import {ArgumentController} from "../business_model_typeorm/controller/ArgumentC
 import {StatementController} from "../business_model_typeorm/controller/StatementController";
 
 
-import { Argument } from "./Argument";
+import { Argument } from "./argument";
 
 
 export const Routes = [{

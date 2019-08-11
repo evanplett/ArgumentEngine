@@ -4,11 +4,11 @@ import { ArgumentController } from "../business_model_typeorm/controller/Argumen
 
 export class Argument
 {
-  private ac = ArgumentController();
+  private ac = new ArgumentController();
 
   getList(limit: number = 100, after_id: number = 0) 
   {
-    return ac.many(after_id, limit);
+    return this.ac.many(after_id, limit);
   }
   
   /*
