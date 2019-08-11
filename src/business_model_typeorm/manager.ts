@@ -24,5 +24,4 @@ export function FillWithTestData(connection: Connection)
 		       });
 		  
 		    connection.manager.save(a1);
-   });
 }
