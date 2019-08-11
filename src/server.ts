@@ -5,6 +5,9 @@ import {Request, Response} from "express";
 import { RestApp } from "./rest/app";
 import { EnsureConnection, FillWithTestData } from "./business_model_typeorm/manager";
 
+import {Argument} from "./business_model_typeorm/entity/Argument";
+import {Statement} from "./business_model_typeorm/entity/Statement";
+
 const PORT = process.env.PORT || "5000";
 
 EnsureConnection().then(async connection => {
