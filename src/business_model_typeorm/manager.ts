@@ -1,5 +1,4 @@
 import {createConnection, Connection } from "typeorm";
-import {User} from "./entity/User";
 import {Argument} from "./entity/Argument";
 import {Statement} from "./entity/Statement";
 
@@ -19,8 +18,8 @@ export function FillWithTestData(connection: Connection)
 		    
 		    let a1 = connection.manager.create( Argument,
 		       {
-		          conclusion: conc,
-		          premises: [p1, p2]
+		          conclusion: conc//,
+		          //premises: [p1, p2]
 		       });
 		  
 		    connection.manager.save(a1);
