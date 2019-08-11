@@ -5,32 +5,7 @@ import {StatementController} from "../business_model_typeorm/controller/Statemen
 
 import { Argument } from "./argument";
 
-
-export const Routes = [{
-    method: "get",
-    route: "/users",
-    controller: UserController,
-    action: "all"
-}, {
-    method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one"
-}, {
-    method: "post",
-    route: "/users",
-    controller: UserController,
-    action: "save"
-}, {
-    method: "delete",
-    route: "/users/:id",
-    controller: UserController,
-    action: "remove"
-},
-
-
-
-{
+const ArgumentRoutes =  [{
     method: "get",
     route: "/argument",
     controller: Argument,
@@ -50,11 +25,10 @@ export const Routes = [{
     route: "/argument/:id",
     controller: ArgumentController,
     action: "remove"
-},
+}];
 
 
-
-{
+const StatementRoutes = [{
     method: "get",
     route: "/statement",
     controller: StatementController,
@@ -74,7 +48,11 @@ export const Routes = [{
     route: "/statement/:id",
     controller: StatementController,
     action: "remove"
-}
+}];
+
+export const Routes = [
+    ...ArgumentRoutes,
+    ...StatementRoutes];
 
 
-];
+
