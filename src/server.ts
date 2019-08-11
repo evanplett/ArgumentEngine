@@ -24,7 +24,7 @@ let p1 = connection.manager.create( Statement, { text: "Premis 1" });
 		    
 		    let a1 = connection.manager.create( Argument,
 		       {
-		          conclusion: conc//,
+		          conclusion: conc,
 		          premises: [p1, p2]
 		       });
 		  
