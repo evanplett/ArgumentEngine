@@ -8,7 +8,7 @@ export class Argument
 
   getList(limit: number = 100, after_id: number = 0) 
   {
-    return ac.many(after_id, limit):
+    return ac.many(after_id, limit);
   }
   
   /*
