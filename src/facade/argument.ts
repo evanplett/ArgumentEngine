@@ -3,7 +3,7 @@
 import { ArgumentController } from "../business_model_typeorm/controller/ArgumentController";
 
 const DEFAULT_LIMIT : number = 100;
-const DEFAULT_STARTING_ID : number = 0;
+const DEFAULT_AFTER_ID : number = 0;
 
 export class Argument
 {
@@ -13,7 +13,7 @@ export class Argument
   {
     limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
     
-    after_id = after_id && after_id >= 0 ? after_id : DEFAULT_STARTING_ID;
+    after_id = after_id && after_id >= 0 ? after_id : DEFAULT_AFTER_ID;
     
     return this.ac.many(after_id, limit);
   }
