@@ -4,8 +4,8 @@ import { ArgumentController } from "../business_model_typeorm/controller/Argumen
 
 export class Argument
 {
-  private const DEFAULT_LIMIT = 100;
-  private const DEFAULT_STARTING_ID = 0;
+  private static readonly DEFAULT_LIMIT = 100;
+  private static readonly DEFAULT_STARTING_ID = 0;
 
 
   private ac = new ArgumentController();
