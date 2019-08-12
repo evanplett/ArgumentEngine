@@ -1,3 +1,5 @@
+//TypeORM Entity
+
 import {Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, ManyToOne} from "typeorm";
 
 import {Statement} from "./Statement";

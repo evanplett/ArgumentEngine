@@ -11,7 +11,7 @@ export class Argument {
 
 
    async all(request: Request, response: Response, next: NextFunction) {
-        return this.af.getList()
+        return this.af.getList(request.body.limit, request.body.after_id)
     }
     
     

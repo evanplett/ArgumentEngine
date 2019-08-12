@@ -6,7 +6,7 @@ export class ArgumentController {
 
     private argumentRepository = getRepository(Argument);
 
-    async many(startingId: number, maxCount: number) {
+    async many(startingId!: number, maxCount!: number) {
         
      return this.argumentRepository.find({ 
        where: {
