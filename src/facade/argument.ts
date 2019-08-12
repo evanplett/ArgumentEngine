@@ -2,12 +2,11 @@
 
 import { ArgumentController } from "../business_model_typeorm/controller/ArgumentController";
 
+static readonly DEFAULT_LIMIT = 100;
+static readonly DEFAULT_STARTING_ID = 0;
+
 export class Argument
 {
-  private static readonly DEFAULT_LIMIT = 100;
-  private static readonly DEFAULT_STARTING_ID = 0;
-
-
   private ac = new ArgumentController();
 
   getList(limit?: number, after_id?: number) 
