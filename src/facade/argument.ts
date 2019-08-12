@@ -2,8 +2,8 @@
 
 import { ArgumentController } from "../business_model_typeorm/controller/ArgumentController";
 
-static readonly DEFAULT_LIMIT = 100;
-static readonly DEFAULT_STARTING_ID = 0;
+const DEFAULT_LIMIT : number = 100;
+const DEFAULT_STARTING_ID : number = 0;
 
 export class Argument
 {
