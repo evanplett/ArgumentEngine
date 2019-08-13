@@ -7,14 +7,6 @@
 ***
 # <a name="data-structures">Data Structures</a> <sup><small>[top](#TOC)</small></sup>
 
-## Argument - Simple
-```
-{
-   id=[int] // The id of the argument
-   conclusion=[string] // The conclusion statement of the argument
-}
-```
-
 ## Argument - Complete
 ```
 {
@@ -71,7 +63,7 @@
 
 ``` 
 {
-   arguments : [array of [Argument - Simple]]
+   arguments : [array of [Argument - Complete]]
 }
 ```
 
