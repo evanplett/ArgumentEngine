@@ -8,7 +8,7 @@ const ArgumentRoutes =  [{
     method: "get",
     route: "/argument",
     controller: Argument,
-    action: "all"
+    action: "many"
 }, {
     method: "get",
     route: "/argument/:id",
