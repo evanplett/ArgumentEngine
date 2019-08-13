@@ -14,7 +14,7 @@ const ArgumentRoutes =  [{
     route: "/argument/:id",
     controller: Argument,
     action: "one"
-}, {
+}];/*, {
     method: "post",
     route: "/argument",
     controller: ArgumentController,
@@ -24,7 +24,7 @@ const ArgumentRoutes =  [{
     route: "/argument/:id",
     controller: ArgumentController,
     action: "remove"
-}];
+}];*/
 
 
 const StatementRoutes = [{
