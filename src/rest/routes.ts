@@ -51,8 +51,8 @@ const StatementRoutes = [{
 }];
 
 export const Routes = [
-    ...ArgumentRoutes,
-    ...StatementRoutes];
+    ...ArgumentRoutes];//,
+    //...StatementRofutes];
 
 
 

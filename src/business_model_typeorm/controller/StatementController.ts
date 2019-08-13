@@ -5,7 +5,7 @@ import {Statement} from "../entity/Statement";
 export class StatementController {
 
     private statementRepository = getRepository(Statement);
-
+/*
     async all(request: Request, response: Response, next: NextFunction) {
         return this.statementRepository.find();
     }
@@ -21,6 +21,6 @@ export class StatementController {
     async remove(request: Request, response: Response, next: NextFunction) {
         let statementToRemove = await this.statementRepository.findOne(request.params.id);
         await this.statementRepository.remove(statementToRemove);
-    }
+    }*/
 
 }
