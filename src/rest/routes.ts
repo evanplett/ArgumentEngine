@@ -1,4 +1,3 @@
-import {UserController} from "../business_model_typeorm/controller/UserController";
 import {ArgumentController} from "../business_model_typeorm/controller/ArgumentController";
 import {StatementController} from "../business_model_typeorm/controller/StatementController";
 
