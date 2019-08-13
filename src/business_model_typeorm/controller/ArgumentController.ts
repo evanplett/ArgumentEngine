@@ -16,6 +16,12 @@ export class ArgumentController {
        relations: ["conclusion", "premises"]});
     }
 
+
+     async one(id: number) {
+        return this.argumentRepository.findOne(id, { relations: ["conclusion", "premises"] });
+    }
+
+
 /*    async all(request: Request, response: Response, next: NextFunction) {
         return this.argumentRepository.find({ relations: ["conclusion", "premises"]});
     }

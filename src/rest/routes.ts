@@ -12,7 +12,7 @@ const ArgumentRoutes =  [{
 }, {
     method: "get",
     route: "/argument/:id",
-    controller: ArgumentController,
+    controller: Argument,
     action: "one"
 }, {
     method: "post",

@@ -10,9 +10,14 @@ export class Argument {
    private af = new ArgumentFacade();
 
 
-   async all(request: Request, response: Response, next: NextFunction) {
-        return this.af.getList(request.query.limit, request.query.after_id)
+   async many(request: Request, response: Response, next: NextFunction) {
+        return this.af.getList(request.query.limit, request.query.after_id);
     }
+    
+    async one(request: Request, response: Response, next: NextFunction) {
+        return this.af.getOne(request.params.id);
+    }
+    
     
     
     

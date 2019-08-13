@@ -18,6 +18,12 @@ export class Argument
     return this.ac.many(after_id, limit);
   }
   
+  getOne(id: number)
+  {
+    return this.ac.one(id);
+  }
+  
+  
   /*
   getFromId(id: number)
   {
