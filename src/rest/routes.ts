@@ -49,9 +49,9 @@ const StatementRoutes = [{
     action: "remove"
 }];
 
-export const Routes = [
-    ...ArgumentRoutes];//,
-    //...StatementRofutes];
+export const Routes = ArgumentRoutes;/* [
+    ...ArgumentRoutes,
+    ...StatementRofutes];*/
 
 
 
