@@ -16,7 +16,7 @@ export class ArgumentController {
        relations: ["conclusion", "premises"]});
     }
 
-    async all(request: Request, response: Response, next: NextFunction) {
+/*    async all(request: Request, response: Response, next: NextFunction) {
         return this.argumentRepository.find({ relations: ["conclusion", "premises"]});
     }
 
@@ -31,6 +31,6 @@ export class ArgumentController {
     async remove(request: Request, response: Response, next: NextFunction) {
         let argumentToRemove = await this.argumentRepository.findOne(request.params.id);
         await this.argumentRepository.remove(argumentToRemove);
-    }
+    }*/
 
 }
