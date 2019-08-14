@@ -10,7 +10,7 @@ import {Statement} from "./business_model_typeorm/entity/Statement";
 
 const PORT = process.env.PORT || "5000";
 
-async function CreateNode(connection: any, max_level: number, level: number = 0,  path: string = ""): Statement {
+async function CreateNode(connection: any, max_level: number, level: number = 0,  path: string = ""): Promise<Statement> {
    let conclusion = connection.manager.create( Statement, { text: "Conclusion " + path});
 
     await connection.manager.save(conclusion);
@@ -30,7 +30,12 @@ async function CreateNode(connection: any, max_level: number, level: number = 0,
 		    await connection.manager.save(argument);
     }
     
-    return conclusion;
+    
+    new Promise<Statement>((resolve) => {
+        resolve(conclusion);
+    
+    
+    //return conclusion;
 }
 
 
