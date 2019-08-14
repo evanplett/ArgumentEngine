@@ -10,6 +10,31 @@ import {Statement} from "./business_model_typeorm/entity/Statement";
 
 const PORT = process.env.PORT || "5000";
 
+
+async function CreateNode(max_level: number, level: number = 0,  path: string = ""): Statement {
+   let conclusion = connection.manager.create( Statement, { text: "Conclusion " + path});
+
+    await connection.manager.save(t_conc1);
+    
+    if (level < max_level)
+    {
+       let leftNode = CreateNode(level + 1, max_level, path + "L";
+
+       let rightNode = CreateNode(level + 1, max_level, path + "R";
+
+       let argument = connection.manager.create( Argument,
+		       {
+		          conclusion: conclusion,
+		          premises: [leftNode, rightNode]
+		       });
+		  
+		    await connection.manager.save(argument);
+    }
+    
+    return conclusion;
+}
+
+
 EnsureConnection().then(async connection => {
     // create express app
     const app = express();
@@ -45,61 +70,7 @@ EnsureConnection().then(async connection => {
 		    await connection.manager.save(a1);
     }
     
-    
-    
     // tree
-    
-    let t_p1a = connection.manager.create( Statement, { text: `Premis t1a` });
-		    let t_p1b = connection.manager.create( Statement, { text: `Premis t1b` });
-		    let t_conc1 = connection.manager.create( Statement, { text: `Conclusion t1`}); 
-		    
-		    await connection.manager.save(t_p1a);
-		    await connection.manager.save(t_p1b);
-		    await connection.manager.save(t_conc1);
-		    
-		    let t_a1 = connection.manager.create( Argument,
-		       {
-		          conclusion: t_conc1,
-		          premises: [t_p1a, t_p1b]
-		       });
-		  
-		    await connection.manager.save(t_a1);
-    
-    
-    
-    
-    let t_p2a = connection.manager.create( Statement, { text: `Premis t2a` });
-		    let t_p2b = connection.manager.create( Statement, { text: `Premis t2b` });
-		    let t_conc2 = connection.manager.create( Statement, { text: `Conclusion t2`}); 
-		    
-		    await connection.manager.save(t_p2a);
-		    await connection.manager.save(t_p2b);
-		    await connection.manager.save(t_conc2);
-		    
-		    let t_a2 = connection.manager.create( Argument,
-		       {
-		          conclusion: t_conc2,
-		          premises: [t_p2a, t_p2b]
-		       });
-		  
-		    await connection.manager.save(t_a2);
-    
-    
-    
-    
-    
-    
-		    let t_conc3 = connection.manager.create( Statement, { text: `Conclusion t3`}); 
-		    
-		 
-		    await connection.manager.save(t_conc3);
-		    
-		    let t_a3 = connection.manager.create( Argument,
-		       {
-		          conclusion: t_conc3,
-		          premises: [t_conc1, t_conc2]
-		       });
-		  
-		    await connection.manager.save(t_a3);
+    CreateNode(3);
     
 }).catch(error => console.log(error));
