@@ -18,9 +18,9 @@ async function CreateNode(max_level: number, level: number = 0,  path: string = 
     
     if (level < max_level)
     {
-       let leftNode = CreateNode(level + 1, max_level, path + "L";
+       let leftNode = CreateNode(level + 1, max_level, path + "L");
 
-       let rightNode = CreateNode(level + 1, max_level, path + "R";
+       let rightNode = CreateNode(level + 1, max_level, path + "R");
 
        let argument = connection.manager.create( Argument,
 		       {
