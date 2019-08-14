@@ -10,10 +10,10 @@ import {Statement} from "./business_model_typeorm/entity/Statement";
 
 const PORT = process.env.PORT || "5000";
 
-function CreateNode(max_level: number, level: number = 0,  path: string = ""): Statement {
+async function CreateNode(connection: any, max_level: number, level: number = 0,  path: string = ""): Statement {
    let conclusion = connection.manager.create( Statement, { text: "Conclusion " + path});
 
-    await connection.manager.save(t_conc1);
+    await connection.manager.save(conclusion);
     
     if (level < max_level)
     {
@@ -70,6 +70,6 @@ EnsureConnection().then(async connection => {
     }
     
     // tree
-    CreateNode(3);
+    CreateNode(connection, 3);
     
 }).catch(error => console.log(error));
