@@ -31,8 +31,9 @@ async function CreateNode(connection: any, max_level: number, level: number = 0,
     }
     
     
-    new Promise<Statement>((resolve) => {
+    return new Promise<Statement>((resolve) => {
         resolve(conclusion);
+        });
     
     
     //return conclusion;
