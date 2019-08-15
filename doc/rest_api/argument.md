@@ -11,8 +11,8 @@
 ```
 {
    id=[int] // The id of the argument
-   id_conclusion=[int] // The id of the conclusion statement of the argument
-   premises=[array of [int]] // An array of the ids of the premise statements of the Argument
+   conclusion=[Statement] // The conclusion statement of the argument
+   premises=[array of [Statement]] // An array of the premise statements of the Argument
    reasoning_method=[REASONING_METHOD] // The reasoning method that this argument uses
 }
 ```
@@ -30,7 +30,7 @@
 ```javascript
 {
   argument_id=[int] // The id of the argument
-  conclusion=[string] // The conclusion statement of the argument
+  conclusion=[Statement] // The conclusion statement of the argument
   premises=[array of [Argument Tree Node]] // An array of the the premises of the Argument
   reasoning_method=[REASONING_METHOD] // The reasoning method that this argument uses
 }
