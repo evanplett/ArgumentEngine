@@ -47,7 +47,12 @@ const StatementRoutes = [{
     route: "/statement/:id",
     controller: StatementController,
     action: "remove"
-}];
+}/*, {
+    method: "get",
+    route: "/argument/:id/tree",
+    controller: Argument,
+    action: "one"
+}*/];
 
 export const Routes = ArgumentRoutes;/* [
     ...ArgumentRoutes,

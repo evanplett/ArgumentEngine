@@ -16,10 +16,37 @@ export class ArgumentController {
        relations: ["conclusion", "premises"]});
     }
 
-
-     async one(id: number) {
+     async one(id: number) 
+     {
         return this.argumentRepository.findOne(id, { relations: ["conclusion", "premises"] });
     }
+    
+    
+    
+    
+    
+    /* Tree should be part of statement
+     async tree(id: number, maxDepth: number) {
+
+
+}
+
+
+
+async function createTreeNode(id: number, max_depth: number, currentDepth: number): Promise<Statement> {
+
+
+    let argument = wait this.argumentRepository.findOne(id, { relations: ["conclusion", "premises"] });
+    
+    for(let i = 0; i < argument.premises.length; i++) {
+       argument.premises[i] = await create 
+    }
+    
+    for each premis, replace with createTreeNode
+
+}
+*/
+
 
 
 /*    async all(request: Request, response: Response, next: NextFunction) {

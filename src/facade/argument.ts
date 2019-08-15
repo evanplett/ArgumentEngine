@@ -4,6 +4,7 @@ import { ArgumentController } from "../business_model_typeorm/controller/Argumen
 
 const DEFAULT_LIMIT : number = 100;
 const DEFAULT_AFTER_ID : number = 0;
+const DEFAULT_MAX_DEPTH : number = 6;
 
 export class Argument
 {
@@ -25,13 +26,10 @@ export class Argument
   
   
   /*
-  getFromId(id: number)
+  getTree(id: number, max_depth?: number) 
   {
-    return this.bma.getFromId(id);
-  }
+     max_depth = max_depth && max_depth > 0 ? max_depth : DEFAULT_MAX_DEPTH;
   
-  treeFromId(id: number, max_depth: number = 100)
-  {
-    return this.bma.treeFromId(id, max_depth);
+     return this.ac.tree(id, max_depth);
   }*/
 }

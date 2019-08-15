@@ -18,7 +18,11 @@ export class Argument {
         return this.af.getOne(request.params.id);
     }
     
-    
+    /*
+    async tree(request: Request, response: Response, next: NextFunction) {
+        return this.af.getList(request.query.limit, request.query.after_id);
+    }
+    */
     
     
 }
