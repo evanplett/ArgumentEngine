@@ -10,16 +10,16 @@ import {Statement} from "./business_model_typeorm/entity/Statement";
 
 const PORT = process.env.PORT || "5000";
 
-async function CreateNode(connection: any, max_level: number, level: number = 0,  path: string = ""): Promise<Statement> {
+async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<Statement> {
    let conclusion = connection.manager.create( Statement, { text: "Conclusion " + path});
 
     await connection.manager.save(conclusion);
     
-    if (level < max_level)
+    if (current_level < max_level)
     {
-       let leftNode = CreateNode(connection, level + 1, max_level, path + "L");
+       let leftNode = await CreateNode(connection, max_level, current_level + 1, path + "L");
 
-       let rightNode = CreateNode(connection, level + 1, max_level, path + "R");
+       let rightNode = await CreateNode(connection, max_level, current_level + 1, path + "R");
 
        let argument = connection.manager.create( Argument,
 		       {
