@@ -19,7 +19,7 @@ export class Argument {
     async one(request: Request, response: Response, next: NextFunction) {
     this.af.getOne(request.params.id)
     .then(value => {
-        response.status(200).json(foundArg);
+        response.status(200).json(value);
        });
     }
     
