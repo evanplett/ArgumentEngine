@@ -13,12 +13,12 @@ export class ArgumentController {
           id: MoreThan(afterId)
        },
        take: maxCount,
-       relations: ["conclusion", "premises", "reasoningMethod"]});
+       relations: ["conclusion", "premises"]});
     }
 
      async one(id: number) 
      {
-        return this.argumentRepository.findOne(id, { relations: ["conclusion", "premises", "reasoningMethod"] });
+        return this.argumentRepository.findOne(id, { relations: ["conclusion", "premises"] });
     }
     
     
