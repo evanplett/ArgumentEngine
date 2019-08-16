@@ -18,7 +18,7 @@ export class Argument {
     
     async one(request: Request, response: Response, next: NextFunction) {
     
-    res.response.json(this.af.getOne(request.params.id));
+    response.json(this.af.getOne(request.params.id));
         //return this.af.getOne(request.params.id);
     }
     
