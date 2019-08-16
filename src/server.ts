@@ -5,7 +5,7 @@ import {Request, Response} from "express";
 import { RestApp } from "./rest/app";
 import { EnsureConnection } from "./business_model_typeorm/manager";
 
-import {Argument} from "./business_model_typeorm/entity/Argument";
+import {Argument, ReasoningMethod} from "./business_model_typeorm/entity/Argument";
 import {Statement} from "./business_model_typeorm/entity/Statement";
 
 const PORT = process.env.PORT || "5000";
@@ -25,7 +25,7 @@ async function CreateNode(connection: any, max_level: number, current_level: num
 		       {
 		          conclusion: conclusion,
 		          premises: [leftNode, rightNode],
-		          reasoningMethod: "Induction"
+		          reasoningMethod: ReasoningMethod.Induction
 		       });
 		  
 		    await connection.manager.save(argument);
@@ -71,7 +71,7 @@ EnsureConnection().then(async connection => {
 		       {
 		          conclusion: conc,
 		          premises: [p1, p2],
-		          reasoningMethod: Argument.ReasoningMethod.Deduction
+		          reasoningMethod: ReasoningMethod.Deduction
 		       });
 		  
 		    await connection.manager.save(a1);
