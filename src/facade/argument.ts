@@ -2,7 +2,7 @@
 
 import { ArgumentController } from "../business_model_typeorm/controller/ArgumentController";
 
-import { ModelArgument } from "../business_model_typeorm/entity/Argument";
+import { Argument as ModelArgument } from "../business_model_typeorm/entity/Argument";
 
 const DEFAULT_LIMIT : number = 100;
 const DEFAULT_AFTER_ID : number = 0;
