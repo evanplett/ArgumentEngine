@@ -32,4 +32,4 @@ export class Argument {
     
     @Column("enum", { enum: ReasoningMethod })
     reasoningMethod!: ReasoningMethod;
-}s
+}
