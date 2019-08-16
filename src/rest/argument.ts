@@ -11,11 +11,15 @@ export class Argument {
 
 
    async many(request: Request, response: Response, next: NextFunction) {
-        return this.af.getList(request.query.limit, request.query.after_id);
+   response.json(this.af.getList(request.query.limit, request.query.after_id));
+   
+        //return this.af.getList(request.query.limit, request.query.after_id);
     }
     
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.af.getOne(request.params.id);
+    
+    res.response.json(this.af.getOne(request.params.id));
+        //return this.af.getOne(request.params.id);
     }
     
     /*
