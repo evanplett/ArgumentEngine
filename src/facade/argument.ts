@@ -2,6 +2,8 @@
 
 import { ArgumentController } from "../business_model_typeorm/controller/ArgumentController";
 
+import { ModelArgument } from "../business_model_typeorm/entity/Argument";
+
 const DEFAULT_LIMIT : number = 100;
 const DEFAULT_AFTER_ID : number = 0;
 const DEFAULT_MAX_DEPTH : number = 6;
@@ -10,18 +12,28 @@ export class Argument
 {
   private ac = new ArgumentController();
 
-  getList(limit?: number, after_id?: number) 
+  getList(limit?: number, after_id?: number)
   {
     limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
     
     after_id = after_id && after_id >= 0 ? after_id : DEFAULT_AFTER_ID;
     
+    
     return this.ac.many(after_id, limit);
   }
   
-  getOne(id: number)
+  getOne(id: number): Promise<ModelArgument>
   {
-    return this.ac.one(id);
+    let one = await this.ac.one(id);
+    
+    
+    if (one !== undefined)
+    {
+       return new Promise<Statement>((resolve) => {
+        resolve(one);
+        });
+    }
+    
   }
   
   
