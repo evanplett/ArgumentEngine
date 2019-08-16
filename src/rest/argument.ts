@@ -20,7 +20,10 @@ export class Argument {
     this.af.getOne(request.params.id)
     .then(value => {
         response.status(200).json(value);
-       });
+       })
+    .catch(error => {
+       response.status(400).send(error);
+    });
     }
     
     /*
