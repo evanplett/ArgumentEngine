@@ -4,14 +4,17 @@ import {Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, ManyToOne
 
 import {Statement} from "./Statement";
 
-enum ReasoningMethod {
+@Entity()
+export class Argument {
+
+   enum ReasoningMethod {
   Abduction = "Abduction",
   Deduction = "Deduction",
   Induction = "Induction"
 }
 
-@Entity()
-export class Argument {
+
+
     constructor(conclusion: Statement, premises: Statement[], reasoningMethod: ReasoningMethod) {
        this.conclusion = conclusion;
        this.premises = premises;

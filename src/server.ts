@@ -71,7 +71,7 @@ EnsureConnection().then(async connection => {
 		       {
 		          conclusion: conc,
 		          premises: [p1, p2],
-		          reasoningMethod: "Deduction"
+		          reasoningMethod: Argument.ReasoningMethod.Deduction
 		       });
 		  
 		    await connection.manager.save(a1);
