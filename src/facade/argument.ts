@@ -22,7 +22,7 @@ export class Argument
     return this.ac.many(after_id, limit);
   }
   
-  getOne(id: number): Promise<ModelArgument>
+  async getOne(id: number): Promise<ModelArgument>
   {
     let one = await this.ac.one(id);
     
@@ -32,10 +32,13 @@ export class Argument
        return new Promise<Statement>((resolve) => {
         resolve(one);
         });
-    }
+    } else {
+    return new Promise<Statement>((reject) => {
+        reject(new Error("Something awful happened"));
+        });
     
+    }
   }
-  
   
   /*
   getTree(id: number, max_depth?: number) 
