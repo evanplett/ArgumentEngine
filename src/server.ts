@@ -24,7 +24,8 @@ async function CreateNode(connection: any, max_level: number, current_level: num
        let argument = connection.manager.create( Argument,
 		       {
 		          conclusion: conclusion,
-		          premises: [leftNode, rightNode]
+		          premises: [leftNode, rightNode],
+		          reasoningMethod: "Induction"
 		       });
 		  
 		    await connection.manager.save(argument);
@@ -69,7 +70,8 @@ EnsureConnection().then(async connection => {
 		    let a1 = connection.manager.create( Argument,
 		       {
 		          conclusion: conc,
-		          premises: [p1, p2]
+		          premises: [p1, p2],
+		          reasoningMethod: "Deduction"
 		       });
 		  
 		    await connection.manager.save(a1);
