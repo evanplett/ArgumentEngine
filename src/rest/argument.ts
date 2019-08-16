@@ -17,11 +17,10 @@ export class Argument {
     }
     
     async one(request: Request, response: Response, next: NextFunction) {
-    let foundArg = await this.af.getOne(request.params.id);
-    
-    
-response.status(200).json(foundArg);
-        //return this.af.getOne(request.params.id);
+    this.af.getOne(request.params.id)
+    .then(value => {
+        response.status(200).json(foundArg);
+       }
     }
     
     /*
