@@ -34,7 +34,7 @@ export class Argument
         });
     } else {
     return new Promise<ModelArgument>((reject) => {
-        reject(new Error("Something awful happened"));
+        reject("Something awful happened");
         });
     
     }
