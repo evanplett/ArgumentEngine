@@ -6,7 +6,7 @@ export class ArgumentController {
 	private argumentRepository = getRepository(Argument);
 
 	async many(afterId: number, maxCount: number): Promise<Argument[]> {
-		return this.argumentRepository.find({
+		return await this.argumentRepository.find({
 			where: {
 				id: MoreThan(afterId)
 			},
