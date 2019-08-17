@@ -27,17 +27,22 @@ export class Argument
     let one = await this.ac.one(id);
     
     
-    if (one !== undefined)
+   /* if (one !== undefined)
     {
+    */
        return new Promise<ModelArgument>((resolve) => {
         resolve(one);
         });
+        
+        
+      /*  
+        
     } else {
     return new Promise<ModelArgument>((reject) => {
         reject("Something awful happened");
         });
     
-    }
+    }*/
   }
   
   /*
