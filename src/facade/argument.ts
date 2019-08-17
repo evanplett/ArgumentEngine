@@ -26,36 +26,18 @@ export class Argument
   {
     let one = await this.ac.one(id);
     
-    
     if (one !== undefined)
     {
-    
-    
        return Promise.resolve(one);
-    
-    
-    } else {
-    
-    
-        return Promise.reject("error");
-    
+    } else { 
+        return Promise.reject(`No Argument with id ${id} found`); 
     }
-    
-    
-      /* return new Promise<ModelArgument>((resolve) => {
-        resolve(one);
-        });
-        
-        */
-      /*  
-        
-    } else {
-    return new Promise<ModelArgument>((reject) => {
-        reject("Something awful happened");
-        });
-    
-    }*/
   }
+  
+  
+  
+  
+  
   
   /*
   getTree(id: number, max_depth?: number) 
