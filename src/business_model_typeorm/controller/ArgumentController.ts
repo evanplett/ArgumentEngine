@@ -15,6 +15,8 @@ export class ArgumentController {
        take: maxCount,
        relations: ["conclusion", "premises"]});
     }
+    
+    
 
      async one(id: number) 
      {

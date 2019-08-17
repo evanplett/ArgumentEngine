@@ -16,7 +16,7 @@ export class Argument {
   then( value => {
      response
      .status(200)
-     .json(this.af.getList(request.query.limit, request.query.after_id));
+     .json(value);
   })
   .catch( error => {
   response.status(400).send(error);
