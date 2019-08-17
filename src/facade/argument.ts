@@ -12,22 +12,26 @@ export class Argument
 {
   private ac = new ArgumentController();
 
-  getList(limit?: number, after_id?: number)
+  getList(limit?: number, after_id?: number): Promise<ModelArgument[]>
   {
     limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
     
     after_id = after_id && after_id >= 0 ? after_id : DEFAULT_AFTER_ID;
     
+    let many = await this.ac.many(after_id, limit);
     
-    return this.ac.many(after_id, limit);
+    if(many.length > 0) {
+       return Promise.resolve(many);
+     } else {
+       return Promise.reject(`No Arguments after id ${after_id} found`);
+     }
   }
   
   async getOne(id: number): Promise<ModelArgument>
   {
     let one = await this.ac.one(id);
     
-    if (one !== undefined)
-    {
+    if (one !== undefined) {
        return Promise.resolve(one);
     } else { 
         return Promise.reject(`No Argument with id ${id} found`); 

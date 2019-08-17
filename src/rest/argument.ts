@@ -24,7 +24,7 @@ export class Argument {
     .catch(error => {
        response.status(400).send(error);
     });
-    }
+}
     
     /*
     async tree(request: Request, response: Response, next: NextFunction) {
