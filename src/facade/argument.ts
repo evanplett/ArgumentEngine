@@ -12,7 +12,7 @@ export class Argument
 {
   private ac = new ArgumentController();
 
-  getList(limit?: number, after_id?: number): Promise<ModelArgument[]>
+  async getList(limit?: number, after_id?: number): Promise<ModelArgument[]>
   {
     limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
     
