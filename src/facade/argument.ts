@@ -22,6 +22,9 @@ export class Argument {
             } else {
                 return Promise.reject(`No Arguments after id ${after_id} found`);
             }
+        })
+        .catch(error => {
+            console.error(error);
         });
 
         return Promise.reject('Internal server error');

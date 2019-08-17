@@ -5,7 +5,7 @@ import { Argument } from '../entity/Argument';
 export class ArgumentController {
 	private argumentRepository = getRepository(Argument);
 
-	async many(afterId: number, maxCount: number) {
+	async many(afterId: number, maxCount: number): Promise<Argument[]> {
 		return this.argumentRepository.find({
 			where: {
 				id: MoreThan(afterId)
@@ -15,7 +15,7 @@ export class ArgumentController {
 		});
 	}
 
-	async one(id: number) {
+	async one(id: number) : Promise<Argument> {
 		return this.argumentRepository.findOne(id, { relations: [ 'conclusion', 'premises' ] });
 	}
 
