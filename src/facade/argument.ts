@@ -29,11 +29,11 @@ export class Argument
     
     if (one !== undefined)
     {
-       return new Promise<Argument>((resolve) => {
+       return new Promise<ModelArgument>((resolve) => {
         resolve(one);
         });
     } else {
-    return new Promise<Argument>((reject) => {
+    return new Promise<ModelArgument>((reject) => {
         reject(new Error("Something awful happened"));
         });
     
