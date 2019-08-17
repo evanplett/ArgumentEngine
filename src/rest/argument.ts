@@ -11,9 +11,21 @@ export class Argument {
 
 
    async many(request: Request, response: Response, next: NextFunction) {
-   response.json(this.af.getList(request.query.limit, request.query.after_id));
+  
+  this.af.getList(request.query.limit, request.query.after_id).
+  then( value => {
+     response
+     .status(200)
+     .json(this.af.getList(request.query.limit, request.query.after_id));
+  })
+  .catch( error => {
+  response.status(400).send(error);
+  });
+  
+  
    
-        //return this.af.getList(request.query.limit, request.query.after_id);
+   
+        
     }
     
     async one(request: Request, response: Response, next: NextFunction) {
