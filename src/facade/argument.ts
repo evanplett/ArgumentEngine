@@ -30,11 +30,15 @@ export class Argument
    /* if (one !== undefined)
     {
     */
-       return new Promise<ModelArgument>((resolve) => {
+    
+    
+    return Promise.resolve(one);
+    
+      /* return new Promise<ModelArgument>((resolve) => {
         resolve(one);
         });
         
-        
+        */
       /*  
         
     } else {
