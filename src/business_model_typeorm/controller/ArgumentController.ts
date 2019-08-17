@@ -15,7 +15,7 @@ export class ArgumentController {
 		});
 	}
 
-	async one(id: number) : Promise<Argument> {
+	async one(id: number) : Promise<Argument | undefined> {
 		return this.argumentRepository.findOne(id, { relations: [ 'conclusion', 'premises' ] });
 	}
 
