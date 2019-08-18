@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany} from "typeorm";
 
 import {Argument} from "./Argument";
 
@@ -15,10 +15,10 @@ export class Statement {
 
     @Column()
     text!: string;
-    
-    @ManyToOne(type => Argument, argument => argument.conclusion)
+
+    @OneToMany(type => Argument, argument => argument.conclusion)
     supportingArguments!: Argument[];
-    
+
     @ManyToMany(type => Argument, argument => argument.premises)
     supportedArguments!: Argument[];
 }
