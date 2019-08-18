@@ -28,9 +28,15 @@ export class Statement {
             });
     }
 
-	/*
+
     async tree(request: Request, response: Response, next: NextFunction) {
-        return this.af.getList(request.query.limit, request.query.after_id);
+        this.sf
+        .getTree(request.query.id, request.query.max_depth)
+        .then((value) =>{
+            response.status(200).json(value);
+        })
+        .catch((error) => {
+                response.status(400).send(error);
+         });
     }
-    */
 }

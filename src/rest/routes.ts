@@ -15,6 +15,11 @@ const ArgumentRoutes =  [{
     route: "/argument/:id",
     controller: Argument,
     action: "one"
+}, {
+    method: "get",
+    route: "/argument/:id/tree",
+    controller: Argument,
+    action: "tree"
 }];/*, {
     method: "post",
     route: "/argument",
@@ -38,6 +43,11 @@ const StatementRoutes = [{
     route: "/statement/:id",
     controller: Statement,
     action: "one"
+}, {
+    method: "get",
+    route: "/statement/:id/tree",
+    controller: Statement,
+    action: "tree"
 }];/*, {
     method: "post",
     route: "/statement",
