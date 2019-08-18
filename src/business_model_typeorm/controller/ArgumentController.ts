@@ -1,11 +1,11 @@
 import { getRepository, MoreThan } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
-import { Argument } from '../entity/Argument';
+import { ModelArgument } from '../entity/Argument';
 
 export class ArgumentController {
-    private argumentRepository = getRepository(Argument);
+    private argumentRepository = getRepository(ModelArgument);
 
-    async many(afterId: number, maxCount: number): Promise<Argument[]> {
+    async many(afterId: number, maxCount: number): Promise<ModelArgument[]> {
         return await this.argumentRepository.find({
             where: {
                 id: MoreThan(afterId)
@@ -18,7 +18,7 @@ export class ArgumentController {
         });
     }
 
-    async one(id: number): Promise<Argument | undefined> {
+    async one(id: number): Promise<ModelArgument | undefined> {
         return await this.argumentRepository.findOne(id, { relations: ['conclusion', 'premises'] });
     }
 

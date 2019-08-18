@@ -1,14 +1,14 @@
 // Façade
 
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
-import { Argument as ModelArgument } from '../business_model_typeorm/entity/Argument';
-import { Statement as FacadeStatement } from "./statement"
+import { ModelArgument } from '../business_model_typeorm/entity/Argument';
+import { FacadeStatement } from "./statement"
 
 const DEFAULT_LIMIT: number = 100;
 const DEFAULT_AFTER_ID: number = 0;
 const DEFAULT_MAX_DEPTH: number = 6;
 
-export class Argument {
+export class FacadeArgument {
     ac = new ArgumentController();
 
     async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {

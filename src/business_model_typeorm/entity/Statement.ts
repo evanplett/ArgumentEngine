@@ -1,9 +1,9 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany} from "typeorm";
 
-import {Argument} from "./Argument";
+import {ModelArgument} from "./Argument";
 
 @Entity()
-export class Statement {
+export class ModelStatement {
 
     constructor(text: string)
     {
@@ -16,9 +16,9 @@ export class Statement {
     @Column()
     text!: string;
 
-    @OneToMany(type => Argument, argument => argument.conclusion)
-    supportingArguments!: Argument[];
+    @OneToMany(type => ModelArgument, argument => argument.conclusion)
+    supportingArguments!: ModelArgument[];
 
-    @ManyToMany(type => Argument, argument => argument.premises)
-    supportedArguments!: Argument[];
+    @ManyToMany(type => ModelArgument, argument => argument.premises)
+    supportedArguments!: ModelArgument[];
 }

@@ -1,17 +1,17 @@
 // Façade
 
 import { StatementController } from '../business_model_typeorm/controller/StatementController';
-import { Statement as ModelStatememt } from '../business_model_typeorm/entity/Statement';
-import { Argument as FacadeArgument } from "./argument"
+import { ModelStatement } from '../business_model_typeorm/entity/Statement';
+import { FacadeArgument } from "./argument"
 
 const DEFAULT_LIMIT: number = 100;
 const DEFAULT_AFTER_ID: number = 0;
 const DEFAULT_MAX_DEPTH: number = 6;
 
-export class Statement {
+export class FacadeStatement {
     sc = new StatementController();
 
-    async getList(limit?: number, after_id?: number): Promise<ModelStatememt[]> {
+    async getList(limit?: number, after_id?: number): Promise<ModelStatement[]> {
         limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
 
         after_id = after_id && after_id >= 0 ? after_id : DEFAULT_AFTER_ID;
@@ -25,7 +25,7 @@ export class Statement {
         }
     }
 
-    async getOne(id: number): Promise<ModelStatememt> {
+    async getOne(id: number): Promise<ModelStatement> {
         let one = await this.sc.one(id);
 
         if (one !== undefined) {

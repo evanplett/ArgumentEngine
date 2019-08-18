@@ -1,12 +1,12 @@
 import { getRepository, MoreThan } from "typeorm";
 import { NextFunction, Request, Response } from "express";
-import { Statement } from "../entity/Statement";
+import { ModelStatement } from "../entity/Statement";
 
 export class StatementController {
 
-    private statementRepository = getRepository(Statement);
+    private statementRepository = getRepository(ModelStatement);
 
-    async many(afterId: number, maxCount: number): Promise<Statement[]> {
+    async many(afterId: number, maxCount: number): Promise<ModelStatement[]> {
         return await this.statementRepository.find({
             where: {
                 id: MoreThan(afterId)
@@ -20,7 +20,7 @@ export class StatementController {
     }
 
 
-    async one(id: number): Promise<Statement | undefined> {
+    async one(id: number): Promise<ModelStatement | undefined> {
         return await this.statementRepository.findOne(id, { relations: ['supportingArguments', 'supportedArguments'] });
     }
 

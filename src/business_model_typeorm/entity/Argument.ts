@@ -2,7 +2,7 @@
 
 import {Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, ManyToOne} from "typeorm";
 
-import {Statement} from "./Statement";
+import {ModelStatement} from "./Statement";
 
 export enum ReasoningMethod {
   Abduction = "Abduction",
@@ -11,9 +11,9 @@ export enum ReasoningMethod {
 }
 
 @Entity()
-export class Argument {
+export class ModelArgument {
 
-    constructor(conclusion: Statement, premises: Statement[], reasoningMethod: ReasoningMethod) {
+    constructor(conclusion: ModelStatement, premises: ModelStatement[], reasoningMethod: ReasoningMethod) {
        this.conclusion = conclusion;
        this.premises = premises;
        this.reasoningMethod = reasoningMethod;
@@ -23,14 +23,14 @@ export class Argument {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(type => Statement, statement => statement.supportingArguments) 
+    @ManyToOne(type => ModelStatement, statement => statement.supportingArguments)
     @JoinTable()
-    conclusion!: Statement;
-    
-    @ManyToMany(type => Statement, statement => statement.supportedArguments )
-    @JoinTable() 
-    premises!: Statement[];
-    
+    conclusion!: ModelStatement;
+
+    @ManyToMany(type => ModelStatement, statement => statement.supportedArguments )
+    @JoinTable()
+    premises!: ModelStatement[];
+
     @Column("enum", { enum: ReasoningMethod })
     reasoningMethod!: ReasoningMethod;
 }
