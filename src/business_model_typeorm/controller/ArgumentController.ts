@@ -16,7 +16,7 @@ export class ArgumentController {
 	}
 
 	async one(id: number) : Promise<Argument | undefined> {
-		return this.argumentRepository.findOne(id, { relations: [ 'conclusion', 'premises' ] });
+		return await this.argumentRepository.findOne(id, { relations: [ 'conclusion', 'premises' ] });
 	}
 
 	/* Tree should be part of statement
