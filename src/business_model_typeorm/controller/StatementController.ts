@@ -12,6 +12,9 @@ async many(afterId: number, maxCount: number): Promise<Statement[]> {
 				id: MoreThan(afterId)
 			},
 			take: maxCount,
+order: {
+        id: "ASC"
+    },
 			relations: [ 'supportingArguments', 'supportedArguments' ]
 		});
 	}

@@ -11,6 +11,9 @@ export class ArgumentController {
 				id: MoreThan(afterId)
 			},
 			take: maxCount,
+  order: {
+        id: "ASC"
+    },
 			relations: [ 'conclusion', 'premises' ]
 		});
 	}
@@ -18,6 +21,12 @@ export class ArgumentController {
 	async one(id: number) : Promise<Argument | undefined> {
 		return await this.argumentRepository.findOne(id, { relations: [ 'conclusion', 'premises' ] });
 	}
+
+
+
+
+
+
 
 	/* Tree should be part of statement
      async tree(id: number, maxDepth: number) {
