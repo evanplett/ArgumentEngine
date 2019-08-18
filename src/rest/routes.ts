@@ -55,9 +55,9 @@ const StatementRoutes = [{
     action: "one"
 }];*/
 
-export const Routes = ArgumentRoutes;/* [
+export const Routes = [
     ...ArgumentRoutes,
-    ...StatementRofutes];*/
+    ...StatementRofutes];
 
 
 
