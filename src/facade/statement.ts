@@ -1,8 +1,8 @@
 // Façade
 
 import { StatementController } from '../business_model_typeorm/controller/StatementController';
-
 import { Statement as ModelStatememt } from '../business_model_typeorm/entity/Statement';
+import { Argument as FacadeArgument } from "./argument"
 
 const DEFAULT_LIMIT: number = 100;
 const DEFAULT_AFTER_ID: number = 0;
@@ -35,11 +35,20 @@ export class Statement {
         }
     }
 
-    /*
-              getTree(id: number, max_depth?: number)
-              {
-                 max_depth = max_depth && max_depth > 0 ? max_depth : DEFAULT_MAX_DEPTH;
 
-                 return this.ac.tree(id, max_depth);
-              }*/
+    async getTree(id: number, max_depth?: number) {
+        max_depth = max_depth && max_depth > 0 ? max_depth : DEFAULT_MAX_DEPTH;
+
+        return this.getTreeNode(id, max_depth, 0);
+    }
+
+    async getTreeNode(id: number, max_depth: number, current_depth: number) {
+        let statement = await this.getOne(id);
+
+        return {
+            statement_id: statement.id,
+            text: statement.text,
+            supportingArguments: statement.supportedArguments.map(argument => FacadeArgument.getTreeNode(argument.id, max_depth, current_depth + 1))
+        }
+    }
 }

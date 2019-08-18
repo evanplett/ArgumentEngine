@@ -3,24 +3,24 @@ import { NextFunction, Request, Response } from 'express';
 import { Argument } from '../entity/Argument';
 
 export class ArgumentController {
-	private argumentRepository = getRepository(Argument);
+    private argumentRepository = getRepository(Argument);
 
-	async many(afterId: number, maxCount: number): Promise<Argument[]> {
-		return await this.argumentRepository.find({
-			where: {
-				id: MoreThan(afterId)
-			},
-			take: maxCount,
-  order: {
-        id: "ASC"
-    },
-			relations: [ 'conclusion', 'premises' ]
-		});
-	}
+    async many(afterId: number, maxCount: number): Promise<Argument[]> {
+        return await this.argumentRepository.find({
+            where: {
+                id: MoreThan(afterId)
+            },
+            take: maxCount,
+            order: {
+                id: "ASC"
+            },
+            relations: ['conclusion', 'premises']
+        });
+    }
 
-	async one(id: number) : Promise<Argument | undefined> {
-		return await this.argumentRepository.findOne(id, { relations: [ 'conclusion', 'premises' ] });
-	}
+    async one(id: number): Promise<Argument | undefined> {
+        return await this.argumentRepository.findOne(id, { relations: ['conclusion', 'premises'] });
+    }
 
 
 
