@@ -12,6 +12,7 @@ export enum ReasoningMethod {
 
 @Entity()
 export class Argument {
+
     constructor(conclusion: Statement, premises: Statement[], reasoningMethod: ReasoningMethod) {
        this.conclusion = conclusion;
        this.premises = premises;
