@@ -1,10 +1,10 @@
 // rest
 import { NextFunction, Request, Response } from 'express';
 
-import { Statement as StatementFacade } from '../facade/statement';
+import { FacadeStatement } from '../facade/statement';
 
 export class Statement {
-    private sf = new StatementFacade();
+    private sf = new FacadeStatement();
 
     async many(request: Request, response: Response, next: NextFunction) {
         this.sf

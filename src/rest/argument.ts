@@ -1,10 +1,10 @@
 // rest
 import { NextFunction, Request, Response } from 'express';
 
-import { Argument as ArgumentFacade } from '../facade/argument';
+import { FacadeArgument } from '../facade/argument';
 
 export class Argument {
-    private af = new ArgumentFacade();
+    private af = new FacadeArgument();
 
     async many(request: Request, response: Response, next: NextFunction) {
         this.af

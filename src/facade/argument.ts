@@ -10,6 +10,7 @@ const DEFAULT_MAX_DEPTH: number = 6;
 
 export class FacadeArgument {
     ac = new ArgumentController();
+    fs = new FacadeStatement();
 
     async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
         limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
@@ -47,7 +48,7 @@ export class FacadeArgument {
 
         return {
             argument_id: arg.id,
-            premises: arg.premises.map(statement => FacadeStatement.getTreeNode(statement.id, max_depth, current_depth + 1)),
+            premises: arg.premises.map(statement => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)),
             reasoning_method: arg.reasoningMethod
         }
     }
