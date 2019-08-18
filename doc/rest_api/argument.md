@@ -26,12 +26,11 @@
 
 ## Argument - Tree
 
-### <a name="argument-tree-node">Argument Tree Node</a>
+### <a name="argument-tree-node">Argument - Tree Node</a>
 ```javascript
 {
   argument_id=[int] // The id of the argument
-  conclusion=[Statement] // The conclusion statement of the argument
-  premises=[array of [Argument Tree Node]] // An array of the the premises of the Argument
+  premises=[array of [Statement Tree Node]] // An array of the the premises of the Argument
   reasoning_method=[REASONING_METHOD] // The reasoning method that this argument uses
 }
 ```
@@ -150,7 +149,7 @@ $.ajax({
 
 ## URL
 
-> /argument/tree/id
+> /argument/id/tree
 
 ## Method
 > GET
@@ -169,7 +168,7 @@ $.ajax({
 * **Content**: 
 
 ``` 
-[Argument Tree Node]
+[Argument - Tree Node]
 ```
 
 ## Error Response
@@ -186,7 +185,7 @@ $.ajax({
 ## Sample Call
 ```javascript
 $.ajax({
-  url: "/argument/tree/15?max_depth=50", 
+  url: "/argument/15/tree?max_depth=50", 
   dataType: "json", 
   type : "GET", 
   success : function(r) { console.log(r); }
