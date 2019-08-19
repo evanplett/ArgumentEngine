@@ -2,7 +2,7 @@
 
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
 import { ModelArgument } from '../business_model_typeorm/entity/Argument';
-//import { FacadeStatement } from "./statement"
+import { FacadeStatement } from "./statement"
 
 export class FacadeArgument {
 					static readonly DEFAULT_LIMIT: number = 100;

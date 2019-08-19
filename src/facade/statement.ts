@@ -2,7 +2,7 @@
 
 import { StatementController } from '../business_model_typeorm/controller/StatementController';
 import { ModelStatement } from '../business_model_typeorm/entity/Statement';
-//import { FacadeArgument } from "./argument"
+import { FacadeArgument } from "./argument"
 
 
 export class FacadeStatement {
