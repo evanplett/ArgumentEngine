@@ -78,6 +78,6 @@ EnsureConnection().then(async connection => {
     }
 
     // tree
-    CreateNode(connection, 3);
+    CreateNode(connection, 6);
 
 }).catch(error => console.log(error));
