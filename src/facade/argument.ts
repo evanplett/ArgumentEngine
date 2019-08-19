@@ -43,7 +43,7 @@ export class FacadeArgument {
         return this.getTreeNode(id, max_depth, 0);
     }
 
-    async getTreeNode(id: number, max_depth: number, current_depth: number) {
+    /*async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let arg = await this.getOne(id);
 
         return {
@@ -51,5 +51,5 @@ export class FacadeArgument {
             premises: arg.premises.map(statement => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)),
             reasoning_method: arg.reasoningMethod
         }
-    }
+    }*/
 }

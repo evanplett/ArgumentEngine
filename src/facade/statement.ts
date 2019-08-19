@@ -43,7 +43,7 @@ export class FacadeStatement {
         return this.getTreeNode(id, max_depth, 0);
     }
 
-    async getTreeNode(id: number, max_depth: number, current_depth: number) {
+    /*async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let statement = await this.getOne(id);
 
         return {
@@ -51,5 +51,5 @@ export class FacadeStatement {
             text: statement.text,
             supportingArguments: statement.supportedArguments.map(argument => this.fa.getTreeNode(argument.id, max_depth, current_depth + 1))
         }
-    }
+    }*/
 }
