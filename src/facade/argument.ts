@@ -9,8 +9,8 @@ export class FacadeArgument {
 					static readonly DEFAULT_AFTER_ID: number = 0;
 					static readonly DEFAULT_MAX_DEPTH: number = 6;
 
-
-    ac = new ArgumentController();
+    private ac = new ArgumentController();
+    private fs: FacadeStatement;
 
     constructor(facadeStatement?: FacadeStatement) {
         this.fs = facadeStatement ? facadeStatement : new FacadeStatement(this);
