@@ -2,7 +2,7 @@
 
 import { StatementController } from '../business_model_typeorm/controller/StatementController';
 import { ModelStatement } from '../business_model_typeorm/entity/Statement';
-import { FacadeArgument } from "./argument"
+//import { FacadeArgument } from "./argument"
 
 const DEFAULT_LIMIT: number = 100;
 const DEFAULT_AFTER_ID: number = 0;
@@ -10,7 +10,7 @@ const DEFAULT_MAX_DEPTH: number = 6;
 
 export class FacadeStatement {
     sc = new StatementController();
-    fa = new FacadeArgument();
+    //fa = new FacadeArgument();
 
     async getList(limit?: number, after_id?: number): Promise<ModelStatement[]> {
         limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
