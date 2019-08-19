@@ -4,18 +4,19 @@ import { ArgumentController } from '../business_model_typeorm/controller/Argumen
 import { ModelArgument } from '../business_model_typeorm/entity/Argument';
 //import { FacadeStatement } from "./statement"
 
-const DEFAULT_LIMIT: number = 100;
-const DEFAULT_AFTER_ID: number = 0;
-const DEFAULT_MAX_DEPTH: number = 6;
-
 export class FacadeArgument {
+					static readonly DEFAULT_LIMIT: number = 100;
+					static readonly DEFAULT_AFTER_ID: number = 0;
+					static readonly DEFAULT_MAX_DEPTH: number = 6;
+
+
     ac = new ArgumentController();
     //fs = new FacadeStatement();
 
     async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
-        limit = limit && limit > 0 ? limit : DEFAULT_LIMIT;
+        limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
 
-        after_id = after_id && after_id >= 0 ? after_id : DEFAULT_AFTER_ID;
+        after_id = after_id && after_id >= 0 ? after_id : FacadeArgument.DEFAULT_AFTER_ID;
 
         let many = await this.ac.many(after_id, limit);
 
@@ -38,7 +39,7 @@ export class FacadeArgument {
 
 
     /*async getTree(id: number, max_depth?: number) {
-        max_depth = max_depth && max_depth > 0 ? max_depth : DEFAULT_MAX_DEPTH;
+        max_depth = max_depth && max_depth > 0 ? max_depth : FacadeArgument.DEFAULT_MAX_DEPTH;
 
         return this.getTreeNode(id, max_depth, 0);
     }
