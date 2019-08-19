@@ -11,7 +11,8 @@ export class FacadeStatement {
 					static readonly DEFAULT_MAX_DEPTH: number = 6;
 
 
-    sc = new StatementController();
+    private sc = new StatementController();
+    private fa: FacadeArgument;
 
     constructor(facadeArgument?: FacadeArgument) {
         this.fa = facadeArgument ? facadeArgument : new FacadeArgument(this);
