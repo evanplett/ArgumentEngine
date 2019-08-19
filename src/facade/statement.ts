@@ -10,8 +10,12 @@ export class FacadeStatement {
 					static readonly DEFAULT_AFTER_ID: number = 0;
 					static readonly DEFAULT_MAX_DEPTH: number = 6;
 
+
     sc = new StatementController();
-    fa = new FacadeArgument();
+
+    constructor(facadeArgument?: FacadeArgument) {
+        this.fa = facadeArgument ? facadeArgument : new FacadeArgument(this);
+    }
 
     async getList(limit?: number, after_id?: number): Promise<ModelStatement[]> {
         limit = limit && limit > 0 ? limit : FacadeStatement.DEFAULT_LIMIT;
