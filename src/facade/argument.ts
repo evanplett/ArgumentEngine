@@ -50,9 +50,16 @@ export class FacadeArgument {
     async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let arg = await this.getOne(id);
 
+        let children;
+
+        if (current_depth < max_depth)
+        {
+            children = arg.premises.map(statement => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1));
+        }
+
         return {
             argument_id: arg.id,
-            premises: arg.premises.map(statement => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)),
+            premises: children,
             reasoning_method: arg.reasoningMethod
         }
     }
