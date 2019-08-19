@@ -37,13 +37,13 @@ export class FacadeStatement {
     }
 
 
-    async getTree(id: number, max_depth?: number) {
+    /*async getTree(id: number, max_depth?: number) {
         max_depth = max_depth && max_depth > 0 ? max_depth : DEFAULT_MAX_DEPTH;
 
         return this.getTreeNode(id, max_depth, 0);
     }
 
-    /*async getTreeNode(id: number, max_depth: number, current_depth: number) {
+    async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let statement = await this.getOne(id);
 
         return {
