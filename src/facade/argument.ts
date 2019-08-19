@@ -11,7 +11,7 @@ export class FacadeArgument {
 
 
     ac = new ArgumentController();
-    //fs = new FacadeStatement();
+    fs = new FacadeStatement();
 
     async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
         limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
