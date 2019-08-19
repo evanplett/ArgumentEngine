@@ -52,6 +52,8 @@ export class FacadeStatement {
     async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let statement = await this.getOne(id);
 
+        console.log(`Getting tree for statement ${id} with ${statement.premises.length}`);
+
         let children;
 
         if (current_depth < max_depth)

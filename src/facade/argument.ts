@@ -50,6 +50,8 @@ export class FacadeArgument {
     async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let arg = await this.getOne(id);
 
+        console.log(`Getting tree for argument ${id} with ${arg.premises.length}`);
+
         let children;
 
         if (current_depth < max_depth)
