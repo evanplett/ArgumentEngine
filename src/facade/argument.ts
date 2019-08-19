@@ -56,10 +56,13 @@ export class FacadeArgument {
 
         if (current_depth < max_depth)
         {
+
+            children = Promise.all(arg.premises.map(async (statement) => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)));
+/*
             let results = arg.premises.map(async (statement) => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1));
 
             Promise.all(results)
-.then((completed) => children = completed);
+                    .then((completed) => children = completed);*/
 
         }
 
