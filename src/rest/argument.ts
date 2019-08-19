@@ -31,7 +31,7 @@ export class Argument {
 
     async tree(request: Request, response: Response, next: NextFunction) {
         this.af
-        .getTree(request.query.id, request.query.max_depth)
+        .getTree(request.params.id, request.query.max_depth)
         .then((value) =>{
             response.status(200).json(value);
         })

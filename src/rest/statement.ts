@@ -31,7 +31,7 @@ export class Statement {
 
     async tree(request: Request, response: Response, next: NextFunction) {
         this.sf
-        .getTree(request.query.id, request.query.max_depth)
+        .getTree(request.params.id, request.query.max_depth)
         .then((value) =>{
             response.status(200).json(value);
         })
