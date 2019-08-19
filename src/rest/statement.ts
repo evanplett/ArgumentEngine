@@ -29,7 +29,7 @@ export class Statement {
     }
 
 
-    /*async tree(request: Request, response: Response, next: NextFunction) {
+    async tree(request: Request, response: Response, next: NextFunction) {
         this.sf
         .getTree(request.query.id, request.query.max_depth)
         .then((value) =>{
@@ -38,5 +38,5 @@ export class Statement {
         .catch((error) => {
                 response.status(400).send(error);
          });
-    }*/
+    }
 }

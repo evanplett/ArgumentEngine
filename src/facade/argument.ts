@@ -41,7 +41,7 @@ export class FacadeArgument {
     }
 
 
-    /*async getTree(id: number, max_depth?: number) {
+    async getTree(id: number, max_depth?: number) {
         max_depth = max_depth && max_depth > 0 ? max_depth : FacadeArgument.DEFAULT_MAX_DEPTH;
 
         return this.getTreeNode(id, max_depth, 0);
@@ -55,5 +55,5 @@ export class FacadeArgument {
             premises: arg.premises.map(statement => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)),
             reasoning_method: arg.reasoningMethod
         }
-    }*/
+    }
 }

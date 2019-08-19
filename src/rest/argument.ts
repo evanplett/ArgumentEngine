@@ -29,7 +29,7 @@ export class Argument {
     }
 
 
-    /*async tree(request: Request, response: Response, next: NextFunction) {
+    async tree(request: Request, response: Response, next: NextFunction) {
         this.af
         .getTree(request.query.id, request.query.max_depth)
         .then((value) =>{
@@ -38,5 +38,5 @@ export class Argument {
         .catch((error) => {
                 response.status(400).send(error);
          });
-    }*/
+    }
 }
