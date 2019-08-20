@@ -50,7 +50,7 @@ export class FacadeArgument {
     async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let arg = await this.getOne(id);
 
-        let children = current_depth > max_depth ? [] : await Promise.all(arg.premises.map(async (statement) => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)));;
+        let children = current_depth > max_depth ? [] : await Promise.all(arg.premises.map(async (statement) => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)));
 
         return {
             argument_id: arg.id,
