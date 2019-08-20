@@ -52,17 +52,23 @@ export class FacadeStatement {
     async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let statement = await this.getOne(id);
 
+
+        let children = current_depth > max_depth ? [] : await Promise.all(statement.supportingArguments.map(async (argument) => this.fa.getTreeNode(argument.id, max_depth, current_depth + 1))):
+
+
+
+/*
         let children;
 
         if (current_depth < max_depth)
         {
             children = await Promise.all(statement.supportingArguments.map(async (argument) => this.fa.getTreeNode(argument.id, max_depth, current_depth + 1)));
-/*
+
             let results = statement.supportingArguments.map(async (argument) => this.fa.getTreeNode(argument.id, max_depth, current_depth + 1));
 
             Promise.all(results)
-                    .then((completed) => children = completed);*/
-        }
+                    .then((completed) => children = completed);
+        }*/
 
         return {
             statement_id: statement.id,
