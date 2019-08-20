@@ -53,7 +53,7 @@ export class FacadeStatement {
         let statement = await this.getOne(id);
 
 
-        let children = current_depth > max_depth ? [] : await Promise.all(statement.supportingArguments.map(async (argument) => this.fa.getTreeNode(argument.id, max_depth, current_depth + 1))):
+        let children = current_depth > max_depth ? [] : await Promise.all(statement.supportingArguments.map(async (argument) => this.fa.getTreeNode(argument.id, max_depth, current_depth + 1)));
 
 
 
