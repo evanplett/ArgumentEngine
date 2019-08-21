@@ -20,7 +20,7 @@ export class FacadeStatement {
 
     // *********** CREATE ********** //
     async createOne(text: string): Promise<ModelStatement> {
-           return this.sc.createOne( ModelStatement, { text: text});
+           return this.sc.createOne( text );
     }
 
     // *********** READ ********** //
