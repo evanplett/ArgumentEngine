@@ -9,7 +9,7 @@ export class Statement {
     // *********** CREATE ********** //
     async create(request: Request, response: Response, next: NextFunction) {
          this.sf
-            .createOne(request.data.text)
+            .createOne(request.body.text)
             .then((value) => {
                 response.status(200).json(value);
             })
