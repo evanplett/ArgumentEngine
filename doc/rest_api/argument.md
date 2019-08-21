@@ -1,8 +1,14 @@
 # <a name="TOC">Table Of Contents</a>
 1. [Data Structures](#data-structures)
-2. [Show Arguments](#show-arguments)
-3. [Show Argument From Id](#show-argument-from-id)
-4. [Show Argument Tree From Id](#show-argument-tree-from-id)
+2. Create
+ 1. [Create Argument](#create-argument)
+3. Read
+ 1. [Show Arguments](#show-arguments)
+ 2. [Show Argument From Id](#show-argument-from-id)
+ 3. [Show Argument Tree From Id](#show-argument-tree-from-id)
+4. Update
+5. Delete
+
 
 ***
 # <a name="data-structures">Data Structures</a> <sup><small>[top](#TOC)</small></sup>
@@ -34,28 +40,88 @@
   reasoning_method=[REASONING_METHOD] // The reasoning method that this argument uses
 }
 ```
-
-
 ***
-# <a name="show-arguments">Show Arguments</a> <sup><small>[top](#TOC)</small></sup>
+# Create
+## <u><a name="create-argument">Create Argument</a></u> <sup><small>[top](#TOC)</small></sup>
 
-## URL
+### URL
 
 > /argument
 
-## Method
+### Method
+> POST
+
+### URL Params
+* Required: NONE
+* Optional: NONE
+
+### Data Params
+```
+{
+ conclusion: [string | Statement Id],
+ premises: [array of [string | Statement Id]],
+ reasoning_method: [REASONING_METHOD]
+}
+```
+
+### Success Response
+
+* **Code**: 200
+* **Content**: 
+
+``` 
+{
+   argument : [Argument - Complete]
+}
+```
+
+### Error Response
+
+* **Code**: 400
+* **Content**: 
+
+``` 
+{
+   error : "Unable to create argument."
+}
+```
+
+### Sample Call
+```javascript
+$.ajax({
+  url: "/argument, 
+  dataType: "json",
+  type : "POST", 
+  data : {
+ conclusion: "conclusion",
+ premises: ["Premise 1","Premise 2"],
+ reasoning_method: "Induction"
+},
+  success : function(r) { console.log(r); }
+});
+```
+
+***
+# Read
+## <u><a name="show-arguments">Show Arguments</a></u> <sup><small>[top](#TOC)</small></sup>
+
+### URL
+
+> /argument
+
+### Method
 > GET
 
-## URL Params
+### URL Params
 * Required: NONE
 * Optional:
  * limit=[int] // default of 100
  * after_id=[int] // default of 0
 
-## Data Params
+### Data Params
 > NONE
 
-## Success Response
+### Success Response
 
 * **Code**: 200
 * **Content**: 
@@ -66,7 +132,7 @@
 }
 ```
 
-## Error Response
+### Error Response
 
 * **Code**: 404
 * **Content**: 
@@ -78,7 +144,7 @@
 ```
 *_Note_*: this error occurs when there are no ids after the specified ```after_id```.
 
-## Sample Call
+### Sample Call
 ```javascript
 $.ajax({
   url: "/argument?limit=50&after_id=30", 
@@ -88,25 +154,23 @@ $.ajax({
 });
 ```
 
+## <u><a name="show-argument-from-id">Show Argument From Id</a></u> <sup><small>[top](#TOC)</small></sup>
 
-***
-# <a name="show-argument-from-id">Show Argument From Id</a> <sup><small>[top](#TOC)</small></sup>
-
-## URL
+### URL
 
 > /argument/id
 
-## Method
+### Method
 > GET
 
-## URL Params
+### URL Params
 * Required: id=[int]
 * Optional: NONE
 
 ## Data Params
 > NONE
 
-## Success Response
+### Success Response
 
 * **Code**: 200
 * **Content**: 
@@ -115,7 +179,7 @@ $.ajax({
 [Argument - Complete]
 ```
 
-## Error Response
+### Error Response
 
 * **Code**: 404
 * **Content**: 
@@ -126,7 +190,7 @@ $.ajax({
 }
 ```
 
-## Sample Call
+### Sample Call
 ```javascript
 $.ajax({
   url: "/argument/15", 
@@ -136,33 +200,24 @@ $.ajax({
 });
 ```
 
+## <u><a name="show-argument-tree-from-id">Show Argument Tree From Id</a></u> <sup><small>[top](#TOC)</small></sup>
 
-
-
-
-
-
-
-
-***
-# <a name="show-argument-tree-from-id">Show Argument Tree From Id</a> <sup><small>[top](#TOC)</small></sup>
-
-## URL
+### URL
 
 > /argument/id/tree
 
-## Method
+### Method
 > GET
 
-## URL Params
+### URL Params
 * Required: id=[int]
 * Optional:
  * max_depth=[int] // default of 100
 
-## Data Params
+### Data Params
 > NONE
 
-## Success Response
+### Success Response
 
 * **Code**: 200
 * **Content**: 
@@ -171,7 +226,7 @@ $.ajax({
 [Argument - Tree Node]
 ```
 
-## Error Response
+### Error Response
 
 * **Code**: 404
 * **Content**: 
@@ -182,7 +237,7 @@ $.ajax({
 }
 ```
 
-## Sample Call
+### Sample Call
 ```javascript
 $.ajax({
   url: "/argument/15/tree?max_depth=50", 

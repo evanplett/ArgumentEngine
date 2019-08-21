@@ -6,3 +6,6 @@
  * Users opinions
  * Rebutals
  * Identifying Logical Fallacies
+ * Complex shapes
+  * Inverse tree
+  * Horizontal cross section

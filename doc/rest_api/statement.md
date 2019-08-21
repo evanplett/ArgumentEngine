@@ -1,8 +1,13 @@
 # <a name="TOC">Table Of Contents</a>
 1. [Data Structures](#data-structures)
-2. [Show Statements](#show-statements)
-3. [Show Statement From Id](#show-statement-from-id)
-4. [Show Statement Tree From Id](#show-statement-tree-from-id)
+2. Create
+ 1. [Create Statement](#create-statement)
+3. Read
+ 1. [Show Statements](#show-statements)
+ 2. [Show Statement From Id](#show-statement-from-id)
+ 3. [Show Statement Tree From Id](#show-statement-tree-from-id)
+4. Update
+5. Delete
 
 ***
 # <a name="data-structures">Data Structures</a> <sup><small>[top](#TOC)</small></sup>
@@ -27,28 +32,83 @@
   supportingArguments=[array of [Argument - Tree Node]
 }
 ```
-
-
 ***
-# <a name="show-statements">Show Statements</a> <sup><small>[top](#TOC)</small></sup>
+# Create
+## <u><a name="create-statement">Create Statement</a></u> <sup><small>[top](#TOC)</small></sup>
 
-## URL
+### URL
 
 > /statement
 
-## Method
+### Method
+> POST
+
+### URL Params
+* Required: NONE
+* Optional: NONE
+
+### Data Params
+```
+{
+ text: [string]
+}
+```
+
+### Success Response
+
+* **Code**: 200
+* **Content**: 
+
+``` 
+{
+   statement : [Statement - Complete]
+}
+```
+
+### Error Response
+
+* **Code**: 400
+* **Content**: 
+
+``` 
+{
+   error : "Unable to create statement."
+}
+```
+
+### Sample Call
+```javascript
+$.ajax({
+  url: "/statement", 
+  dataType: "json", 
+  data: {text: "This is a statement"}, 
+  type : "POST", 
+  success : function(r) { console.log(r); }
+});
+```
+
+
+***
+# Read
+## <u><a name="show-statements">Show Statements</a></u> <sup><small>[top](#TOC)</small></sup>
+
+### URL
+
+> /statement
+
+### Method
 > GET
 
-## URL Params
+### URL Params
 * Required: NONE
 * Optional:
  * limit=[int] // default of 100
  * after_id=[int] // default of 0
 
-## Data Params
+### Data Params
 > NONE
 
-## Success Response
+### Success Response
 
 * **Code**: 200
 * **Content**: 
@@ -59,7 +119,7 @@
 }
 ```
 
-## Error Response
+### Error Response
 
 * **Code**: 404
 * **Content**: 
@@ -71,7 +131,7 @@
 ```
 *_Note_*: this error occurs when there are no ids after the specified ```after_id```.
 
-## Sample Call
+### Sample Call
 ```javascript
 $.ajax({
   url: "/statement?limit=50&after_id=30", 
@@ -82,24 +142,24 @@ $.ajax({
 ```
 
 
-***
-# <a name="show-statement-from-id">Show Statement From Id</a> <sup><small>[top](#TOC)</small></sup>
 
-## URL
+## <u><a name="show-statement-from-id">Show Statement From Id</a></u> <sup><small>[top](#TOC)</small></sup>
+
+### URL
 
 > /statement/id
 
-## Method
+### Method
 > GET
 
-## URL Params
+### URL Params
 * Required: id=[int]
 * Optional: NONE
 
-## Data Params
+### Data Params
 > NONE
 
-## Success Response
+### Success Response
 
 * **Code**: 200
 * **Content**: 
@@ -108,7 +168,7 @@ $.ajax({
 [Statement - Complete]
 ```
 
-## Error Response
+### Error Response
 
 * **Code**: 404
 * **Content**: 
@@ -119,7 +179,7 @@ $.ajax({
 }
 ```
 
-## Sample Call
+### Sample Call
 ```javascript
 $.ajax({
   url: "/statement/15", 
@@ -129,33 +189,24 @@ $.ajax({
 });
 ```
 
+## <u><a name="show-statement-tree-from-id">Show Statement Tree From Id</a></u> <sup><small>[top](#TOC)</small></sup>
 
-
-
-
-
-
-
-
-***
-# <a name="show-statement-tree-from-id">Show Statement Tree From Id</a> <sup><small>[top](#TOC)</small></sup>
-
-## URL
+### URL
 
 > /statement/id/tree
 
-## Method
+### Method
 > GET
 
-## URL Params
+### URL Params
 * Required: id=[int]
 * Optional:
  * max_depth=[int] // default of 100
 
-## Data Params
+### Data Params
 > NONE
 
-## Success Response
+### Success Response
 
 * **Code**: 200
 * **Content**: 
@@ -164,7 +215,7 @@ $.ajax({
 [Statement - Tree Node]
 ```
 
-## Error Response
+### Error Response
 
 * **Code**: 404
 * **Content**: 
@@ -175,7 +226,7 @@ $.ajax({
 }
 ```
 
-## Sample Call
+### Sample Call
 ```javascript
 $.ajax({
   url: "/statement/15/tree?max_depth=50", 
