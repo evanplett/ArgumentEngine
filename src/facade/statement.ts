@@ -18,6 +18,12 @@ export class FacadeStatement {
         this.fa = facadeArgument ? facadeArgument : new FacadeArgument(this);
     }
 
+    // *********** CREATE ********** //
+    async createOne(text: string): Promise<ModelStatement> {
+           return this.sc.create( ModelStatement, { text: text});
+    }
+
+    // *********** READ ********** //
     async getList(limit?: number, after_id?: number): Promise<ModelStatement[]> {
         limit = limit && limit > 0 ? limit : FacadeStatement.DEFAULT_LIMIT;
 

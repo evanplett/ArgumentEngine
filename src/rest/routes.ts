@@ -48,12 +48,12 @@ const StatementRoutes = [{
     route: "/statement/:id/tree",
     controller: Statement,
     action: "tree"
-}];/*, {
+}, {
     method: "post",
     route: "/statement",
-    controller: StatementController,
-    action: "save"
-}, {
+    controller: Statement,
+    action: "create"
+}];/*, {
     method: "delete",
     route: "/statement/:id",
     controller: StatementController,
