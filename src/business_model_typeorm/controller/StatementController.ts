@@ -6,6 +6,12 @@ export class StatementController {
 
     private statementRepository = getRepository(ModelStatement);
 
+    // *********** CREATE ********** //
+    async createOne(text: string): Promise<ModelStatement> {
+           return this.statementRepository.create( ModelStatement, { text: text});
+    }
+
+    // *********** READ ********** //
     async many(afterId: number, maxCount: number): Promise<ModelStatement[]> {
         return await this.statementRepository.find({
             where: {
