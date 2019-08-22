@@ -58,7 +58,7 @@ EnsureConnection().then(async connection => {
     // put some values in the database
 
     // many
-    for(let i = 1; i < 100; i++) {
+    /*for(let i = 1; i < 100; i++) {
     let p1 = connection.manager.create( ModelStatement, { text: `Premis ${i}a` });
 		    let p2 = connection.manager.create( ModelStatement, { text: `Premis ${i}b` });
 		    let conc = connection.manager.create( ModelStatement, { text: `Conclusion ${i}`});
@@ -75,9 +75,9 @@ EnsureConnection().then(async connection => {
 		       });
 
 		    await connection.manager.save(a1);
-    }
+    }*/
 
     // tree
-    CreateNode(connection, 6);
+    //CreateNode(connection, 6);
 
 }).catch(error => console.log(error));
