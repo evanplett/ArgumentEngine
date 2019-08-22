@@ -9,7 +9,7 @@ export class Statement {
     // *********** CREATE ********** //
     async create(request: Request, response: Response, next: NextFunction) {
 
-         console.log(`Received statement creation request: ${request}`);
+         console.log(`Received statement creation request: ${request.body}`);
 
          this.sf
             .createOne(request.body.text)
