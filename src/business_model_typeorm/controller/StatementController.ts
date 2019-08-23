@@ -8,10 +8,7 @@ export class StatementController {
 
     // *********** CREATE ********** //
     async createOne(text: string): Promise<ModelStatement> {
-           return await this.statementRepository.create( { text: text})
-                .then(async newStatement => {
-                    await this.statementRepository.save(newStatement)
-                });
+        return await this.statementRepository.save( this.statementRepository.create( { text: text} ))
     }
 
     // *********** READ ********** //
