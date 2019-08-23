@@ -8,7 +8,11 @@ export class StatementController {
 
     // *********** CREATE ********** //
     async createOne(text: string): Promise<ModelStatement> {
-        return await this.statementRepository.save( this.statementRepository.create( { text: text} ))
+        let newStatement = await this.statementRepository.save( this.statementRepository.create( { text: text} ));
+        return await this.statementRepository.findOne(newStatement.id,
+        {
+            relations: ['supportingArguments', 'supportedArguments']
+        });
     }
 
     // *********** READ ********** //
