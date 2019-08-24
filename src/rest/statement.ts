@@ -8,9 +8,6 @@ export class Statement {
 
     // *********** CREATE ********** //
     async create(request: Request, response: Response, next: NextFunction) {
-
-         console.log("Received statement creation request: " + JSON.stringify(request.body));
-
          this.sf
             .createOne(request.body.text)
             .then((value) => {

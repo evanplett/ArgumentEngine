@@ -1,13 +1,13 @@
 // Façade
 
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
-import { ModelArgument } from '../business_model_typeorm/entity/Argument';
+import { ModelArgument, ReasoningMethod } from '../business_model_typeorm/entity/Argument';
 import { FacadeStatement } from "./statement"
 
 export class FacadeArgument {
-					static readonly DEFAULT_LIMIT: number = 100;
-					static readonly DEFAULT_AFTER_ID: number = 0;
-					static readonly DEFAULT_MAX_DEPTH: number = 6;
+    static readonly DEFAULT_LIMIT: number = 100;
+    static readonly DEFAULT_AFTER_ID: number = 0;
+    static readonly DEFAULT_MAX_DEPTH: number = 6;
 
     private ac = new ArgumentController();
     private fs: FacadeStatement;
@@ -16,6 +16,48 @@ export class FacadeArgument {
         this.fs = facadeStatement ? facadeStatement : new FacadeStatement(this);
     }
 
+    // *********** CREATE ********** //
+    async createOne(conclusion: string | number, reasoningMethod: ReasoningMethod, premises: (string | number)[]): Promise<ModelArgument> {
+
+        if (typeof conclusion === "string") {
+            let conclusionStatement = this.fs.createOne(conclusion);
+        }
+        else {
+            let conclusionStatement = this.fs.getOne(conclusion);
+        }
+
+        let premisStatements = premises.map(premis => {
+            if (typeof premis === "string") {
+                return this.fs.createOne(premis);
+            }
+            else {
+                return this.fs.getOne(premis);
+            }
+        });
+
+        let created = await this.sc.createOne(text);
+
+        if (created !== undefined) {
+            return Promise.resolve(created);
+        } else {
+            return Promise.reject(`Unable to create statement with text '${text}'`);
+        }
+
+
+
+
+
+
+
+
+        let newArgument = await this.argumentRepository.save(this.argumentRepository.create({ text: text }));
+        return await this.argumentRepository.findOne(newArgument.id,
+            {
+                relations: ['supportingArguments', 'supportedArguments']
+            });
+    }
+
+    // *********** READ ********** //
     async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
         limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
 

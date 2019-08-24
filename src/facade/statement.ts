@@ -6,9 +6,9 @@ import { FacadeArgument } from "./argument"
 
 
 export class FacadeStatement {
-					static readonly DEFAULT_LIMIT: number = 100;
-					static readonly DEFAULT_AFTER_ID: number = 0;
-					static readonly DEFAULT_MAX_DEPTH: number = 6;
+    static readonly DEFAULT_LIMIT: number = 100;
+    static readonly DEFAULT_AFTER_ID: number = 0;
+    static readonly DEFAULT_MAX_DEPTH: number = 6;
 
 
     private sc = new StatementController();
@@ -20,15 +20,18 @@ export class FacadeStatement {
 
     // *********** CREATE ********** //
     async createOne(text: string): Promise<ModelStatement> {
+        let created = await this.sc.createOne(text);
 
-           console.log(`Creating statement with text '${text}'`)
-           return  await this.sc.createOne( text );
+        if (created !== undefined) {
+            return Promise.resolve(created);
+        } else {
+            return Promise.reject(`Unable to create statement with text '${text}'`);
+        }
     }
 
     // *********** READ ********** //
     async getList(limit?: number, after_id?: number): Promise<ModelStatement[]> {
         limit = limit && limit > 0 ? limit : FacadeStatement.DEFAULT_LIMIT;
-
         after_id = after_id && after_id >= 0 ? after_id : FacadeStatement.DEFAULT_AFTER_ID;
 
         let many = await this.sc.many(after_id, limit);
@@ -54,7 +57,13 @@ export class FacadeStatement {
     async getTree(id: number, max_depth?: number) {
         max_depth = max_depth && max_depth > 0 ? max_depth : FacadeStatement.DEFAULT_MAX_DEPTH;
 
-        return this.getTreeNode(id, max_depth, 0);
+        let tree = this.getTreeNode(id, max_depth, 0);
+
+        if (tree !== undefined) {
+            return Promise.resolve(tree);
+        } else {
+            return Promise.reject(`No tree for Statement with id ${id} found`);
+        }
     }
 
     async getTreeNode(id: number, max_depth: number, current_depth: number) {

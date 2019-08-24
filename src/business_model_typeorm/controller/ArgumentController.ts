@@ -1,10 +1,28 @@
 import { getRepository, MoreThan } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
-import { ModelArgument } from '../entity/Argument';
+import { ModelArgument, ReasoningMethod } from '../entity/Argument';
+import { ModelStatement } from '../entity/Statement';
 
 export class ArgumentController {
     private argumentRepository = getRepository(ModelArgument);
 
+    // *********** CREATE ********** //
+    async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {
+
+        let newArgument = await this.argumentRepository.save(this.argumentRepository.create(
+            {
+                conclusion: conclusion,
+                premises: premises,
+                reasoningMethod: reasoningMethod
+            }));
+
+        return await this.argumentRepository.findOne(newArgument.id,
+            {
+                relations: ['conclusion', 'premises']
+            });
+    }
+
+    // *********** READ ********** //
     async many(afterId: number, maxCount: number): Promise<ModelArgument[]> {
         return await this.argumentRepository.find({
             where: {
