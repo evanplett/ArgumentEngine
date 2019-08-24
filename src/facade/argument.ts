@@ -20,10 +20,9 @@ export class FacadeArgument {
     // *********** CREATE ********** //
     async createOne(conclusion: string | number, reasoningMethod: ReasoningMethod, premises: (string | number)[]): Promise<ModelArgument> {
 
-    let conclusionStatement = typeof conclusion === "string" ? this.fs.createOne(conclusion) : this.fs.getOne(conclusion);
-
-
-
+    let conclusionStatement = typeof conclusion === "string" ?
+                await this.fs.createOne(conclusion) :
+                await this.fs.getOne(conclusion);
 
 
 
@@ -37,7 +36,7 @@ export class FacadeArgument {
             this.fs.getOne(conclusion).then(value => {conclusionStatement = value});
         }*/
 
-        let premisStatements = await Promise.all( premises.map(premis => {
+        let premisStatements = await Promise.all( premises.map(async premis => {
             if (typeof premis === "string") {
                 return await this.fs.createOne(premis);
             }
