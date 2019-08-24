@@ -3,6 +3,7 @@
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
 import { ModelArgument, ReasoningMethod } from '../business_model_typeorm/entity/Argument';
 import { FacadeStatement } from "./statement"
+import { ModelStatement } from '../business_model_typeorm/entity/Statement';
 
 export class FacadeArgument {
     static readonly DEFAULT_LIMIT: number = 100;
@@ -19,11 +20,13 @@ export class FacadeArgument {
     // *********** CREATE ********** //
     async createOne(conclusion: string | number, reasoningMethod: ReasoningMethod, premises: (string | number)[]): Promise<ModelArgument> {
 
+
+        let conclusionStatement: ModelStatement;
         if (typeof conclusion === "string") {
-            let conclusionStatement = this.fs.createOne(conclusion);
+             this.fs.createOne(conclusion).then(value => {conclusionStatement = value});
         }
         else {
-            let conclusionStatement = this.fs.getOne(conclusion);
+            this.fs.getOne(conclusion).then(value => {conclusionStatement = value});
         }
 
         let premisStatements = premises.map(premis => {
@@ -35,26 +38,13 @@ export class FacadeArgument {
             }
         });
 
-        let created = await this.sc.createOne(text);
+        let created = await this.ac.createOne(conclusionStatement, reasoningMethod, premisStatements);
 
         if (created !== undefined) {
             return Promise.resolve(created);
         } else {
-            return Promise.reject(`Unable to create statement with text '${text}'`);
+            return Promise.reject(`Unable to create argument`);
         }
-
-
-
-
-
-
-
-
-        let newArgument = await this.argumentRepository.save(this.argumentRepository.create({ text: text }));
-        return await this.argumentRepository.findOne(newArgument.id,
-            {
-                relations: ['supportingArguments', 'supportedArguments']
-            });
     }
 
     // *********** READ ********** //
