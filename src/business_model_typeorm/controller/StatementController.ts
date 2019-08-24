@@ -7,12 +7,9 @@ export class StatementController {
     private statementRepository = getRepository(ModelStatement);
 
     // *********** CREATE ********** //
-    async createOne(text: string): Promise<ModelStatement> {
+    async createOne(text: string): Promise<ModelStatement | undefined> {
         let newStatement = await this.statementRepository.save( this.statementRepository.create( { text: text} ));
-        return await this.statementRepository.findOne(newStatement.id,
-        {
-            relations: ['supportingArguments', 'supportedArguments']
-        });
+        return await this.one(newStatement.id);
     }
 
     // *********** READ ********** //

@@ -7,7 +7,7 @@ export class ArgumentController {
     private argumentRepository = getRepository(ModelArgument);
 
     // *********** CREATE ********** //
-    async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {
+    async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument | undefined> {
 
         let newArgument = await this.argumentRepository.save(this.argumentRepository.create(
             {
@@ -16,10 +16,7 @@ export class ArgumentController {
                 reasoningMethod: reasoningMethod
             }));
 
-        return await this.argumentRepository.findOne(newArgument.id,
-            {
-                relations: ['conclusion', 'premises']
-            });
+        return await this.one(newArgument.id);
     }
 
     // *********** READ ********** //
