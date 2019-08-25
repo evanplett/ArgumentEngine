@@ -32,8 +32,9 @@ export class FacadeArgument {
             }
         }));
 
-
-        let methodOfReasoning: ReasoningMethod = ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod];
+        let methodOfReasoning: ReasoningMethod = <ReasoningMethod>ReasoningMethod[reasoningMethod];
+        //let methodOfReasoning: ReasoningMethod = ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod];
+        //var color : Color= <Color>Color[green];
 
         let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
 
