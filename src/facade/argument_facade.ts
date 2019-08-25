@@ -32,9 +32,11 @@ export class FacadeArgument {
             }
         }));
 
-        let methodOfReasoning: ReasoningMethod = typeof reasoningMethod === "string" ?
+        let methodOfReasoning: ReasoningMethod = ReasoningMethod.Induction;
+
+        /*let methodOfReasoning: ReasoningMethod = typeof reasoningMethod === "string" ?
             ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod] :
-            reasoningMethod;
+            reasoningMethod;*/
 
         let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
 
