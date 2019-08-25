@@ -16,7 +16,7 @@ export class FacadeArgument {
     }
 
     // *********** CREATE ********** //
-    async createOne(conclusion: string | number, reasoningMethod: ReasoningMethod | string, premises: (string | number)[]): Promise<ModelArgument> {
+    async createOne(conclusion: string | number, reasoningMethod: string, premises: (string | number)[]): Promise<ModelArgument> {
 
         let conclusionStatement: ModelStatement = typeof conclusion === "string" ?
             await this.fs.createOne(conclusion) :
@@ -32,11 +32,8 @@ export class FacadeArgument {
             }
         }));
 
-        let methodOfReasoning: ReasoningMethod = ReasoningMethod.Induction;
 
-        /*let methodOfReasoning: ReasoningMethod = typeof reasoningMethod === "string" ?
-            ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod] :
-            reasoningMethod;*/
+        let methodOfReasoning: ReasoningMethod = ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod];
 
         let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
 
