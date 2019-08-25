@@ -1,7 +1,7 @@
 // rest
 import { NextFunction, Request, Response } from 'express';
 
-import { FacadeStatement } from '../facade/statement';
+import { FacadeStatement } from '../facade/statement_facade';
 
 export class Statement {
     private sf = new FacadeStatement();

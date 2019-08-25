@@ -1,7 +1,7 @@
 // rest
 import { NextFunction, Request, Response } from 'express';
 
-import { FacadeArgument } from '../facade/argument';
+import { FacadeArgument } from '../facade/argument_facade';
 
 export class Argument {
     private af = new FacadeArgument();

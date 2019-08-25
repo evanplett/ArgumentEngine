@@ -1,8 +1,10 @@
 // Façade
 
+
+
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
 import { ModelArgument, ReasoningMethod } from '../business_model_typeorm/entity/Argument';
-import { FacadeStatement } from "./statement"
+import { FacadeStatement } from "./statement_facade"
 import { ModelStatement } from '../business_model_typeorm/entity/Statement';
 
 export class FacadeArgument {
@@ -34,7 +36,7 @@ export class FacadeArgument {
             }
         }));
 
-        
+
 
         let created = await this.ac.createOne(conclusionStatement, reasoningMethod, premisStatements);
 

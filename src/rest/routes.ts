@@ -2,8 +2,8 @@ import {ArgumentController} from "../business_model_typeorm/controller/ArgumentC
 import {StatementController} from "../business_model_typeorm/controller/StatementController";
 
 
-import { Argument } from "./argument";
-import { Statement } from "./statement";
+import { Argument } from "./argument_rest";
+import { Statement } from "./statement_rest";
 
 const ArgumentRoutes =  [{
     method: "get",
