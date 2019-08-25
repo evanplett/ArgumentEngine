@@ -23,8 +23,8 @@ const ArgumentRoutes =  [{
 }, {
     method: "post",
     route: "/argument",
-    controller: ArgumentController,
-    action: "save"
+    controller: Argument,
+    action: "create"
 }];/*, {
     method: "delete",
     route: "/argument/:id",
