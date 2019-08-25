@@ -19,6 +19,17 @@ export class ModelArgument {
        this.reasoningMethod = reasoningMethod;
     }
 
+    static stringToReasoningMethod(reasoningMethodString: string) : Promise<ReasoningMethod>
+    {
+        let methodOfReasoning: ReasoningMethod = <ReasoningMethod>ReasoningMethod[reasoningMethodString];
+
+        if (methodOfReasoning !== undefined) {
+            return Promise.resolve(methodOfReasoning);
+        } else {
+            return Promise.reject(`${reasoningMethodString} is not a valid reasoning method`);
+        }
+    }
+
 
     @PrimaryGeneratedColumn()
     id!: number;

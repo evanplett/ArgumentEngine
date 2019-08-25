@@ -17,29 +17,38 @@ export class FacadeArgument {
 
     // *********** CREATE ********** //
     async createOne(conclusion: string | number, reasoningMethod: string, premises: (string | number)[]): Promise<ModelArgument> {
-        let conclusionStatement: ModelStatement = typeof conclusion === "string" ?
-            await this.fs.createOne(conclusion) :
-            await this.fs.getOne(conclusion);
 
+        let conclusionStatement: Promise<ModelStatement> = typeof conclusion === "string" ?
+            this.fs.createOne(conclusion) :
+            this.fs.getOne(conclusion);
 
-        let premisStatements: ModelStatement[] = await Promise.all(premises.map(async premis => {
+        let premisStatements: Promise<ModelStatement[]> = Promise.all(premises.map(async premis => {
             if (typeof premis === "string") {
-                return await this.fs.createOne(premis);
+                return this.fs.createOne(premis);
             }
             else {
-                return await this.fs.getOne(premis);
+                return this.fs.getOne(premis);
             }
         }));
 
-        let methodOfReasoning: ReasoningMethod = <ReasoningMethod>ReasoningMethod[reasoningMethod];
+        let methodOfReasoning: Promise<ReasoningMethod> = ModelArgument.stringToReasoningMethod(reasoningMethod);
 
-        let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
+        return Promise.all([conclusionStatement, premisStatements, methodOfReasoning])
+            .then(([conclusionValue, premisValues, reasoningMethodValue]) => {
+                return this.ac.createOne(conclusionValue, reasoningMethodValue, premisValues);
+            })
+            .catch(error => {
+                return Promise.reject("Unable to create Argument");
+            })
 
+
+        //let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
+/*
         if (created !== undefined) {
             return Promise.resolve(created);
         } else {
             return Promise.reject(`Unable to create argument`);
-        }
+        }*/
     }
 
     // *********** READ ********** //
