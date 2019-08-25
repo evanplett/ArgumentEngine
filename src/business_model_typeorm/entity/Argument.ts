@@ -1,26 +1,31 @@
 //TypeORM Entity
 
-import {Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 
-import {ModelStatement} from "./Statement";
+import { ModelStatement, StatementTreeNode } from "./Statement";
 
 export enum ReasoningMethod {
-  Abduction = "Abduction",
-  Deduction = "Deduction",
-  Induction = "Induction"
+    Abduction = "Abduction",
+    Deduction = "Deduction",
+    Induction = "Induction"
+}
+
+export interface ArgumentTreeNode {
+    argument_id: number,
+    premises: Promise<StatementTreeNode[]>,
+    reasoning_method: Promise<ReasoningMethod>
 }
 
 @Entity()
 export class ModelArgument {
 
     constructor(conclusion: ModelStatement, premises: ModelStatement[], reasoningMethod: ReasoningMethod) {
-       this.conclusion = conclusion;
-       this.premises = premises;
-       this.reasoningMethod = reasoningMethod;
+        this.conclusion = conclusion;
+        this.premises = premises;
+        this.reasoningMethod = reasoningMethod;
     }
 
-    static stringToReasoningMethod(reasoningMethodString: string) : Promise<ReasoningMethod>
-    {
+    static stringToReasoningMethod(reasoningMethodString: string): Promise<ReasoningMethod> {
         let methodOfReasoning: ReasoningMethod = <ReasoningMethod>ReasoningMethod[reasoningMethodString];
 
         if (methodOfReasoning !== undefined) {
@@ -30,7 +35,7 @@ export class ModelArgument {
         }
     }
 
-
+    // Typeorm elements
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -38,7 +43,7 @@ export class ModelArgument {
     @JoinTable()
     conclusion!: ModelStatement;
 
-    @ManyToMany(type => ModelStatement, statement => statement.supportedArguments )
+    @ManyToMany(type => ModelStatement, statement => statement.supportedArguments)
     @JoinTable()
     premises!: ModelStatement[];
 

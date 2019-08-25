@@ -1,13 +1,19 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from "typeorm";
 
-import {ModelArgument} from "./Argument";
+import { ModelArgument, ArgumentTreeNode } from "./Argument";
+
+
+export interface StatementTreeNode {
+    statement_id: number,
+    text: string,
+    supportingArguments: Promise<ArgumentTreeNode[]>
+}
 
 @Entity()
 export class ModelStatement {
 
-    constructor(text: string)
-    {
-      this.text = text;
+    constructor(text: string) {
+        this.text = text;
     }
 
     @PrimaryGeneratedColumn()

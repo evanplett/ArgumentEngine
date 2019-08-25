@@ -1,5 +1,4 @@
 import { getRepository, MoreThan } from 'typeorm';
-import { NextFunction, Request, Response } from 'express';
 import { ModelArgument, ReasoningMethod } from '../entity/Argument';
 import { ModelStatement } from '../entity/Statement';
 

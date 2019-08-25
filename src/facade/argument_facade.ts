@@ -1,5 +1,5 @@
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
-import { ModelArgument, ReasoningMethod } from '../business_model_typeorm/entity/Argument';
+import { ModelArgument, ReasoningMethod, ArgumentTreeNode } from '../business_model_typeorm/entity/Argument';
 import { FacadeStatement } from './statement_facade';
 import { ModelStatement } from '../business_model_typeorm/entity/Statement';
 
@@ -37,14 +37,13 @@ export class FacadeArgument {
                 return this.ac.createOne(conclusionValue, reasoningMethodValue, premisValues);
             })
             .catch((error) => {
-                return Promise.reject('Unable to create Argument');
+                return Promise.reject(`Unable to create Argument: ${error}`);
             });
     }
 
     // *********** READ ********** //
     async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
         limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
-
         after_id = after_id && after_id >= 0 ? after_id : FacadeArgument.DEFAULT_AFTER_ID;
 
         let many = await this.ac.many(after_id, limit);
@@ -69,7 +68,7 @@ export class FacadeArgument {
         return this.getTreeNode(id, max_depth, 0);
     }
 
-    async getTreeNode(id: number, max_depth: number, current_depth: number) {
+    async getTreeNode(id: number, max_depth: number, current_depth: number){
         let arg = await this.getOne(id);
 
         let children =
