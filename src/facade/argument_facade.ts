@@ -17,9 +17,6 @@ export class FacadeArgument {
 
     // *********** CREATE ********** //
     async createOne(conclusion: string | number, reasoningMethod: string, premises: (string | number)[]): Promise<ModelArgument> {
-
-        console.log(`ArgFacade::createOne(${conclusion}, ${reasoningMethod}, ${premises})`);
-
         let conclusionStatement: ModelStatement = typeof conclusion === "string" ?
             await this.fs.createOne(conclusion) :
             await this.fs.getOne(conclusion);
@@ -35,8 +32,6 @@ export class FacadeArgument {
         }));
 
         let methodOfReasoning: ReasoningMethod = <ReasoningMethod>ReasoningMethod[reasoningMethod];
-        //let methodOfReasoning: ReasoningMethod = ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod];
-        //var color : Color= <Color>Color[green];
 
         let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
 

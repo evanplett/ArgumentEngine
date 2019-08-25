@@ -8,9 +8,6 @@ export class ArgumentController {
 
     // *********** CREATE ********** //
     async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {
-
-        console.log(`ArgController::createOne(${conclusion}, ${reasoningMethod}, ${premises})`);
-
         return this.argumentRepository.save(this.argumentRepository.create(
             {
                 conclusion: conclusion,
@@ -20,18 +17,6 @@ export class ArgumentController {
             .then(newArgument => {
                 return this.one(newArgument.id);
             });
-
-/*
-        let newArgument = await this.argumentRepository.save(this.argumentRepository.create(
-            {
-                conclusion: conclusion,
-                premises: premises,
-                reasoningMethod: reasoningMethod
-            }));
-
-
-
-        return this.one(newArgument.id);*/
     }
 
     // *********** READ ********** //
