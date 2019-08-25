@@ -7,8 +7,20 @@ export class ArgumentController {
     private argumentRepository = getRepository(ModelArgument);
 
     // *********** CREATE ********** //
-    async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument | undefined> {
+    async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {
 
+
+        return this.argumentRepository.save(this.argumentRepository.create(
+            {
+                conclusion: conclusion,
+                premises: premises,
+                reasoningMethod: reasoningMethod
+            }))
+            .then(newArgument => {
+                return this.one(newArgument.id);
+            });
+
+/*
         let newArgument = await this.argumentRepository.save(this.argumentRepository.create(
             {
                 conclusion: conclusion,
@@ -16,12 +28,14 @@ export class ArgumentController {
                 reasoningMethod: reasoningMethod
             }));
 
-        return await this.one(newArgument.id);
+
+
+        return this.one(newArgument.id);*/
     }
 
     // *********** READ ********** //
     async many(afterId: number, maxCount: number): Promise<ModelArgument[]> {
-        return await this.argumentRepository.find({
+        return this.argumentRepository.find({
             where: {
                 id: MoreThan(afterId)
             },
@@ -33,14 +47,9 @@ export class ArgumentController {
         });
     }
 
-    async one(id: number): Promise<ModelArgument | undefined> {
-        return await this.argumentRepository.findOne(id, { relations: ['conclusion', 'premises'] });
+    async one(id: number): Promise<ModelArgument> {
+        return this.argumentRepository.findOneOrFail(id, { relations: ['conclusion', 'premises'] });
     }
-
-
-
-
-
 
 
 	/* Tree should be part of statement
