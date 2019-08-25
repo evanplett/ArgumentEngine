@@ -9,7 +9,7 @@ export class Argument {
     // *********** CREATE ********** //
     async create(request: Request, response: Response, next: NextFunction) {
          this.af
-            .createOne(request.body.conclusion, request.body.reasoningMethod, request.body.premises)
+            .createOne(request.body.conclusion, request.body.reasoning_method, request.body.premises)
             .then((value) => {
                 response.status(200).json(value);
             })
