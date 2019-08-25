@@ -7,7 +7,7 @@ export class ArgumentController {
     private argumentRepository = getRepository(ModelArgument);
 
     // *********** CREATE ********** //
-    async createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {
+    createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {
         return this.argumentRepository.save(this.argumentRepository.create(
             {
                 conclusion: conclusion,
@@ -20,7 +20,7 @@ export class ArgumentController {
     }
 
     // *********** READ ********** //
-    async many(afterId: number, maxCount: number): Promise<ModelArgument[]> {
+    many(afterId: number, maxCount: number): Promise<ModelArgument[]> {
         return this.argumentRepository.find({
             where: {
                 id: MoreThan(afterId)
@@ -33,7 +33,7 @@ export class ArgumentController {
         });
     }
 
-    async one(id: number): Promise<ModelArgument> {
+    one(id: number): Promise<ModelArgument> {
         return this.argumentRepository.findOneOrFail(id, { relations: ['conclusion', 'premises'] });
     }
 

@@ -1,6 +1,6 @@
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
 import { ModelArgument, ReasoningMethod } from '../business_model_typeorm/entity/Argument';
-import { FacadeStatement } from "./statement_facade"
+import { FacadeStatement } from './statement_facade';
 import { ModelStatement } from '../business_model_typeorm/entity/Statement';
 
 export class FacadeArgument {
@@ -16,20 +16,19 @@ export class FacadeArgument {
     }
 
     // *********** CREATE ********** //
-    async createOne(conclusion: string | number, reasoningMethod: string, premises: (string | number)[]): Promise<ModelArgument> {
+    createOne(
+        conclusion: string | number,
+        reasoningMethod: string,
+        premises: (string | number)[]
+    ): Promise<ModelArgument> {
+        let conclusionStatement: Promise<ModelStatement> =
+            typeof conclusion === 'string' ? this.fs.createOne(conclusion) : this.fs.getOne(conclusion);
 
-        let conclusionStatement: Promise<ModelStatement> = typeof conclusion === "string" ?
-            this.fs.createOne(conclusion) :
-            this.fs.getOne(conclusion);
-
-        let premisStatements: Promise<ModelStatement[]> = Promise.all(premises.map(async premis => {
-            if (typeof premis === "string") {
-                return this.fs.createOne(premis);
-            }
-            else {
-                return this.fs.getOne(premis);
-            }
-        }));
+        let premisStatements: Promise<ModelStatement[]> = Promise.all(
+            premises.map(async (premis) => {
+                return typeof premis === 'string' ? this.fs.createOne(premis) : this.fs.getOne(premis);
+            })
+        );
 
         let methodOfReasoning: Promise<ReasoningMethod> = ModelArgument.stringToReasoningMethod(reasoningMethod);
 
@@ -37,18 +36,9 @@ export class FacadeArgument {
             .then(([conclusionValue, premisValues, reasoningMethodValue]) => {
                 return this.ac.createOne(conclusionValue, reasoningMethodValue, premisValues);
             })
-            .catch(error => {
-                return Promise.reject("Unable to create Argument");
-            })
-
-
-        //let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
-/*
-        if (created !== undefined) {
-            return Promise.resolve(created);
-        } else {
-            return Promise.reject(`Unable to create argument`);
-        }*/
+            .catch((error) => {
+                return Promise.reject('Unable to create Argument');
+            });
     }
 
     // *********** READ ********** //
@@ -67,15 +57,11 @@ export class FacadeArgument {
     }
 
     async getOne(id: number): Promise<ModelArgument> {
-        let one = await this.ac.one(id);
-
-        if (one !== undefined) {
-            return Promise.resolve(one);
-        } else {
-            return Promise.reject(`No Argument with id ${id} found`);
-        }
+        return this.ac.one(id)
+            .catch(error => {
+                return Promise.reject(`No Argument with id ${id} found`);
+            });
     }
-
 
     async getTree(id: number, max_depth?: number) {
         max_depth = max_depth && max_depth > 0 ? max_depth : FacadeArgument.DEFAULT_MAX_DEPTH;
@@ -86,12 +72,19 @@ export class FacadeArgument {
     async getTreeNode(id: number, max_depth: number, current_depth: number) {
         let arg = await this.getOne(id);
 
-        let children = current_depth > max_depth ? [] : await Promise.all(arg.premises.map(async (statement) => this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)));
+        let children =
+            current_depth > max_depth
+                ? []
+                : await Promise.all(
+                    arg.premises.map(async (statement) =>
+                        this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)
+                    )
+                );
 
         return {
             argument_id: arg.id,
             premises: children,
             reasoning_method: arg.reasoningMethod
-        }
+        };
     }
 }
