@@ -20,12 +20,12 @@ const ArgumentRoutes =  [{
     route: "/argument/:id/tree",
     controller: Argument,
     action: "tree"
-}];/*, {
+}, {
     method: "post",
     route: "/argument",
     controller: ArgumentController,
     action: "save"
-}, {
+}];/*, {
     method: "delete",
     route: "/argument/:id",
     controller: ArgumentController,
