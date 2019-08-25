@@ -1,7 +1,3 @@
-// Façade
-
-
-
 import { ArgumentController } from '../business_model_typeorm/controller/ArgumentController';
 import { ModelArgument, ReasoningMethod } from '../business_model_typeorm/entity/Argument';
 import { FacadeStatement } from "./statement_facade"
@@ -20,14 +16,14 @@ export class FacadeArgument {
     }
 
     // *********** CREATE ********** //
-    async createOne(conclusion: string | number, reasoningMethod: ReasoningMethod, premises: (string | number)[]): Promise<ModelArgument> {
+    async createOne(conclusion: string | number, reasoningMethod: ReasoningMethod | string, premises: (string | number)[]): Promise<ModelArgument> {
 
-        let conclusionStatement = typeof conclusion === "string" ?
+        let conclusionStatement: ModelStatement = typeof conclusion === "string" ?
             await this.fs.createOne(conclusion) :
             await this.fs.getOne(conclusion);
 
 
-        let premisStatements = await Promise.all(premises.map(async premis => {
+        let premisStatements: ModelStatement[] = await Promise.all(premises.map(async premis => {
             if (typeof premis === "string") {
                 return await this.fs.createOne(premis);
             }
@@ -36,9 +32,11 @@ export class FacadeArgument {
             }
         }));
 
+        let methodOfReasoning: ReasoningMethod = typeof reasoningMethod === "string" ?
+            ReasoningMethod[reasoningMethod as keyof typeof ReasoningMethod] :
+            reasoningMethod;
 
-
-        let created = await this.ac.createOne(conclusionStatement, reasoningMethod, premisStatements);
+        let created = await this.ac.createOne(conclusionStatement, methodOfReasoning, premisStatements);
 
         if (created !== undefined) {
             return Promise.resolve(created);

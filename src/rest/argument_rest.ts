@@ -1,4 +1,3 @@
-// rest
 import { NextFunction, Request, Response } from 'express';
 
 import { FacadeArgument } from '../facade/argument_facade';
