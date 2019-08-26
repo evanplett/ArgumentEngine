@@ -31,7 +31,7 @@ export class ModelArgument {
         if (methodOfReasoning !== undefined) {
             return Promise.resolve(methodOfReasoning);
         } else {
-            return Promise.reject(`${reasoningMethodString} is not a valid reasoning method`);
+            return Promise.reject(`'${reasoningMethodString}' is not a valid reasoning method`);
         }
     }
 
