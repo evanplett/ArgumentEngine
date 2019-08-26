@@ -42,48 +42,73 @@ export class FacadeArgument {
     }
 
     // *********** READ ********** //
-    async getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
+    getList(limit?: number, after_id?: number): Promise<ModelArgument[]> {
         limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
         after_id = after_id && after_id >= 0 ? after_id : FacadeArgument.DEFAULT_AFTER_ID;
 
-        let many = await this.ac.many(after_id, limit);
-
-        if (many.length > 0) {
-            return Promise.resolve(many);
-        } else {
-            return Promise.reject(`No Arguments after id ${after_id} found`);
-        }
+        return this.ac.many(after_id, limit)
+            .then(list => {
+                if (list.length > 0) {
+                    return Promise.resolve(list);
+                } else {
+                    return Promise.reject(`No Arguments after id ${after_id} found`);
+                }
+            });
     }
 
-    async getOne(id: number): Promise<ModelArgument> {
+    getOne(id: number): Promise<ModelArgument> {
         return this.ac.one(id)
             .catch(error => {
                 return Promise.reject(`No Argument with id ${id} found`);
             });
     }
 
-    async getTree(id: number, max_depth?: number) {
+    getTree(id: number, max_depth?: number) {
         max_depth = max_depth && max_depth > 0 ? max_depth : FacadeArgument.DEFAULT_MAX_DEPTH;
 
-        return this.getTreeNode(id, max_depth, 0);
+        return this.getTreeNode(id, max_depth);
     }
 
-    async getTreeNode(id: number, max_depth: number, current_depth: number){
-        let arg = await this.getOne(id);
+    getTreeNode(id: number, max_depth: number, current_depth: number = 0): Promise<ArgumentTreeNode> {
+        return this.getOne(id)
+            .then(argument => {
+                if (current_depth >= max_depth) {
+                    return {
+                        argument_id: argument.id,
+                        premises: [],
+                        reasoning_method: argument.reasoningMethod
+                    }
+                }
+                else {
+                    return Promise.all(
+                        argument.premises.map(statement =>
+                            this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)))
+                        .then(children => {
+                            return {
+                                argument_id: argument.id,
+                                premises: children,
+                                reasoning_method: argument.reasoningMethod
+                            }
+                        });
+                }
+            });
 
-        let children =
-            current_depth > max_depth
-                ? []
-                : await Promise.all(
-                    arg.premises.map(async (statement) =>
-                        this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)
-                    )
-                );
+        /*
+                let arg = await this.getOne(id);
 
-        return {
-            argument_id: arg.id,
-            premises: children,
-            reasoning_method: arg.reasoningMethod
-        };
+                let children =
+                    current_depth > max_depth
+                        ? []
+                        : await Promise.all(
+                            arg.premises.map(async (statement) =>
+                                this.fs.getTreeNode(statement.id, max_depth, current_depth + 1)
+                            )
+                        );
+
+                return {
+                    argument_id: arg.id,
+                    premises: children,
+                    reasoning_method: arg.reasoningMethod
+                };*/
     }
 }

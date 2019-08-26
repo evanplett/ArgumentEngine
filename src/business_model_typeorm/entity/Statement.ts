@@ -6,7 +6,7 @@ import { ModelArgument, ArgumentTreeNode } from "./Argument";
 export interface StatementTreeNode {
     statement_id: number,
     text: string,
-    supportingArguments: Promise<ArgumentTreeNode[]>
+    supportingArguments: ArgumentTreeNode[]
 }
 
 @Entity()

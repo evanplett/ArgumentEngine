@@ -7,14 +7,16 @@ export class StatementController {
     private statementRepository = getRepository(ModelStatement);
 
     // *********** CREATE ********** //
-    async createOne(text: string): Promise<ModelStatement | undefined> {
-        let newStatement = await this.statementRepository.save( this.statementRepository.create( { text: text} ));
-        return await this.one(newStatement.id);
+    createOne(text: string): Promise<ModelStatement> {
+        return this.statementRepository.save( this.statementRepository.create( { text: text} ))
+        .then(newStatement => {
+            return this.one(newStatement.id);
+        });
     }
 
     // *********** READ ********** //
-    async many(afterId: number, maxCount: number): Promise<ModelStatement[]> {
-        return await this.statementRepository.find({
+    many(afterId: number, maxCount: number): Promise<ModelStatement[]> {
+        return this.statementRepository.find({
             where: {
                 id: MoreThan(afterId)
             },
@@ -26,9 +28,8 @@ export class StatementController {
         });
     }
 
-
-    async one(id: number): Promise<ModelStatement | undefined> {
-        return await this.statementRepository.findOne(id, { relations: ['supportingArguments', 'supportedArguments'] });
+    one(id: number): Promise<ModelStatement> {
+        return this.statementRepository.findOneOrFail(id, { relations: ['supportingArguments', 'supportedArguments'] });
     }
 
 

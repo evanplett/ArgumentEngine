@@ -12,8 +12,8 @@ export enum ReasoningMethod {
 
 export interface ArgumentTreeNode {
     argument_id: number,
-    premises: Promise<StatementTreeNode[]>,
-    reasoning_method: Promise<ReasoningMethod>
+    premises: StatementTreeNode[],
+    reasoning_method: ReasoningMethod
 }
 
 @Entity()
