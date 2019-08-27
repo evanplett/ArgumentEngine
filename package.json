@@ -5,6 +5,7 @@
    "main": "dist/server.js",
    "scripts": {
       "build-ts": "tsc",
+      "postbuild": "npm test",
       "lint": "tslint -c tslint.json 'src/**/*.ts'",
       "start": "node dist/server.js",
       "postinstall": "npm run build-ts",
