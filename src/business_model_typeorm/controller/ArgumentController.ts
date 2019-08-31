@@ -2,17 +2,8 @@ import { getRepository, MoreThan, Repository } from 'typeorm';
 import { ModelArgument, ReasoningMethod } from '../entity/Argument';
 import { ModelStatement } from '../entity/Statement';
 
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-
-@Injectable
 export class ArgumentController {
-    //private argumentRepository = getRepository(ModelArgument);
-
-  constructor(
-    @InjectRepository(ModelArgument)
-    private readonly argumentRepository: Repository<ModelArgument>,
-  ) {}
+    private argumentRepository = getRepository(ModelArgument);
 
 
     // *********** CREATE ********** //
