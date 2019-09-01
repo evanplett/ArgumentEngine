@@ -4,7 +4,7 @@ describe('This is a fake test', () => {
 
 
     test('Check the fake function', () => {
-        return EnsureConnection().then(connection => {
+        return EnsureConnection().then(async connection => {
             expect(4).toEqual(4);
         });
     });
