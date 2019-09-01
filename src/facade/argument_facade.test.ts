@@ -1,6 +1,11 @@
+import { EnsureConnection } from "../business_model_typeorm/manager";
+
 describe('This is a fake test', () => {
 
+
     test('Check the fake function', () => {
-        expect(4).toEqual(4);
+        return EnsureConnection().then(connection => {
+            expect(4).toEqual(4);
+        });
     });
 });
