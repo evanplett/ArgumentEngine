@@ -22,9 +22,9 @@ export class Server {
             app.use('/rest', RestApp());
 
             // start express server
-            app.listen(PORT);
+            app.listen(this.PORT);
 
-            console.log("Express server has started on port " + PORT + ".");
+            console.log("Express server has started on port " + this.PORT + ".");
         }).catch(error => console.log(error));
     }
 }
