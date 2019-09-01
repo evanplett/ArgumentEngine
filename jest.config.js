@@ -6,5 +6,4 @@ module.exports = {
 		"^.+\\.tsx?$": "ts-jest"
 	},
     collectCoverage: true,
-    detectOpenHandles: true
 }
