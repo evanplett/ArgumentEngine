@@ -10,7 +10,7 @@
       "start": "node dist/server.js",
       "postinstall": "npm run build-ts",
       "serve": "node dist/server.js",
-      "test": "jest --detectOpenHandles",
+      "test": "",
       "watch-node": "nodemon dist/server.js",
       "watch-ts": "tsc -w"
    },
