@@ -1,6 +1,8 @@
 //apiTest.js
 const request = require('supertest');
-const app = require('/rest/app'); //reference to you app.js file
+//const app = require('./rest/app'); //reference to you app.js file
+import { RestApp } from "./rest/app"
+const app = RestApp()
 
 //==================== user API test ====================
 

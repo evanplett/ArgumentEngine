@@ -5,12 +5,12 @@
    "main": "dist/server.js",
    "scripts": {
       "build-ts": "tsc",
-      "postbuild-ts": "npm test",
       "lint": "tslint -c tslint.json 'src/**/*.ts'",
       "start": "node dist/server.js",
+      "poststart": "npm test",
       "postinstall": "npm run build-ts",
       "serve": "node dist/server.js",
-      "test": "mocha 'apiTest.js'",
+      "test": "mocha 'dist/apiTest.js'",
       "watch-node": "nodemon dist/server.js",
       "watch-ts": "tsc -w"
    },
@@ -45,6 +45,7 @@
       "@types/jest": "^24.0.16",
       "@types/node": "^8.0.29",
       "jest": "^24.8.0",
+      "mocha": "^6.2.2",
       "nodemon": "^1.19.1",
       "prettier": "^1.18.2",
       "supertest": "^4.0.2",
