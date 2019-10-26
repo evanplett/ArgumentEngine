@@ -10,6 +10,7 @@ import {ModelStatement} from "./business_model_typeorm/entity/Statement";
 
 const PORT = process.env.PORT || "5000";
 
+/*
 async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
    let conclusion = connection.manager.create( ModelStatement, { text: "Conclusion " + path});
 
@@ -38,7 +39,7 @@ async function CreateNode(connection: any, max_level: number, current_level: num
 
 
     //return conclusion;
-}
+}*/
 
 
 EnsureConnection().then(async connection => {
