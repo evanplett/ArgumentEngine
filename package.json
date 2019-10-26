@@ -9,7 +9,7 @@
       "start": "run-p serve test",
       "postinstall": "npm run build-ts",
       "serve": "node dist/server.js",
-      "test": "mocha 'dist/apiTest.js'",
+      "test": "wait-on -d 2000 http-get://argumentengine.herokuapp.com/argument && mocha 'dist/apiTest.js'",
       "watch-node": "nodemon dist/server.js",
       "watch-ts": "tsc -w"
    },
@@ -64,6 +64,7 @@
       "postgresql": "0.0.1",
       "reflect-metadata": "^0.1.10",
       "save-dev": "0.0.1-security",
-      "typeorm": "0.2.18"
+      "typeorm": "0.2.18",
+      "wait-on": "^3.3.0"
    }
 }
