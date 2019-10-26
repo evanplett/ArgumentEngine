@@ -6,7 +6,7 @@
    "scripts": {
       "build-ts": "tsc",
       "lint": "tslint -c tslint.json 'src/**/*.ts'",
-      "start": "npm-p serve test",
+      "start": "run-p serve test",
       "postinstall": "npm run build-ts",
       "serve": "node dist/server.js",
       "test": "mocha 'dist/apiTest.js'",
