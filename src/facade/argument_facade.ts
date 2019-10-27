@@ -3,6 +3,8 @@ import { ModelArgument, ReasoningMethod, ArgumentTreeNode } from '../business_mo
 import { FacadeStatement } from './statement_facade';
 import { ModelStatement } from '../business_model_typeorm/entity/Statement';
 
+import { Error } from '../Error'
+
 export class FacadeArgument {
     static readonly DEFAULT_LIMIT: number = 100;
     static readonly DEFAULT_AFTER_ID: number = 0;
@@ -37,7 +39,7 @@ export class FacadeArgument {
                 return this.ac.createOne(conclusionValue, reasoningMethodValue, premisValues);
             })
             .catch((error) => {
-                return Promise.reject(`Unable to create Argument: ${error}`);
+                return Promise.reject(new Error(400, `Unable to create Argument: ${error}`));
             });
     }
 
@@ -51,7 +53,7 @@ export class FacadeArgument {
                 if (list.length > 0) {
                     return Promise.resolve(list);
                 } else {
-                    return Promise.reject(new Error(`No Arguments after id ${after_id} found'));
+                    return Promise.reject(new Error(400, `No Arguments after id ${after_id} found'));
                 }
             });
     }
@@ -59,7 +61,7 @@ export class FacadeArgument {
     getOne(id: number): Promise<ModelArgument> {
         return this.ac.one(id)
             .catch(error => {
-                return Promise.reject(`No Argument with id ${id} found`);
+                return Promise.reject(new Error(400,`No Argument with id ${id} found`));
             });
     }
 
