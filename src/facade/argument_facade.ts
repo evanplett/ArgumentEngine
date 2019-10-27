@@ -52,7 +52,7 @@ export class FacadeArgument {
                     return Promise.resolve(list);
                 } else {
                     return Promise.reject(
-{errorMessage:`No Arguments after id ${after_id} found'});
+{"errorMessage":`No Arguments after id ${after_id} found'});
                 }
             });
     }
