@@ -51,8 +51,7 @@ export class FacadeArgument {
                 if (list.length > 0) {
                     return Promise.resolve(list);
                 } else {
-                    return Promise.reject(
-{"errorMessage":`No Arguments after id ${after_id} found'});
+                    return Promise.reject(new Error(`No Arguments after id ${after_id} found'));
                 }
             });
     }
