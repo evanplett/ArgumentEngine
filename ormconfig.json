@@ -1,4 +1,5 @@
-{
+[{
+   "name": "default"
    "type": "postgres",
    "dropSchema": true,
    "host": "ec2-54-235-96-48.compute-1.amazonaws.com",
@@ -22,4 +23,31 @@
       "migrationsDir": "dst/business_model_typeorm/migration",
       "subscribersDir": "dst/business_model_typeorm/subscriber"
    }
+},
+{
+   "name": "testing"
+   "type": "postgres",
+   "dropSchema": true,
+   "host": "ec2-174-129-253-125.compute-1.amazonaws.com",
+   "port": 5432,
+   "username": "hvcpicfuympcwi",
+   "password": "c3ea1b35d514ee578f99de26f85aad1a5c8376cc531ae3755d2c3157258c32e8",
+   "database": "d3ivd7anbgga2k",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "dist/business_model_typeorm/entity/**/*.js"
+   ],
+   "migrations": [
+      "dist/business_model_typeorm/migration/**/*.js"
+   ],
+   "subscribers": [
+      "dist/business_model_typeorm/subscriber/**/*.js"
+   ],
+   "cli": {
+      "entitiesDir": "dst/business_model_typeorm/entity",
+      "migrationsDir": "dst/business_model_typeorm/migration",
+      "subscribersDir": "dst/business_model_typeorm/subscriber"
+   }
 }
+]

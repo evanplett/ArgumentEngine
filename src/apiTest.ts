@@ -20,15 +20,7 @@ const app = RestApp()
 describe('GET /argument', function () {
 
     beforeEach(() => {
-        return EnsureConnection();
-        /*return createConnection({
-            type: "sqlite",
-            database: ":memory:",
-            dropSchema: true,
-            entities: [ModelArgument,ModelStatement],
-            synchronize: true,
-            logging: false
-        });*/
+        return EnsureConnection("testing");
     });
 
     afterEach(() => {
