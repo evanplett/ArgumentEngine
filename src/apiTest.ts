@@ -33,7 +33,7 @@ describe('GET /argument', function () {
             .get('/argument')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(200, done);
+            .expect(400, done);
     });
 });
 

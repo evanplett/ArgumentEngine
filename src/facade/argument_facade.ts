@@ -53,7 +53,7 @@ export class FacadeArgument {
                 if (list.length > 0) {
                     return Promise.resolve(list);
                 } else {
-                    return Promise.reject(new Error(400, `No Arguments after id ${after_id} found'));
+                    return Promise.reject(new Error(400, `No Arguments after id ${after_id} found`));
                 }
             });
     }
