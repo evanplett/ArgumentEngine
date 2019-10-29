@@ -24,7 +24,7 @@ describe('GET /argument', function () {
     });
 
     afterEach(() => {
-        let conn = getConnection();
+        let conn = getConnection("testing");
         return conn.close();
     })
 
