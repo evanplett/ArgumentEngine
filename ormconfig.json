@@ -1,7 +1,7 @@
 [{
-   "name": "default"
+   "name": "production"
    "type": "postgres",
-   "dropSchema": true,
+   "dropSchema": false,
    "host": "ec2-54-235-96-48.compute-1.amazonaws.com",
    "port": 5432,
    "username": "fsnnmuemtggcje",
