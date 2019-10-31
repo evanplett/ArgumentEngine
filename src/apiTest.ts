@@ -2,7 +2,7 @@
 import {createConnection, getConnection, Entity, getRepository } from "typeorm";
 
 
-import { EnsureConnection } from "./business_model_typeorm/manager";
+import * from "./business_model_typeorm/manager";
 
 import {ModelArgument} from "./business_model_typeorm/entity/Argument";
 import {ModelStatement} from "./business_model_typeorm/entity/Statement";
@@ -20,11 +20,11 @@ const app = RestApp()
 describe('GET /argument', function () {
 
     beforeEach(() => {
-        return EnsureConnection("testing");
+        return SetCurrentConnection("testing");
     });
 
     afterEach(() => {
-        let conn = getConnection("testing");
+        let conn = GetCurrentConnection();
         return conn.close();
     })
 

@@ -1,10 +1,12 @@
 import { getRepository, MoreThan } from "typeorm";
 import { NextFunction, Request, Response } from "express";
 import { ModelStatement } from "../entity/Statement";
+import * from "../manager";
+
 
 export class StatementController {
 
-    private statementRepository = getRepository(ModelStatement);
+    private statementRepository = GetCurrentConnection().getRepository(ModelStatement);
 
     // *********** CREATE ********** //
     createOne(text: string): Promise<ModelStatement> {
