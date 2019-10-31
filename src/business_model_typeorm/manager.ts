@@ -2,7 +2,7 @@ import {ConnectionManager, Connection } from "typeorm";
 
 const connectionManager = new ConnectionManager();
 
-currentConnectionName: string;
+declare var currentConnectionName: string;
 
 export function SetCurrentConnection(connectionName: string) 
 {
