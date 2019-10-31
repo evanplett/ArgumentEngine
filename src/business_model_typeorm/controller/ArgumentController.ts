@@ -1,7 +1,7 @@
 import { getRepository, MoreThan } from 'typeorm';
 import { ModelArgument, ReasoningMethod } from '../entity/Argument';
 import { ModelStatement } from '../entity/Statement';
-import * from "../manager";
+import { GetCurrentConnection } from "../manager";
 
 export class ArgumentController {
     private argumentRepository = GetCurrentConnection().getRepository(ModelArgument);

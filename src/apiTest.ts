@@ -2,7 +2,7 @@
 import {createConnection, getConnection, Entity, getRepository } from "typeorm";
 
 
-import * from "./business_model_typeorm/manager";
+import { GetCurrentConnection, SetCurrentConnection } from "./business_model_typeorm/manager";
 
 import {ModelArgument} from "./business_model_typeorm/entity/Argument";
 import {ModelStatement} from "./business_model_typeorm/entity/Statement";

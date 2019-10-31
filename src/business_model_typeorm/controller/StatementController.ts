@@ -1,7 +1,7 @@
 import { getRepository, MoreThan } from "typeorm";
 import { NextFunction, Request, Response } from "express";
 import { ModelStatement } from "../entity/Statement";
-import * from "../manager";
+import { GetCurrentConnection } from "../manager";
 
 
 export class StatementController {
