@@ -6,7 +6,7 @@ declare var currentConnectionName: string;
 
 export function SetCurrentConnection(connectionName: string) : Promise<Connection>
 {
-  currentConnectionName = connectionName;
+  global.currentConnectionName = connectionName;
 
  return getConnectionOptions(currentConnectionName).then(
 connectionOptions => {
@@ -15,5 +15,5 @@ connectionOptions => {
 
 export function GetCurrentConnection() : Connection
 {
-   return connectionManager.get(currentConnectionName);
+   return connectionManager.get(global.currentConnectionName);
 }
