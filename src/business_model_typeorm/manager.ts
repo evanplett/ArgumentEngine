@@ -4,7 +4,7 @@ const connectionManager = new ConnectionManager();
 
 declare var currentConnectionName: string;
 
-export function SetCurrentConnection(connectionName: string) 
+export function SetCurrentConnection(connectionName: string) : Promise<Connection>
 {
   currentConnectionName = connectionName;
 
