@@ -8,7 +8,7 @@ export function SetCurrentConnection(connectionName: string) : Promise<Connectio
 {
   currentConnectionName = connectionName;
 
- getConnectionOptions(currentConnectionName).then(
+ return getConnectionOptions(currentConnectionName).then(
 connectionOptions => {
   return connectionManager.create(connectionOptions). connect();});
 }
