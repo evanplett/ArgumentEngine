@@ -8,10 +8,9 @@ export function SetCurrentConnection(connectionName: string)
 {
   currentConnectionName = connectionName;
 
-   getConnectionOptions(currentConnectionName).then(
-
+ getConnectionOptions(currentConnectionName).then(
 connectionOptions => {
-  return connectionManager.create(connectionOptions). connect();
+  return connectionManager.create(connectionOptions). connect();});
 }
 
 export function GetCurrentConnection() : Connection
