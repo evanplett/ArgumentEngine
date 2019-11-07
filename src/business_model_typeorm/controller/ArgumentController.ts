@@ -1,10 +1,10 @@
 import { getRepository, MoreThan } from 'typeorm';
 import { ModelArgument, ReasoningMethod } from '../entity/Argument';
 import { ModelStatement } from '../entity/Statement';
-import { GetCurrentConnection } from "../manager";
+import { MyConnectionManager } from "../manager";
 
 export class ArgumentController {
-    private argumentRepository = GetCurrentConnection().getRepository(ModelArgument);
+    private argumentRepository = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
 
     // *********** CREATE ********** //
     createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise<ModelArgument> {

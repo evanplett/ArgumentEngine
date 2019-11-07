@@ -3,7 +3,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import { RestApp } from "./rest/app";
-import { SetCurrentConnection } from "./business_model_typeorm/manager";
+import { MyConnectionManager } from "./business_model_typeorm/manager";
 
 import {ModelArgument, ReasoningMethod} from "./business_model_typeorm/entity/Argument";
 import {ModelStatement} from "./business_model_typeorm/entity/Statement";
@@ -39,7 +39,7 @@ async function CreateNode(connection: any, max_level: number, current_level: num
 }
 
 
-SetCurrentConnection("production").then(async connection => {
+MyConnectionManager.SetCurrentConnection("production").then(async connection => {
     // create express app
     const app = express();
     app.use(bodyParser.json());
