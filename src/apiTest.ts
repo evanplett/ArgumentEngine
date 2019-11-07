@@ -2,7 +2,7 @@
 import {createConnection, getConnection, Entity, getRepository } from "typeorm";
 
 
-import { GetCurrentConnection, SetCurrentConnection } from "./business_model_typeorm/manager";
+import { MyConnectionManager } from "./business_model_typeorm/manager";
 
 import {ModelArgument} from "./business_model_typeorm/entity/Argument";
 import {ModelStatement} from "./business_model_typeorm/entity/Statement";
@@ -10,7 +10,10 @@ import {ModelStatement} from "./business_model_typeorm/entity/Statement";
 const request = require('supertest');
 //const app = require('./rest/app'); //reference to you app.js file
 import { RestApp } from "./rest/app"
-const app = RestApp()
+const app = RestApp();
+
+const connMan = MyConnectionManager();
+
 
 //==================== user API test ====================
 
@@ -20,11 +23,11 @@ const app = RestApp()
 describe('GET /argument', function () {
 
     beforeEach(() => {
-        return SetCurrentConnection("testing");
+        return connMan.SetCurrentConnection("testing");
     });
 
     afterEach(() => {
-        let conn = GetCurrentConnection();
+        let conn = connMan.GetCurrentConnection();
         return conn.close();
     })
 

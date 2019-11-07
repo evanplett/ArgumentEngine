@@ -2,25 +2,22 @@ import {ConnectionManager, Connection, getConnectionOptions } from "typeorm";
 
 
 #TODO: Maybe inherit from typeorm ConnectionManager
-export abstract class MyConnectionManager {
+export class MyConnectionManager extends ConnectionManager {
 
+private currentConnectionName ="";
 
-private const connectionManager = new ConnectionManager();
-
-private static currentConnectionName ="";
-
-public static SetCurrentConnection(connectionName: string) : Promise<Connection>
+public SetCurrentConnection(connectionName: string) : Promise<Connection>
 {
-  global.currentConnectionName = connectionName;
+  this.currentConnectionName = connectionName;
 
  return getConnectionOptions(currentConnectionName).then(
 connectionOptions => {
-  return connectionManager.create(connectionOptions). connect();});
+  return this.create(connectionOptions). connect();});
 }
 
-public static GetCurrentConnection() : Connection
+public GetCurrentConnection() : Connection
 {
-   return connectionManager.get(global.currentConnectionName);
+   return this.get(global.currentConnectionName);
 }
 
 
