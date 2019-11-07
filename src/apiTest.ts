@@ -12,8 +12,6 @@ const request = require('supertest');
 import { RestApp } from "./rest/app"
 const app = RestApp();
 
-const connMan = new MyConnectionManager();
-
 
 //==================== user API test ====================
 
@@ -23,11 +21,11 @@ const connMan = new MyConnectionManager();
 describe('GET /argument', function () {
 
     beforeEach(() => {
-        return connMan.SetCurrentConnection("testing");
+        return MyConnectionManager.SetCurrentConnection("testing");
     });
 
     afterEach(() => {
-        let conn = connMan.GetCurrentConnection();
+        let conn = MyConnectionManager.GetCurrentConnection();
         return conn.close();
     })
 
