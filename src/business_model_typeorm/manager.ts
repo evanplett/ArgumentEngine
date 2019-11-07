@@ -12,12 +12,12 @@ public static SetCurrentConnection(connectionName: string) : Promise<Connection>
 
  return getConnectionOptions(MyConnectionManager.currentConnectionName).then(
 connectionOptions => {
-  return connMan.create(connectionOptions). connect();});
+  return MyConnectionManager.connMan.create(connectionOptions). connect();});
 }
 
 public static GetCurrentConnection() : Connection
 {
-   return connMan.get(MyConnectionManager.currentConnectionName);
+   return MyConnectionManager.connMan.get(MyConnectionManager.currentConnectionName);
 }
 
 
