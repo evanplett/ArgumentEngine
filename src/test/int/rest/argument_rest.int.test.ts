@@ -2,14 +2,14 @@
 import {createConnection, getConnection, Entity, getRepository } from "typeorm";
 
 
-import { MyConnectionManager } from "./business_model_typeorm/manager";
+import { MyConnectionManager } from "../../../business_model_typeorm/manager";
 
-import {ModelArgument} from "./business_model_typeorm/entity/Argument";
-import {ModelStatement} from "./business_model_typeorm/entity/Statement";
+import {ModelArgument} from "../../../business_model_typeorm/entity/Argument";
+import {ModelStatement} from "../../../business_model_typeorm/entity/Statement";
 
 const request = require('supertest');
 
-import { RestApp } from "./app"
+import { RestApp } from "../../../rest/app"
 const app = RestApp();
 
 
