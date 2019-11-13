@@ -10,7 +10,7 @@
       "start": "run-p serve test",
       "postinstall": "npm run build-ts",
       "serve": "node dist/server.js",
-      "test": "mocha --recursive dist/test",
+      "test": "mocha --recursive --diff dist/test",
       "watch-node": "nodemon dist/server.js",
       "watch-ts": "tsc -w"
    },
