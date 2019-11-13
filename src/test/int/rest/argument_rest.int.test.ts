@@ -29,8 +29,8 @@ describe('GET /argument', function () {
         return conn.close();
     })
 
-    it('respond with json containing a list of all users', function (done) {
-        return request(app)
+    it('respond with empty json and code 400', function (done) {
+        request(app)
             .get('/argument')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
