@@ -29,12 +29,12 @@ describe('GET /argument', function () {
         return conn.close();
     })
 
-    it('respond with empty json and code 400', function (done) {
-        request(app)
+    it('respond with empty json and code 400', function () {
+        return request(app)
             .get('/argument')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(400, done);
+            .expect(400);
     });
 });
 
