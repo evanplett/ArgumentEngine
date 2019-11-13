@@ -35,7 +35,7 @@ describe('GET /argument', function () {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(400, {
-              errorCode: '400',
+              errorCode: 400,
               errorDetail: "No Arguments after id 0 found"
       });
     });
