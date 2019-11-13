@@ -30,7 +30,7 @@ describe('GET /argument', function () {
     })
 
     it('respond with json containing a list of all users', function (done) {
-        request(app)
+        return request(app)
             .get('/argument')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
