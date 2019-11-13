@@ -35,12 +35,17 @@ describe('GET /argument', function () {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(400, {
-              errorCode: 400,
-              errorDetail: "No Arguments after id 0 found"
+              errorCode: 400
       });
     });
 });
 
+/*
+,
+              errorDetail: "No Arguments after id 0 found"
+
+
+*/
 
 
 /*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
