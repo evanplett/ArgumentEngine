@@ -13,12 +13,8 @@ import { RestApp } from "../../../rest/app"
 const app = RestApp();
 
 
-//==================== user API test ====================
 
-/**
- * Testing get all user endpoint
- */
-describe('GET /argument', function () {
+describe('With an empty database', function () {
 
     beforeEach(() => {
         return MyConnectionManager.SetCurrentConnection("testing");
@@ -27,9 +23,12 @@ describe('GET /argument', function () {
     afterEach(() => {
         let conn = MyConnectionManager.GetCurrentConnection();
         return conn.close();
-    })
+    });
 
-    it('respond with empty json and code 400', function () {
+
+   describe ('GET Argument', function () {
+
+    it('with no parameters, respond with code 400 and error message', function () {
         return request(app)
             .get('/argument')
             .set('Accept', 'application/json')
@@ -39,7 +38,18 @@ describe('GET /argument', function () {
               errorDetail: "No Arguments after id 0 found"
       });
     });
+
+    }
+
+
+
 });
+
+
+
+
+
+
 
 /*
 
