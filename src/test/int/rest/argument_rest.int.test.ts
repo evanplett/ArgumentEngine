@@ -39,7 +39,7 @@ describe('With an empty database', function () {
       });
     });
 
-    }
+    });
 
 
 
