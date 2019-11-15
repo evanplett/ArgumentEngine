@@ -39,6 +39,20 @@ describe('With an empty database', function () {
       });
     });
 
+
+it('with after_id = 10, respond with code 400 and error message', function () {
+        return request(app)
+            .get('/argument?after_id=10')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400, {
+              errorCode: 400,
+              errorDetail: "No Arguments after id 10 found"
+      });
+    });
+
+
+
     });
 
 
