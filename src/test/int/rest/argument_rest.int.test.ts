@@ -52,6 +52,31 @@ it('with after_id = 10, respond with code 400 and error message', function () {
     });
 
 
+it('with limit = 10, respond with code 400 and error message', function () {
+        return request(app)
+            .get('/argument?limit=10')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400, {
+              errorCode: 400,
+              errorDetail: "No Arguments after id 0 found"
+      });
+    });
+
+
+it('with after_id = 10 and limit = 10, respond with code 400 and error message', function () {
+        return request(app)
+            .get('/argument?after_id=10&limit=10')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400, {
+              errorCode: 400,
+              errorDetail: "No Arguments after id 10 found"
+      });
+    });
+
+
+
 
     });
 
