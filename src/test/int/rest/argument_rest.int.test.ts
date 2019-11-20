@@ -92,7 +92,9 @@ describe('With an empty database', function () {
       return request(app)
       .post('/argument')
       .set('Accept', 'application/json')
-      .field('data', newArg)
+      .send({
+        data: newArg
+      })
       .expect('Content-Type', /json/)
       .expect(200);
     });
