@@ -1,4 +1,3 @@
-//apiTest.js
 import {
   createConnection,
   getConnection,
@@ -96,7 +95,10 @@ describe('With an empty database', function () {
         data: newArg
       })
       .expect('Content-Type', /json/)
-      .expect(200, newArg);
+      .expect(200, {
+        errorCode: 400,
+        errorDetail: "No Arguments after id 10 found"
+      });
     });
 
   });
