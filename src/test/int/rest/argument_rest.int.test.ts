@@ -1,86 +1,103 @@
 //apiTest.js
-import {createConnection, getConnection, Entity, getRepository } from "typeorm";
+import {
+  createConnection,
+  getConnection,
+  Entity,
+  getRepository
+} from "typeorm";
 
 
-import { MyConnectionManager } from "../../../business_model_typeorm/manager";
+import {
+  MyConnectionManager
+} from "../../../business_model_typeorm/manager";
 
-import {ModelArgument} from "../../../business_model_typeorm/entity/Argument";
-import {ModelStatement} from "../../../business_model_typeorm/entity/Statement";
+import {
+  ModelArgument
+} from "../../../business_model_typeorm/entity/Argument";
+import {
+  ModelStatement
+} from "../../../business_model_typeorm/entity/Statement";
 
 const request = require('supertest');
 
-import { RestApp } from "../../../rest/app"
+import {
+  RestApp
+} from "../../../rest/app"
 const app = RestApp();
-
 
 
 describe('With an empty database', function () {
 
-    beforeEach(() => {
-        return MyConnectionManager.SetCurrentConnection("testing");
-    });
+  beforeEach(() => {
+    return MyConnectionManager.SetCurrentConnection("testing");
+  });
 
-    afterEach(() => {
-        let conn = MyConnectionManager.GetCurrentConnection();
-        return conn.close();
-    });
+  afterEach(() => {
+    let conn = MyConnectionManager.GetCurrentConnection();
+    return conn.close();
+  });
 
-
-   describe ('GET Argument', function () {
-
+  describe ('GET Argument', function () {
     it('with no parameters, respond with code 400 and error message', function () {
-        return request(app)
-            .get('/argument')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(400, {
-              errorCode: 400,
-              errorDetail: "No Arguments after id 0 found"
+      return request(app)
+      .get('/argument')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        errorCode: 400,
+        errorDetail: "No Arguments after id 0 found"
       });
     });
-
-
-it('with after_id = 10, respond with code 400 and error message', function () {
-        return request(app)
-            .get('/argument?after_id=10')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(400, {
-              errorCode: 400,
-              errorDetail: "No Arguments after id 10 found"
+    it('with after_id = 10, respond with code 400 and error message', function () {
+      return request(app)
+      .get('/argument?after_id=10')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        errorCode: 400,
+        errorDetail: "No Arguments after id 10 found"
       });
     });
-
-
-it('with limit = 10, respond with code 400 and error message', function () {
-        return request(app)
-            .get('/argument?limit=10')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(400, {
-              errorCode: 400,
-              errorDetail: "No Arguments after id 0 found"
+    it('with limit = 10, respond with code 400 and error message', function () {
+      return request(app)
+      .get('/argument?limit=10')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        errorCode: 400,
+        errorDetail: "No Arguments after id 0 found"
       });
     });
-
-
-it('with after_id = 10 and limit = 10, respond with code 400 and error message', function () {
-        return request(app)
-            .get('/argument?after_id=10&limit=10')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(400, {
-              errorCode: 400,
-              errorDetail: "No Arguments after id 10 found"
+    it('with after_id = 10 and limit = 10, respond with code 400 and error message', function () {
+      return request(app)
+      .get('/argument?after_id=10&limit=10')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        errorCode: 400,
+        errorDetail: "No Arguments after id 10 found"
       });
     });
+  });
 
+  describe ('POST Argument', function () {
+    it('with valid new argument, respond with code 200 and error message', function () {
 
+      let newArg = {
+        'conclusion': "My Conclusion",
+        'premises': ["Premise 1", "Premise 2"],
+        'reasoning_method': "Induction"
+      }
 
-
+      return request(app)
+      .post('/argument')
+      .set('Accept', 'application/json')
+      .field('data', newArg)
+      .expect('Content-Type', /json/)
+      .expect(200);
     });
 
-
+  });
 
 });
 
