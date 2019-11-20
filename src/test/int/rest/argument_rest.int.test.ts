@@ -80,7 +80,7 @@ describe('With an empty database', function () {
     });
   });
 
-  describe ('POST Argument', function () {
+  describe ('POST Argument', async function () {
     it('with valid new argument, respond with code 200 and error message', function () {
 
       let newArg = {
