@@ -80,7 +80,7 @@ describe('With an empty database', function () {
     });
   });
 
-  describe ('POST Argument', async function () {
+  describe ('POST Argument', function () {
     it('with valid new argument, respond with code 200 and error message', function () {
 
       let newArg = {
@@ -96,7 +96,7 @@ describe('With an empty database', function () {
         data: newArg
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(200, newArg);
     });
 
   });
