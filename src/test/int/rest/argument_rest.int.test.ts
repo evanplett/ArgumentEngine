@@ -79,7 +79,7 @@ describe('With an empty database', function () {
     });
   });
 
-  describe ('POST Argument', function () {
+  /*describe ('POST Argument', function () {
     it('with valid new argument, respond with code 200 and error message', function () {
 
       let newArg = {
@@ -100,8 +100,7 @@ describe('With an empty database', function () {
         errorDetail: "No Arguments after id 10 found"
       });
     });
-
-  });
+  });*/
 
 });
 
