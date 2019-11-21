@@ -13,6 +13,10 @@ import {
   MyConnectionManager
 } from "../manager";
 
+import {
+  Error
+} from '../../Error'
+
 export class ArgumentController {
   private argumentRepository = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
 
