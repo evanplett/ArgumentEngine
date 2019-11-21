@@ -89,7 +89,7 @@ describe('With an empty database', function () {
       }
 
       return request(app)
-      .post('/argument')
+      .get('/argument')
       .set('Accept', 'application/json')
       .send({
         data: newArg
