@@ -26,6 +26,7 @@ export class Argument {
 
   // *********** READ ********** //
   async many(request: Request, response: Response, next: NextFunction) {
+    console.log("Rest::many");
     this.af
     .getList(request.query.limit, request.query.after_id)
     .then((value) => {
@@ -37,6 +38,7 @@ export class Argument {
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
+    console.log("Rest::one");
     this.af
     .getOne(request.params.id)
     .then((value) => {
@@ -49,6 +51,7 @@ export class Argument {
 
 
   async tree(request: Request, response: Response, next: NextFunction) {
+    console.log("Rest::tree");
     this.af
     .getTree(request.params.id, request.query.max_depth)
     .then((value) => {
