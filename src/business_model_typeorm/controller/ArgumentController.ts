@@ -22,6 +22,7 @@ export class ArgumentController {
 
   // *********** CREATE ********** //
   createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {
+    console.debug("Controller::Argument::createOne");
     return this.argumentRepository.save(this.argumentRepository.create(
       {
         conclusion: conclusion,
@@ -38,6 +39,7 @@ export class ArgumentController {
 
   // *********** READ ********** //
   many(afterId: number, maxCount: number): Promise < ModelArgument[] > {
+    console.debug("Controller::Argument::many");
     return this.argumentRepository.find({
       where: {
         id: MoreThan(afterId)
@@ -51,6 +53,7 @@ export class ArgumentController {
   }
 
   one(id: number): Promise < ModelArgument > {
+    console.debug("Controller::Argument::one");
     return this.argumentRepository.findOneOrFail(id, {
       relations: ['conclusion', 'premises']
     });

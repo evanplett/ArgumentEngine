@@ -13,7 +13,7 @@ export class Argument {
 
   // *********** CREATE ********** //
   async create(request: Request, response: Response, next: NextFunction) {
-    console.log("Rest::create");
+    console.debug("Rest::Argument::create");
     this.af
     .createOne(request.body.conclusion, request.body.reasoning_method, request.body.premises)
     .then((value) => {
@@ -26,7 +26,7 @@ export class Argument {
 
   // *********** READ ********** //
   async many(request: Request, response: Response, next: NextFunction) {
-    console.log("Rest::many");
+    console.debug("Rest::Argument::many");
     this.af
     .getList(request.query.limit, request.query.after_id)
     .then((value) => {
@@ -38,7 +38,7 @@ export class Argument {
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
-    console.log("Rest::one");
+    console.debug("Rest::Argument::one");
     this.af
     .getOne(request.params.id)
     .then((value) => {
@@ -51,7 +51,7 @@ export class Argument {
 
 
   async tree(request: Request, response: Response, next: NextFunction) {
-    console.log("Rest::tree");
+    console.debug("Rest::Argument::tree");
     this.af
     .getTree(request.params.id, request.query.max_depth)
     .then((value) => {
