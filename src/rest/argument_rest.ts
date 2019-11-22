@@ -13,7 +13,7 @@ export class Argument {
 
   // *********** CREATE ********** //
   async create(request: Request, response: Response, next: NextFunction) {
-    console.debug("Rest::Argument::create(request: %j", request);
+    console.debug("Rest::Argument::create(request: %o", request);
     this.af
     .createOne(request.body.conclusion, request.body.reasoning_method, request.body.premises)
     .then((value) => {
