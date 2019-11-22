@@ -1,11 +1,17 @@
-import {Routes} from "./routes";
+import {
+  Routes
+} from "./routes";
 import * as express from "express";
-import { MapRoutesOnApp } from "../routing_utils";
+import {
+  MapRoutesOnApp
+} from "../routing_utils";
+import * as bodyParser from "body-parser";
 
 export function RestApp() {
-     const app = express();
-     MapRoutesOnApp(app, Routes);
-     return app;
+  const app = express();
+  app.use(bodyParser.json());
+  MapRoutesOnApp(app, Routes);
+  return app;
 }
 
 //MapRoutesOnApp(app, Routes);
