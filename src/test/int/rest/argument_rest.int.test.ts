@@ -91,9 +91,7 @@ describe('With an empty database', function () {
       return request(app)
       .post('/argument')
       .set('Accept', 'application/json')
-      .send({
-        data: newArg
-      })
+      .send(newArg)
       .expect('Content-Type', /json/)
       .expect(200, {
         errorCode: 400,
