@@ -94,31 +94,30 @@ describe('With an empty database', function () {
       .send(newArg)
       .expect('Content-Type', /json/)
       .expect(200, {
-        {
-          'conclusion': {
-            'id': 1,
-            'text': newArg.conclusion
-          }
-        });
+        'conclusion': {
+          'id': 1,
+          'text': newArg.conclusion
+        }
       });
     });
-
   });
 
+});
 
 
 
 
 
 
-  /*
+
+/*
 
 
 
 */
 
 
-  /*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
+/*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
    let conclusion = connection.manager.create( ModelStatement, { text: "Conclusion " + path});
 
     await connection.manager.save(conclusion);
