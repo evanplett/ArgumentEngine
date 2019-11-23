@@ -17,6 +17,10 @@ import {
   ModelStatement
 } from "../../../business_model_typeorm/entity/Statement";
 
+import {
+  TestUtils
+} from "./test_utils"
+
 const request = require('supertest');
 
 import {
@@ -98,6 +102,12 @@ describe('With an empty database', function () {
           'id': 1,
           'text': newArg.conclusion
         }
+      })
+      .end((err, res) => {
+        if (err) {
+          return err;
+        }
+        expect(res).to.be.eql([]);
       });
     });
   });
