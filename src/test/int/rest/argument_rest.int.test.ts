@@ -53,7 +53,10 @@ describe('With an empty database', function () {
     });
     it('with after_id = 10, respond with code 400 and error message', function () {
       return request(app)
-      .get('/argument?after_id=10')
+      .get('/argument')
+      .query({
+        after_id: '10'
+      })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400, {
@@ -63,9 +66,12 @@ describe('With an empty database', function () {
     });
     it('with limit = 10, respond with code 400 and error message', function () {
       return request(app)
-      .get('/argument?limit=10')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .get('/argument')
+      .query({
+        limit: '10'
+      })
+      .type('json')
+      .accept('json')
       .expect(400, {
         errorCode: 400,
         errorDetail: "No Arguments after id 0 found"
@@ -73,9 +79,13 @@ describe('With an empty database', function () {
     });
     it('with after_id = 10 and limit = 10, respond with code 400 and error message', function () {
       return request(app)
-      .get('/argument?after_id=10&limit=10')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .get('/argument')
+      .query({
+        limit: '10',
+        after_id: '10'
+      })
+      .type('json')
+      .accept('json')
       .expect(400, {
         errorCode: 400,
         errorDetail: "No Arguments after id 10 found"
@@ -94,9 +104,9 @@ describe('With an empty database', function () {
 
       return request(app)
       .post('/argument')
-      .set('Accept', 'application/json')
+      .type('json')
       .send(newArg)
-      .expect('Content-Type', /json/)
+      .accept('json')
       .expect(200, {
         'conclusion': {
           'id': 1,
@@ -107,7 +117,7 @@ describe('With an empty database', function () {
         if (err) {
           return err;
         }
-        expect(res).to.be.eql([]);
+        expect(TestUtils.DoesArgumentMatch(res)).to.eql([]);
       });
     });
   });
