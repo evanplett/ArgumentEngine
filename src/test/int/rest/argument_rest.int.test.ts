@@ -22,6 +22,8 @@ import {
 } from "./test_utils"
 
 const request = require('supertest');
+const should = require('should');
+
 
 import {
   RestApp
@@ -117,7 +119,7 @@ describe('With an empty database', function () {
         if (err) {
           return err;
         }
-        expect(TestUtils.DoesArgumentMatch(newArg, res.body)).to.eql([]);
+        expect(TestUtils.DoesArgumentMatchArgElements(newArg, res.body)).to.eql([]);
       });
     });
   });

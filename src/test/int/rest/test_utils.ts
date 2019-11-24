@@ -24,7 +24,7 @@ export class TestUtils {
     return errors;
   }
 
-  static DoesArgumentMatch(argElements: object, argument: object): string [] {
+  static DoesArgumentMatchArgElements(argElements: object, argument: object): string [] {
     return(argElements.conclusiom, argElements.premises, argElements.reasoning_method, argument);
   }
 
