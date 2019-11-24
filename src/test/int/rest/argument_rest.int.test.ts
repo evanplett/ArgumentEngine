@@ -117,7 +117,7 @@ describe('With an empty database', function () {
         if (err) {
           return err;
         }
-        expect(TestUtils.DoesArgumentMatch(res)).to.eql([]);
+        expect(TestUtils.DoesArgumentMatch(newArg, res.body)).to.eql([]);
       });
     });
   });

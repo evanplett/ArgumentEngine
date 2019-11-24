@@ -1,7 +1,7 @@
 export class TestUtils {
 
   // Returns an array of strings that describe the differences
-  static DoesArgumentMatch(conclusion: string, premises: string[], reasoningMethod: string, argument: object): string [] {
+  static DoesArgumentMatch(conclusion: string, premises: string[], reasoning_method: string, argument: object): string [] {
 
     let errors: string [] = [];
 
@@ -10,7 +10,7 @@ export class TestUtils {
       errors.push(error);
     }
 
-    if (argument.conclusion.reasoningMethod != reasoningMethod) {
+    if (argument.conclusion.reasoning_method != reasoning_method) {
       let error: string = "ReasoningMethod: Exp '" + conclusion + "' != Act '" + argument.conclusion.text + "'";
       errors.push(error);
     }
@@ -23,4 +23,11 @@ export class TestUtils {
 
     return errors;
   }
+
+  static DoesArgumentMatch(argElements: object, argument: object): string [] {
+    return(argElements.conclusiom, argElements.premises, argElements.reasoning_method, argument);
+  }
+
+
+
 }
