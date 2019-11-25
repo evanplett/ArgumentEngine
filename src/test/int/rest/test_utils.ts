@@ -1,6 +1,6 @@
 import {
-  RestApp
-} from "../../../business_model_typeorm/entity/ModelArgument"
+  ModelArgument
+} from "../../../business_model_typeorm/entity/Argument"
 
 
 export class ArgumentParams {
@@ -35,7 +35,7 @@ export class TestUtils {
     }
 
     if (!(premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
-      return premises.contains(value.text)}))) {
+      return premises.some(x => x === value.text)}))) {
       let error: string = "Premises: Exp '" + premises + "' != Act '" + argument.premises + "'";
       errors.push(error);
     }
