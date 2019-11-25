@@ -1,7 +1,26 @@
+import {
+  RestApp
+} from "../../../business_model_typeorm/entity/ModelArgument"
+
+
+export class ArgumentParams {
+
+  conclusion: string;
+  premises: string [];
+  reasoningMethod: string;
+
+  constructor(conclusion: string, premises: string[], reasoningMethod: string) {
+    this.conclusion = conclusion;
+    this.premises = premises;
+    this.reasoningMethod = reasoningMethod;
+  }
+}
+
+
 export class TestUtils {
 
   // Returns an array of strings that describe the differences
-  static DoesArgumentMatch(conclusion: string, premises: string[], reasoning_method: string, argument: object): string [] {
+  static DoesArgumentMatch(conclusion: string, premises: string[], reasoning_method: string, argument: ModelArgument): string [] {
 
     let errors: string [] = [];
 
