@@ -22,7 +22,6 @@ import {
 } from "./test_utils"
 
 const request = require('supertest');
-const should = require('should');
 
 
 import {
