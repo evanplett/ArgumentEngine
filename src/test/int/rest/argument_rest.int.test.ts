@@ -18,7 +18,8 @@ import {
 } from "../../../business_model_typeorm/entity/Statement";
 
 import {
-  TestUtils
+  TestUtils,
+  ArgumentParams
 } from "./test_utils"
 
 const request = require('supertest');
@@ -97,11 +98,11 @@ describe('With an empty database', function () {
   describe ('POST Argument', function () {
     it('with valid new argument, respond with code 200 and error message', function () {
 
-      let newArg = {
-        'conclusion': "My Conclusion",
-        'premises': ["Premise 1", "Premise 2"],
-        'reasoning_method': "Induction"
-      }
+      let newArg = ArgumentParams(
+        "My Conclusion",
+        ["Premise 1", "Premise 2"],
+        "Induction"
+      );
 
       return request(app)
       .post('/argument')
