@@ -114,7 +114,7 @@ describe('With an empty database', function () {
 
         let errors: string[] = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
 
-        if (! errors.length > 0) throw new Error(errors.toString());
+        if (errors.length > 0) throw new Error(errors.toString());
 
 
 
