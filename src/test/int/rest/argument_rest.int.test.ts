@@ -98,7 +98,7 @@ describe('With an empty database', function () {
   describe ('POST Argument', function () {
     it('with valid new argument, respond with code 200 and error message', function () {
 
-      let newArg = ArgumentParams(
+      let newArg = new ArgumentParams(
         "My Conclusion",
         ["Premise 1", "Premise 2"],
         "Induction"
