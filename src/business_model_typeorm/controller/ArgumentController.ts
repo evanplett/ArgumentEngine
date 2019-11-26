@@ -21,13 +21,13 @@ export class ArgumentController {
   private argumentRepository = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
 
   // *********** CREATE ********** //
-  createOne(conclusion: ModelStatement, reasoningMethod: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {
+  createOne(conclusion: ModelStatement, reasoning_method: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {
     console.debug("Controller::Argument::createOne");
     return this.argumentRepository.save(this.argumentRepository.create(
       {
         conclusion: conclusion,
         premises: premises,
-        reasoningMethod: reasoningMethod
+        reasoning_method: reasoningMl_method
       }))
     .then(newArgument => {
       return this.one(newArgument.id);
