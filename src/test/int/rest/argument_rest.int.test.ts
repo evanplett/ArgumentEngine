@@ -109,7 +109,16 @@ describe('With an empty database', function () {
       .type('json')
       .send(newArg)
       .accept('json')
-      .expect(200);
+      .expect(200)
+      .expect((res) => {
+
+        let string[] errors = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
+
+        if (! errors.empty()) throw new Error(errors);
+
+
+
+      });
       /*.end((err, res) => {
         if (err) {
           return err;
