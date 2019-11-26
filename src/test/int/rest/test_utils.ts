@@ -29,7 +29,7 @@ export class TestUtils {
       errors.push(error);
     }
 
-    if (argument.conclusion.reasoning_method != reasoning_method) {
+    if (argument.reasoning_method != reasoning_method) {
       let error: string = "ReasoningMethod: Exp '" + conclusion + "' != Act '" + argument.conclusion.text + "'";
       errors.push(error);
     }
@@ -43,8 +43,8 @@ export class TestUtils {
     return errors;
   }
 
-  static DoesArgumentMatchArgElements(argElements: object, argument: object): string [] {
-    return(argElements.conclusiom, argElements.premises, argElements.reasoning_method, argument);
+  static DoesArgumentMatchArgElements(argElements: ArgumentParams, argument: object): string [] {
+    return DoesArgumentMatch(argElements.conclusiom, argElements.premises, argElements.reasoning_method, argument);
   }
 
 
