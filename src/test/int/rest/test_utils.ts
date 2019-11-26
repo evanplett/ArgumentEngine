@@ -7,7 +7,7 @@ export class ArgumentParams {
 
   conclusion: string;
   premises: string [];
-  reasoningMethod: string;
+  reasoning_method: string;
 
   constructor(conclusion: string, premises: string[], reasoning_method: string) {
     this.conclusion = conclusion;
@@ -43,7 +43,7 @@ export class TestUtils {
     return errors;
   }
 
-  static DoesArgumentMatchArgElements(argElements: ArgumentParams, argument: object): string [] {
+  static DoesArgumentMatchArgElements(argElements: ArgumentParams, argument: ModelArgument): string [] {
     return TestUtils.DoesArgumentMatch(argElements.conclusion, argElements.premises, argElements.reasoning_method, argument);
   }
 

@@ -32,10 +32,10 @@ export class FacadeArgument {
   // *********** CREATE ********** //
   createOne(
     conclusion: string | number,
-    reasoningMethod: string,
+    reasoning_method: string,
     premises: (string | number)[]
   ): Promise < ModelArgument > {
-    console.debug("Façade::Argument::createOne(conclusion: %s | reasoningMethod: %s | premises: %o)", conclusion, reasoning_method, premises);
+    console.debug("Façade::Argument::createOne(conclusion: %s | reasoning_method: %s | premises: %o)", conclusion, reasoning_method, premises);
     let conclusionStatement: Promise < ModelStatement > =
     typeof conclusion === 'string' ? this.fs.createOne(conclusion): this.fs.getOne(conclusion);
 
@@ -45,7 +45,7 @@ export class FacadeArgument {
       })
     );
 
-    let methodOfReasoning: Promise < ReasoningMethod > = ModelArgument.stringToReasoningMethod(reasoningMethod);
+    let methodOfReasoning: Promise < ReasoningMethod > = ModelArgument.stringToReasoningMethod(reasoning_method);
 
     return Promise.all([conclusionStatement, premisStatements, methodOfReasoning])
     .then(([conclusionValue, premisValues, reasoningMethodValue]) => {
