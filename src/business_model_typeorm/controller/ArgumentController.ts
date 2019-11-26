@@ -27,7 +27,7 @@ export class ArgumentController {
       {
         conclusion: conclusion,
         premises: premises,
-        reasoning_method: reasoningMl_method
+        reasoning_method: reasoning_method
       }))
     .then(newArgument => {
       return this.one(newArgument.id);

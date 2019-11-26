@@ -32,7 +32,7 @@ export class ModelArgument {
   constructor(conclusion: ModelStatement, premises: ModelStatement[], reasoning_method: ReasoningMethod) {
     this.conclusion = conclusion;
     this.premises = premises;
-    this.reasoning_ethod = reasoning_method;
+    this.reasoning_method = reasoning_method;
   }
 
   static stringToReasoningMethod(reasoningMethodString: string): Promise < ReasoningMethod > {

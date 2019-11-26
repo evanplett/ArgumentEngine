@@ -9,10 +9,10 @@ export class ArgumentParams {
   premises: string [];
   reasoningMethod: string;
 
-  constructor(conclusion: string, premises: string[], reasoningMethod: string) {
+  constructor(conclusion: string, premises: string[], reasoning_method: string) {
     this.conclusion = conclusion;
     this.premises = premises;
-    this.reasoningMethod = reasoningMethod;
+    this.reasoning_method = reasoning_method;
   }
 }
 
@@ -44,7 +44,7 @@ export class TestUtils {
   }
 
   static DoesArgumentMatchArgElements(argElements: ArgumentParams, argument: object): string [] {
-    return DoesArgumentMatch(argElements.conclusiom, argElements.premises, argElements.reasoning_method, argument);
+    return TestUtils.DoesArgumentMatch(argElements.conclusion, argElements.premises, argElements.reasoning_method, argument);
   }
 
 
