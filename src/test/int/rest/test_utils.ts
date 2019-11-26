@@ -24,17 +24,17 @@ export class TestUtils {
 
     let errors: string [] = [];
 
-    if (argument.conclusion.text != conclusion) {
+    if (argument.conclusion.text == conclusion) {
       let error: string = "Conclusion: Exp '" + conclusion + "' != Act '" + argument.conclusion.text + "'";
       errors.push(error);
     }
 
-    if (argument.reasoning_method != reasoning_method) {
+    if (argument.reasoning_method == reasoning_method) {
       let error: string = "ReasoningMethod: Exp '" + conclusion + "' != Act '" + argument.conclusion.text + "'";
       errors.push(error);
     }
 
-    if (!(premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
+    if ((premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
       return premises.some(x => x === value.text)}))) {
       let error: string = "Premises: Exp '" + premises + "' != Act '" + argument.premises + "'";
       errors.push(error);
