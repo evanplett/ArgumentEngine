@@ -60,5 +60,5 @@ export class ModelArgument {
   @Column("enum", {
     enum: ReasoningMethod
   })
-  reasoning_ethod!: ReasoningMethod;
+  reasoning_method!: ReasoningMethod;
 }
