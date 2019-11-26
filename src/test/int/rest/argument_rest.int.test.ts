@@ -112,7 +112,7 @@ describe('With an empty database', function () {
       .expect(200)
       .expect((res) => {
 
-        let string[] errors = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
+        let errors: string[] = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
 
         if (! errors.empty()) throw new Error(errors);
 
