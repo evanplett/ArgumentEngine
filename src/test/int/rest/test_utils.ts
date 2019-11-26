@@ -25,18 +25,20 @@ export class TestUtils {
     let errors: string [] = [];
 
     if (argument.conclusion.text == conclusion) {
-      let error: string = "Conclusion: Exp '" + conclusion + "' != Act '" + argument.conclusion.text + "'";
+      let error: string = "Conclusion: Exp: '" + conclusion + "' != Act: '" + argument.conclusion.text + "'";
       errors.push(error);
     }
 
     if (argument.reasoning_method == reasoning_method) {
-      let error: string = "ReasoningMethod: Exp '" + conclusion + "' != Act '" + argument.conclusion.text + "'";
+      let error: string = "ReasoningMethod: Exp: '" + conclusion + "' != Act: '" + argument.conclusion.text + "'";
       errors.push(error);
     }
 
     if ((premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
       return premises.some(x => x === value.text)}))) {
-      let error: string = "Premises: Exp '" + premises + "' != Act '" + argument.premises + "'";
+      let error: string = "Premises: Exp: '" + premises + "' != Act: '" + argument.premises.map(value => value.text). reduce((accumulator, currentValue) => {
+        return accumulator + "'" + currentValue + "',";
+      }) + "'";
       errors.push(error);
     }
 
