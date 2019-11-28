@@ -114,36 +114,36 @@ describe('With an empty database', function () {
 
         let errors: string[] = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
 
-        if (errors.length > 0) throw new Error(errors.map(error => "\n - " + error).join("");
+        if (errors.length > 0) throw new Error(errors.map(error => "\n - " + error).join(""));
 
 
 
-        });
-        /*.end((err, res) => {
+      });
+      /*.end((err, res) => {
         if (err) {
           return err;
         }
         expect(TestUtils.DoesArgumentMatchArgElements(newArg, res.body)).to.eql([]);
       });*/
-      });
     });
-
   });
 
+});
 
 
 
 
 
 
-  /*
+
+/*
 
 
 
 */
 
 
-  /*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
+/*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
    let conclusion = connection.manager.create( ModelStatement, { text: "Conclusion " + path});
 
     await connection.manager.save(conclusion);
