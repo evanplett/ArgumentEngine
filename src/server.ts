@@ -1,32 +1,22 @@
 import "reflect-metadata";
 import * as express from "express";
-import * as bodyParser from "body-parser";
-import { Request, Response } from "express";
-import { RestApp } from "./rest/app";
-import { EnsureConnection } from "./business_model_typeorm/manager";
+import {
+  RestApp
+} from "./rest/app";
+import {
+  MyConnectionManager
+} from "./business_model_typeorm/manager";
 
-import { ModelArgument, ReasoningMethod } from "./business_model_typeorm/entity/Argument";
-import { ModelStatement } from "./business_model_typeorm/entity/Statement";
 
+MyConnectionManager.SetCurrentConnection("production").then(async connection => {
+  // create express app
+  const app = express();
 
-export class Server {
-    static readonly PORT = process.env.PORT || "5000";
+  // route to the rest app
+  app.use('/rest', RestApp());
 
-    static Start() {
-        EnsureConnection().then(async connection => {
-            // create express app
-            const app = express();
-            app.use(bodyParser.json());
+  // start express server
+  app.listen(PORT);
 
-            // route to the rest app
-            app.use('/rest', RestApp());
-
-            // start express server
-            app.listen(this.PORT);
-
-            console.log("Express server has started on port " + this.PORT + ".");
-        }).catch(error => console.log(error));
-    }
-}
-
-Server.Start();
+  console.log("Express server has started on port " + PORT + ".");
+}).catch(error => console.log(error));

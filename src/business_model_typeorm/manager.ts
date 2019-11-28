@@ -1,21 +1,24 @@
-import { createConnection, Connection } from "typeorm";
+import {ConnectionManager, Connection, getConnectionOptions } from "typeorm";
 
-export class BusinessModelManager {
-    static connection: Connection;
+export class MyConnectionManager {
 
-    static async EnsureConnection() : Connection {
-        if (!this.connection) {
-            this.connection = await createConnection();
-        }
+static connMan: ConnectionManager = new ConnectionManager();
 
-        return this.connection;
-    }
+static currentConnectionName: string ="";
 
-    static CloseConnection() {
-        if (this.connection)
-        {
-            this.connection.close();
-        }
-    }
+public static SetCurrentConnection(connectionName: string) : Promise<Connection>
+{
+  MyConnectionManager.currentConnectionName = connectionName;
+
+ return getConnectionOptions(MyConnectionManager.currentConnectionName).then(
+connectionOptions => {
+  return MyConnectionManager.connMan.create(connectionOptions). connect();});
 }
 
+public static GetCurrentConnection() : Connection
+{
+   return MyConnectionManager.connMan.get(MyConnectionManager.currentConnectionName);
+}
+
+
+}
