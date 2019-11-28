@@ -66,6 +66,7 @@
       "reflect-metadata": "^0.1.10",
       "save-dev": "0.0.1-security",
       "typeorm": "0.2.18",
+      "typescript-logging": "^0.6.4",
       "wait-on": "^3.3.0"
    }
 }
