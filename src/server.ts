@@ -7,6 +7,7 @@ import {
   MyConnectionManager
 } from "./business_model_typeorm/manager";
 
+const PORT = process.env.PORT || "5000";
 
 MyConnectionManager.SetCurrentConnection("production").then(async connection => {
   // create express app
