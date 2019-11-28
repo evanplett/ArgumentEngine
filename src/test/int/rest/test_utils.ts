@@ -36,7 +36,7 @@ export class TestUtils {
 
     if ((premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
       return premises.some(x => x === value.text)}))) {
-      let error: string = "Premises: Exp: [" + premisesmap(value => "'" + value + "'").join(",") + "] != Act: [" + argument.premises.map(value => "'" + value.text + "'").join(",") + "]";
+      let error: string = "Premises: Exp: [" + premises.map(value => "'" + value + "'").join(",") + "] != Act: [" + argument.premises.map(value => "'" + value.text + "'").join(",") + "]";
       errors.push(error);
     }
 
