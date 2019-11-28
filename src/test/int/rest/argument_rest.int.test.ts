@@ -106,7 +106,7 @@ describe('With an empty database', function () {
       .accept('json')
       .expect(400, {
         errorCode: 400,
-        errorDetail: "No Arguments after id 10 found"
+        errorDetail: "No Argument with id 0 found"
       });
     });
 
