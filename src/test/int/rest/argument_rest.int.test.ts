@@ -95,7 +95,7 @@ describe('With an empty database', function () {
     });
 
     it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function () {
-      let id: int = 0;
+      let id: number = 0;
 
       return request(app)
       .get(`/argument/${id}/tree`)
