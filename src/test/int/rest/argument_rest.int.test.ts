@@ -93,6 +93,23 @@ describe('With an empty database', function () {
         errorDetail: "No Arguments after id 10 found"
       });
     });
+
+    it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function () {
+      let id: int = 0;
+
+      return request(app)
+      .get(`/argument/${id}/tree`)
+      .query({
+        max_depth: '10'
+      })
+      .type('json')
+      .accept('json')
+      .expect(400, {
+        errorCode: 400,
+        errorDetail: "No Arguments after id 10 found"
+      });
+    });
+
   });
 
   describe ('POST Argument', function () {
