@@ -115,9 +115,6 @@ describe('With an empty database', function () {
         let errors: string[] = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
 
         if (errors.length > 0) throw new Error(errors.map(error => "\n - " + error).join(""));
-
-
-
       });
       /*.end((err, res) => {
         if (err) {
