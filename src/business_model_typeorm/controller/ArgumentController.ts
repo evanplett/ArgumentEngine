@@ -1,6 +1,7 @@
 import {
   getRepository,
-  MoreThan
+  MoreThan,
+  Repository
 } from 'typeorm';
 import {
   ModelArgument,
@@ -11,18 +12,18 @@ import {
 } from '../entity/Statement';
 import {
   MyConnectionManager
-} from "../manager";
+} from '../manager';
 
 import {
   Error
-} from '../../Error'
+} from '../../Error';
 
 export class ArgumentController {
-  private argumentRepository = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
+  private argumentRepository: Repository = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
 
   // *********** CREATE ********** //
   createOne(conclusion: ModelStatement, reasoning_method: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {
-    console.debug("Controller::Argument::createOne");
+    console.debug('Controller::Argument::createOne');
     return this.argumentRepository.save(this.argumentRepository.create(
       {
         conclusion: conclusion,
@@ -39,7 +40,7 @@ export class ArgumentController {
 
   // *********** READ ********** //
   many(afterId: number, maxCount: number): Promise < ModelArgument[] > {
-    console.debug("Controller::Argument::many");
+    console.debug('Controller::Argument::many');
     return this.argumentRepository.find({
       where: {
         id: MoreThan(afterId)
@@ -53,7 +54,7 @@ export class ArgumentController {
   }
 
   one(id: number): Promise < ModelArgument > {
-    console.debug("Controller::Argument::one");
+    console.debug('Controller::Argument::one');
     return this.argumentRepository.findOneOrFail(id, {
       relations: ['conclusion', 'premises']
     });

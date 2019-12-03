@@ -1,30 +1,38 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  OneToMany
+} from 'typeorm';
 
-import { ModelArgument, ArgumentTreeNode } from "./Argument";
+import {
+  ModelArgument,
+  ArgumentTreeNode
+} from "./Argument";
 
 
 export interface StatementTreeNode {
-    statement_id: number,
-    text: string,
-    supportingArguments: ArgumentTreeNode[]
+  statement_id: number,
+  text: string,
+  supportingArguments: ArgumentTreeNode[]
 }
 
 @Entity()
 export class ModelStatement {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    constructor(text: string) {
-        this.text = text;
-    }
+  @Column()
+  text!: string;
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+  @OneToMany(type => ModelArgument, argument => argument.conclusion)
+  supportingArguments!: ModelArgument[];
 
-    @Column()
-    text!: string;
+  @ManyToMany(type => ModelArgument, argument => argument.premises)
+  supportedArguments!: ModelArgument[];
 
-    @OneToMany(type => ModelArgument, argument => argument.conclusion)
-    supportingArguments!: ModelArgument[];
-
-    @ManyToMany(type => ModelArgument, argument => argument.premises)
-    supportedArguments!: ModelArgument[];
+  constructor(text: string) {
+    this.text = text;
+  }
 }
