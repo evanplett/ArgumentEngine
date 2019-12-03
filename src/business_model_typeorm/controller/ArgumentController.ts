@@ -19,7 +19,7 @@ import {
 } from '../../Error';
 
 export class ArgumentController {
-  private argumentRepository: Repository = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
+  private argumentRepository: Repository < ModelArgument > = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
 
   // *********** CREATE ********** //
   createOne(conclusion: ModelStatement, reasoning_method: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {

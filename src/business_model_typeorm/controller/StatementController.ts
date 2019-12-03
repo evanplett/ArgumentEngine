@@ -18,7 +18,7 @@ import {
 
 export class StatementController {
 
-  private statementRepository: Repository = MyConnectionManager.GetCurrentConnection().getRepository(ModelStatement);
+  private statementRepository: Repository < ModelStatement > = MyConnectionManager.GetCurrentConnection().getRepository(ModelStatement);
 
   // *********** CREATE ********** //
   createOne(text: string): Promise < ModelStatement > {
