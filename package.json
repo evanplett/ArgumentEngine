@@ -6,7 +6,7 @@
   "scripts": {
     "build-ts": "tsc",
     "postbuild-ts": "npm run lint && npm test",
-    "lint": "tslint -c  sec/excelmicro_typescript_styleguide/linters/tslint.json 'src/**/*.ts'",
+    "lint": "tslint -c  external/excelmicro_typescript_linting/tslint.json 'src/**/*.ts'",
     "start": "run-p serve test",
     "postinstall": "npm run build-ts",
     "serve": "node dist/server.js",
