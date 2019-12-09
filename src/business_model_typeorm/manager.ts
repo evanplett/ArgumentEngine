@@ -19,8 +19,7 @@ export class MyConnectionManager {
       });
   }
 
-  public static GetCurrentConnection(): Connection
-  {
+  public static GetCurrentConnection(): Connection {
     return MyConnectionManager.connMan.get(MyConnectionManager.currentConnectionName);
   }
 }

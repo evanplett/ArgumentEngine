@@ -47,7 +47,7 @@ export class ArgumentController {
       },
       take: maxCount,
       order: {
-        id: "ASC"
+        id: 'ASC'
       },
       relations: ['conclusion', 'premises']
     });

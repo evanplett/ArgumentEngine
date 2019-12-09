@@ -9,13 +9,13 @@ import {
 import {
   ModelArgument,
   ArgumentTreeNode
-} from "./Argument";
+} from './Argument';
 
 
 export interface StatementTreeNode {
-  statement_id: number,
-  text: string,
-  supportingArguments: ArgumentTreeNode[]
+  statement_id: number;
+  text: string;
+  supportingArguments: ArgumentTreeNode[];
 }
 
 @Entity()
