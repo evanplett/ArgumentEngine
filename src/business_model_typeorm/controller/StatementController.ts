@@ -14,6 +14,9 @@ import {
 import {
   MyConnectionManager
 } from '../manager';
+import {
+  logDatamodelTypeorm as logger
+} from '../../log_config';
 
 
 export class StatementController {

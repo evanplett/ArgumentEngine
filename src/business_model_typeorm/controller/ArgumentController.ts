@@ -17,13 +17,17 @@ import {
 import {
   Error
 } from '../../Error';
+import {
+  logDatamodelTypeorm as logger
+} from '../../log_config';
 
 export class ArgumentController {
   private argumentRepository: Repository < ModelArgument > = MyConnectionManager.GetCurrentConnection().getRepository(ModelArgument);
 
   // *********** CREATE ********** //
   createOne(conclusion: ModelStatement, reasoning_method: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {
-    console.debug('Controller::Argument::createOne');
+
+    logger.trace('Controller::Argument::createOne');
     return this.argumentRepository.save(this.argumentRepository.create(
       {
         conclusion: conclusion,
@@ -40,7 +44,7 @@ export class ArgumentController {
 
   // *********** READ ********** //
   many(afterId: number, maxCount: number): Promise < ModelArgument[] > {
-    console.debug('Controller::Argument::many');
+    logger.trace('Controller::Argument::many');
     return this.argumentRepository.find({
       where: {
         id: MoreThan(afterId)
@@ -54,7 +58,7 @@ export class ArgumentController {
   }
 
   one(id: number): Promise < ModelArgument > {
-    console.debug('Controller::Argument::one');
+    logger.trace('Controller::Argument::one');
     return this.argumentRepository.findOneOrFail(id, {
       relations: ['conclusion', 'premises']
     });
