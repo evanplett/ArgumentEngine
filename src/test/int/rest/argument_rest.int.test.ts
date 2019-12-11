@@ -1,4 +1,4 @@
-import { createConnection, getConnection, Entity, getRepository } from 'typeorm';
+import { createConnection, getConnection, Entity, getRepository, Connection } from 'typeorm';
 
 import { MyConnectionManager } from '../../../business_model_typeorm/manager';
 
@@ -13,24 +13,24 @@ import { RestApp } from '../../../rest/app';
 const app = RestApp();
 
 async function CreateNode(
-	connection: any,
+	connection: Connection,
 	max_level: number,
 	current_level: number = 0,
 	path: string = ''
 ): Promise<ModelStatement> {
-	let conclusion = connection.manager.create(ModelStatement, { text: 'Conclusion ' + path });
+	let conclusion: ModelStatement = connection.manager.create(ModelStatement, { text: 'Conclusion ' + path });
 
 	await connection.manager.save(conclusion);
 
 	if (current_level < max_level) {
-		let leftNode = await CreateNode(connection, max_level, current_level + 1, path + 'L');
+		let leftNode: ModelStatement = await CreateNode(connection, max_level, current_level + 1, path + 'L');
 
-		let rightNode = await CreateNode(connection, max_level, current_level + 1, path + 'R');
+		let rightNode: ModelStatement = await CreateNode(connection, max_level, current_level + 1, path + 'R');
 
-		let argument = connection.manager.create(ModelArgument, {
+		let argument: ModelArgument = connection.manager.create(ModelArgument, {
 			conclusion: conclusion,
 			premises: [ leftNode, rightNode ],
-			reasoningMethod: ReasoningMethod.Induction
+			reasoning_method: ReasoningMethod.Induction
 		});
 
 		await connection.manager.save(argument);
