@@ -25,9 +25,7 @@ export const logArgumentEngineBase = new Category('argument_engine');
 
 export const logFacade = new Category('façade', logArgumentEngineBase);
 
-export const logApi = new Category('api', logArgumentEngineBase);
-
-export const logApiRest = new Category('rest', logApi);
+export const logRest = new Category('rest');
 
 export const logDatamodel = new Category('data_model', logArgumentEngineBase);
 

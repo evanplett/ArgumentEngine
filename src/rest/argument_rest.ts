@@ -9,7 +9,7 @@ import {
 } from '../facade/argument_facade';
 
 import {
-  logApiRest as logger
+  logRest as logger
 } from '../log_config';
 
 export class Argument {

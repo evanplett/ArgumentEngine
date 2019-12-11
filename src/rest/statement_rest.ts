@@ -10,7 +10,7 @@ import {
 } from '../facade/statement_facade';
 
 import {
-  logApiRest as logger
+  logRest as logger
 } from '../log_config';
 
 
