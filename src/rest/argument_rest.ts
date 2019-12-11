@@ -42,7 +42,7 @@ export class Argument {
   }
 
   async one(request: Request, response: Response, next: NextFunction): Promise<void> {
-    logger.trace('Rest::Argument::one');
+    logger.debug('Rest::Argument::one');
     this.af
     .getOne(request.params.id)
     .then((value) => {
