@@ -9,18 +9,6 @@ import {
 
 CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Debug));
 
-
-/*
- Categories:
- - Façade
- - API
-  - REST
- - DataModel
-  - TypeoORM
-
-*/
-
-
 export const logArgumentEngineBase = new Category('argument_engine');
 
 export const logFacade = new Category('façade', logArgumentEngineBase);
