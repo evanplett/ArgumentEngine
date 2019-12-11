@@ -11,11 +11,11 @@ import {
 
 import {
   logApiRest as logger
-} from '../log_config'
+} from '../log_config';
 
 
 export class Statement {
-  private sf = new FacadeStatement();
+  private sf: FacadeStatement = new FacadeStatement();
 
   // *********** CREATE ********** //
   async create(request: Request, response: Response, next: NextFunction) {

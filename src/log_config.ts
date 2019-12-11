@@ -4,7 +4,7 @@ import {
   CategoryServiceFactory,
   CategoryConfiguration,
   LogLevel
-} from "typescript-logging";
+} from 'typescript-logging';
 
 
 CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Debug));

@@ -10,6 +10,8 @@
       "outDir": "./dist",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
+      "allowUnusedLabels": false,
+      "noImplicitReturns": true,
       "sourceMap": true,
 	      "allowSyntheticDefaultImports": true,
 	      "strictNullChecks": true

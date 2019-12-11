@@ -30,7 +30,7 @@ export class FacadeArgument {
   private fs: FacadeStatement;
 
   constructor(facadeStatement?: FacadeStatement) {
-    this.fs = facadeStatement ? facadeStatement: new FacadeStatement(this);
+    this.fs = facadeStatement ? facadeStatement : new FacadeStatement(this);
   }
 
   // *********** CREATE ********** //
@@ -41,11 +41,11 @@ export class FacadeArgument {
   ): Promise < ModelArgument > {
     logger.trace(`Façade::Argument::createOne(conclusion: ${conclusion} | reasoning_method: ${reasoning_method} | premises: ${premises})`);
     let conclusionStatement: Promise < ModelStatement > =
-    typeof conclusion === 'string' ? this.fs.createOne(conclusion): this.fs.getOne(conclusion);
+    typeof conclusion === 'string' ? this.fs.createOne(conclusion) : this.fs.getOne(conclusion);
 
     let premisStatements: Promise < ModelStatement[] > = Promise.all(
       premises.map(async (premis) => {
-        return typeof premis === 'string' ? this.fs.createOne(premis): this.fs.getOne(premis);
+        return typeof premis === 'string' ? this.fs.createOne(premis) : this.fs.getOne(premis);
       })
     );
 
@@ -63,14 +63,12 @@ export class FacadeArgument {
   }
 
   // *********** READ ********** //
-  getList(limit?: number,
-    after_id?: number): Promise < ModelArgument[] > {
+  getList(limit?: number, after_id?: number): Promise < ModelArgument[] > {
     logger.trace('Façade::Argument::getList');
-    limit = limit && limit > 0 ? limit: FacadeArgument.DEFAULT_LIMIT;
-    after_id = after_id && after_id >= 0 ? after_id: FacadeArgument.DEFAULT_AFTER_ID;
+    limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
+    after_id = after_id && after_id >= 0 ? after_id : FacadeArgument.DEFAULT_AFTER_ID;
 
-    return this.ac.many(after_id,
-      limit)
+    return this.ac.many(after_id, limit)
     .then(list => {
       if (list.length > 0) {
         return Promise.resolve(list);
@@ -88,18 +86,14 @@ export class FacadeArgument {
     });
   }
 
-  getTree(id: number,
-    max_depth?: number): Promise < ArgumentTreeNode > {
-    console.debug('Façade::Argument::getTree');
-    max_depth = max_depth && max_depth > 0 ? max_depth: FacadeArgument.DEFAULT_MAX_DEPTH;
+  getTree(id: number, max_depth?: number): Promise < ArgumentTreeNode > {
+    logger.trace('Façade::Argument::getTree');
+    max_depth = max_depth && max_depth > 0 ? max_depth : FacadeArgument.DEFAULT_MAX_DEPTH;
 
-    return this.getTreeNode(id,
-      max_depth);
+    return this.getTreeNode(id, max_depth);
   }
 
-  getTreeNode(id: number,
-    max_depth: number,
-    current_depth: number = 0): Promise < ArgumentTreeNode > {
+  getTreeNode(id: number, max_depth: number, current_depth: number = 0): Promise < ArgumentTreeNode > {
     logger.trace('Façade::Argument::getTreeNode');
     return this.getOne(id)
     .then(argument => {
@@ -108,7 +102,7 @@ export class FacadeArgument {
           argument_id: argument.id,
           premises: [],
           reasoning_method: argument.reasoning_method
-        }
+        };
       } else {
         return Promise.all(
           argument.premises.map(statement =>
@@ -118,7 +112,7 @@ export class FacadeArgument {
             argument_id: argument.id,
             premises: children,
             reasoning_method: argument.reasoning_method
-          }
+          };
         });
       }
     });

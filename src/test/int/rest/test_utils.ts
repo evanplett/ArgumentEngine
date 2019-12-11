@@ -1,6 +1,6 @@
 import {
   ModelArgument
-} from "../../../business_model_typeorm/entity/Argument"
+} from '../../../business_model_typeorm/entity/Argument';
 
 
 export class ArgumentParams {
@@ -19,24 +19,27 @@ export class ArgumentParams {
 
 export class TestUtils {
 
-  // Returns an array of strings that describe the differences
+  // eeturns an array of strings that describe the differences
   static DoesArgumentMatch(conclusion: string, premises: string[], reasoning_method: string, argument: ModelArgument): string [] {
 
     let errors: string [] = [];
 
     if (argument.conclusion.text !== conclusion) {
-      let error: string = "Conclusion: Exp: '" + conclusion + "' != Act: '" + argument.conclusion.text + "'";
+      let error: string = 'Conclusion: Exp: \'' + conclusion + '\' != Act: \'' + argument.conclusion.text + '\'';
       errors.push(error);
     }
 
     if (argument.reasoning_method !== reasoning_method) {
-      let error: string = "ReasoningMethod: Exp: '" + conclusion + "' != Act: '" + argument.conclusion.text + "'";
+      let error: string = 'ReasoningMethod: Exp: \'' + conclusion + '\' != Act: \'' + argument.conclusion.text + '\'';
       errors.push(error);
     }
 
     if (!(premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
-      return premises.some(x => x === value.text)}))) {
-      let error: string = "Premises: Exp: [" + premises.map(value => "'" + value + "'").join(",") + "] != Act: [" + argument.premises.map(value => "'" + value.text + "'").join(",") + "]";
+      return premises.some(x => x === value.text); }))) {
+
+      let expPremises: string = premises.map(value => '\'' + value + '\'').join(',');
+      let actPremises: string = argument.premises.map(value => '\'' + value.text + '\'').join(',');
+      let error: string = 'Premises: Exp: [' + expPremises + '] != Act: [' + actPremises + ']';
       errors.push(error);
     }
 

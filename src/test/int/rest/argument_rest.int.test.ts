@@ -3,38 +3,38 @@ import {
   getConnection,
   Entity,
   getRepository
-} from "typeorm";
+} from 'typeorm';
 
 
 import {
   MyConnectionManager
-} from "../../../business_model_typeorm/manager";
+} from '../../../business_model_typeorm/manager';
 
 import {
   ModelArgument
-} from "../../../business_model_typeorm/entity/Argument";
+} from '../../../business_model_typeorm/entity/Argument';
 import {
   ModelStatement
-} from "../../../business_model_typeorm/entity/Statement";
+} from '../../../business_model_typeorm/entity/Statement';
 
 import {
   TestUtils,
   ArgumentParams
-} from "./test_utils"
+} from './test_utils';
 
 const request = require('supertest');
 
 
 import {
   RestApp
-} from "../../../rest/app"
+} from '../../../rest/app';
 const app = RestApp();
 
 
 describe('With an empty database', function () {
 
   beforeEach(() => {
-    return MyConnectionManager.SetCurrentConnection("testing");
+    return MyConnectionManager.SetCurrentConnection('testing');
   });
 
   afterEach(() => {
@@ -50,7 +50,7 @@ describe('With an empty database', function () {
       .expect('Content-Type', /json/)
       .expect(400, {
         errorCode: 400,
-        errorDetail: "No Arguments after id 0 found"
+        errorDetail: 'No Arguments after id 0 found'
       });
     });
     it('with after_id = 10, respond with code 400 and error message', function () {
@@ -63,7 +63,7 @@ describe('With an empty database', function () {
       .expect('Content-Type', /json/)
       .expect(400, {
         errorCode: 400,
-        errorDetail: "No Arguments after id 10 found"
+        errorDetail: 'No Arguments after id 10 found'
       });
     });
     it('with limit = 10, respond with code 400 and error message', function () {
@@ -76,7 +76,7 @@ describe('With an empty database', function () {
       .accept('json')
       .expect(400, {
         errorCode: 400,
-        errorDetail: "No Arguments after id 0 found"
+        errorDetail: 'No Arguments after id 0 found'
       });
     });
     it('with after_id = 10 and limit = 10, respond with code 400 and error message', function () {
@@ -90,7 +90,7 @@ describe('With an empty database', function () {
       .accept('json')
       .expect(400, {
         errorCode: 400,
-        errorDetail: "No Arguments after id 10 found"
+        errorDetail: 'No Arguments after id 10 found'
       });
     });
 
@@ -106,7 +106,7 @@ describe('With an empty database', function () {
       .accept('json')
       .expect(400, {
         errorCode: 400,
-        errorDetail: "No Argument with id 0 found"
+        errorDetail: 'No Argument with id 0 found'
       });
     });
 
@@ -116,9 +116,9 @@ describe('With an empty database', function () {
     it('with valid new argument, respond with code 200 and error message', function () {
 
       let newArg = new ArgumentParams(
-        "My Conclusion",
-        ["Premise 1", "Premise 2"],
-        "Induction"
+        'My Conclusion',
+        ['Premise 1', 'Premise 2'],
+        'Induction'
       );
 
       return request(app)
@@ -131,7 +131,7 @@ describe('With an empty database', function () {
 
         let errors: string[] = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
 
-        if (errors.length > 0) throw new Error(errors.map(error => "\n - " + error).join(""));
+        if (errors.length > 0) throw new Error(errors.map(error => '\n - ' + error).join(''));
       });
       /*.end((err, res) => {
         if (err) {
@@ -157,16 +157,16 @@ describe('With an empty database', function () {
 */
 
 
-/*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ""): Promise<ModelStatement> {
-   let conclusion = connection.manager.create( ModelStatement, { text: "Conclusion " + path});
+/*async function CreateNode(connection: any, max_level: number, current_level: number = 0,  path: string = ''): Promise<ModelStatement> {
+   let conclusion = connection.manager.create( ModelStatement, { text: 'Conclusion ' + path});
 
     await connection.manager.save(conclusion);
 
     if (current_level < max_level)
     {
-       let leftNode = await CreateNode(connection, max_level, current_level + 1, path + "L");
+       let leftNode = await CreateNode(connection, max_level, current_level + 1, path + 'L');
 
-       let rightNode = await CreateNode(connection, max_level, current_level + 1, path + "R");
+       let rightNode = await CreateNode(connection, max_level, current_level + 1, path + 'R');
 
        let argument = connection.manager.create( ModelArgument,
 		       {

@@ -1,68 +1,68 @@
-import {ArgumentController} from "../business_model_typeorm/controller/ArgumentController";
-import {StatementController} from "../business_model_typeorm/controller/StatementController";
+import {ArgumentController} from '../business_model_typeorm/controller/ArgumentController';
+import {StatementController} from '../business_model_typeorm/controller/StatementController';
 
 
-import { Argument } from "./argument_rest";
-import { Statement } from "./statement_rest";
+import { Argument } from './argument_rest';
+import { Statement } from './statement_rest';
 
 const ArgumentRoutes =  [{
-    method: "get",
-    route: "/argument",
+    method: 'get',
+    route: '/argument',
     controller: Argument,
-    action: "many"
+    action: 'many'
 }, {
-    method: "get",
-    route: "/argument/:id",
+    method: 'get',
+    route: '/argument/:id',
     controller: Argument,
-    action: "one"
+    action: 'one'
 }, {
-    method: "get",
-    route: "/argument/:id/tree",
+    method: 'get',
+    route: '/argument/:id/tree',
     controller: Argument,
-    action: "tree"
+    action: 'tree'
 }, {
-    method: "post",
-    route: "/argument",
+    method: 'post',
+    route: '/argument',
     controller: Argument,
-    action: "create"
-}];/*, {
-    method: "delete",
-    route: "/argument/:id",
+    action: 'create'
+}]; /*, {
+    method: 'delete',
+    route: '/argument/:id',
     controller: ArgumentController,
-    action: "remove"
+    action: 'remove'
 }];*/
 
 
 const StatementRoutes = [{
-    method: "get",
-    route: "/statement",
+    method: 'get',
+    route: '/statement',
     controller: Statement,
-    action: "many"
+    action: 'many'
 }, {
-    method: "get",
-    route: "/statement/:id",
+    method: 'get',
+    route: '/statement/:id',
     controller: Statement,
-    action: "one"
+    action: 'one'
 }, {
-    method: "get",
-    route: "/statement/:id/tree",
+    method: 'get',
+    route: '/statement/:id/tree',
     controller: Statement,
-    action: "tree"
+    action: 'tree'
 }, {
-    method: "post",
-    route: "/statement",
+    method: 'post',
+    route: '/statement',
     controller: Statement,
-    action: "create"
-}];/*, {
-    method: "delete",
-    route: "/statement/:id",
+    action: 'create'
+}]; /*, {
+    method: 'delete',
+    route: '/statement/:id',
     controller: StatementController,
-    action: "remove"
+    action: 'remove'
 }, {
-    method: "get",
-    route: "/argument/:id/tree",
+    method: 'get',
+    route: '/argument/:id/tree',
     controller: Argument,
-    action: "one"
+    action: 'one'
 }];*/
 
 export const Routes = [

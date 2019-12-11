@@ -20,11 +20,11 @@ export class FacadeStatement {
   static readonly DEFAULT_AFTER_ID: number = 0;
   static readonly DEFAULT_MAX_DEPTH: number = 6;
 
-  private sc = new StatementController();
+  private sc: StatementController = new StatementController();
   private fa: FacadeArgument;
 
   constructor(facadeArgument?: FacadeArgument) {
-    this.fa = facadeArgument ? facadeArgument: new FacadeArgument(this);
+    this.fa = facadeArgument ? facadeArgument : new FacadeArgument(this);
   }
 
   // *********** CREATE ********** //
@@ -40,8 +40,8 @@ export class FacadeStatement {
 
   // *********** READ ********** //
   getList(limit?: number, after_id?: number): Promise < ModelStatement[] > {
-    limit = limit && limit > 0 ? limit: FacadeStatement.DEFAULT_LIMIT;
-    after_id = after_id && after_id >= 0 ? after_id: FacadeStatement.DEFAULT_AFTER_ID;
+    limit = limit && limit > 0 ? limit : FacadeStatement.DEFAULT_LIMIT;
+    after_id = after_id && after_id >= 0 ? after_id : FacadeStatement.DEFAULT_AFTER_ID;
 
     return this.sc.many(after_id, limit);
     /*
@@ -63,9 +63,9 @@ export class FacadeStatement {
   }
 
   getTree(id: number, max_depth?: number): Promise < StatementTreeNode > {
-    max_depth = max_depth && max_depth > 0 ? max_depth: FacadeStatement.DEFAULT_MAX_DEPTH;
+    max_depth = max_depth && max_depth > 0 ? max_depth : FacadeStatement.DEFAULT_MAX_DEPTH;
 
-    return this.getTreeNode(id, max_depth)
+    return this.getTreeNode(id, max_depth);
     /*
         if (tree !== undefined) {
             return Promise.resolve(tree);
@@ -82,7 +82,7 @@ export class FacadeStatement {
           statement_id: statement.id,
           text: statement.text,
           supportingArguments: []
-        }
+        };
       } else {
         return Promise.all(
           statement.supportingArguments.map(async (argument) =>
@@ -93,7 +93,7 @@ export class FacadeStatement {
             statement_id: statement.id,
             text: statement.text,
             supportingArguments: children
-          }
+          };
         });
       }
     });
