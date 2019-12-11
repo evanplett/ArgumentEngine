@@ -18,7 +18,7 @@ export class Statement {
   private sf: FacadeStatement = new FacadeStatement();
 
   // *********** CREATE ********** //
-  async create(request: Request, response: Response, next: NextFunction) {
+  async create(request: Request, response: Response, next: NextFunction): Promise<void> {
     this.sf
     .createOne(request.body.text)
     .then((value) => {
@@ -30,7 +30,7 @@ export class Statement {
   }
 
   // *********** READ ********** //
-  async many(request: Request, response: Response, next: NextFunction) {
+  async many(request: Request, response: Response, next: NextFunction): Promise<void> {
     this.sf
     .getList(request.query.limit, request.query.after_id)
     .then((value) => {
@@ -41,7 +41,7 @@ export class Statement {
     });
   }
 
-  async one(request: Request, response: Response, next: NextFunction) {
+  async one(request: Request, response: Response, next: NextFunction): Promise<void> {
     this.sf
     .getOne(request.params.id)
     .then((value) => {
@@ -53,7 +53,7 @@ export class Statement {
   }
 
 
-  async tree(request: Request, response: Response, next: NextFunction) {
+  async tree(request: Request, response: Response, next: NextFunction): Promise<void> {
     this.sf
     .getTree(request.params.id, request.query.max_depth)
     .then((value) => {

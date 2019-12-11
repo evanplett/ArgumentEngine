@@ -2,6 +2,10 @@ import {
   ModelArgument
 } from '../../../business_model_typeorm/entity/Argument';
 
+import {
+  ModelStatement
+} from '../../../business_model_typeorm/entity/Statement';
+
 
 export class ArgumentParams {
 
@@ -34,7 +38,8 @@ export class TestUtils {
       errors.push(error);
     }
 
-    if (!(premises.length === argument.premises.length && argument.premises.sort().every(function(value, index) {
+    if (!(premises.length === argument.premises.length
+        && argument.premises.sort().every(function(value: ModelStatement, index: number): boolean {
       return premises.some(x => x === value.text); }))) {
 
       let expPremises: string = premises.map(value => '\'' + value + '\'').join(',');

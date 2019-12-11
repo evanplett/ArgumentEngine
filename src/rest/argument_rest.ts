@@ -16,7 +16,7 @@ export class Argument {
   private af: FacadeArgument = new FacadeArgument();
 
   // *********** CREATE ********** //
-  async create(request: Request, response: Response, next: NextFunction) {
+  async create(request: Request, response: Response, next: NextFunction): Promise<void> {
     logger.trace('Rest::Argument::create(request.body: %o', request.body);
     this.af
     .createOne(request.body.conclusion, request.body.reasoning_method, request.body.premises)
@@ -29,7 +29,7 @@ export class Argument {
   }
 
   // *********** READ ********** //
-  async many(request: Request, response: Response, next: NextFunction) {
+  async many(request: Request, response: Response, next: NextFunction): Promise<void> {
     logger.trace('Rest::Argument::many');
     this.af
     .getList(request.query.limit, request.query.after_id)
@@ -41,7 +41,7 @@ export class Argument {
     });
   }
 
-  async one(request: Request, response: Response, next: NextFunction) {
+  async one(request: Request, response: Response, next: NextFunction): Promise<void> {
     logger.trace('Rest::Argument::one');
     this.af
     .getOne(request.params.id)
@@ -54,7 +54,7 @@ export class Argument {
   }
 
 
-  async tree(request: Request, response: Response, next: NextFunction) {
+  async tree(request: Request, response: Response, next: NextFunction): Promise<void> {
     logger.trace('Rest::Argument::tree');
     this.af
     .getTree(request.params.id, request.query.max_depth)

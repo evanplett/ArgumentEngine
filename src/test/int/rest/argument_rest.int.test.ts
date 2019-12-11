@@ -22,7 +22,10 @@ import {
   ArgumentParams
 } from './test_utils';
 
-const request = require('supertest');
+
+import * as request from 'supertest';
+
+// const request = require('supertest');
 
 
 import {
@@ -31,7 +34,7 @@ import {
 const app = RestApp();
 
 
-describe('With an empty database', function () {
+describe('With an empty database', function (): void {
 
   beforeEach(() => {
     return MyConnectionManager.SetCurrentConnection('testing');
@@ -42,8 +45,8 @@ describe('With an empty database', function () {
     return conn.close();
   });
 
-  describe ('GET Argument', function () {
-    it('with no parameters, respond with code 400 and error message', function () {
+  describe ('GET Argument', function (): void {
+    it('with no parameters, respond with code 400 and error message', function (): any {
       return request(app)
       .get('/argument')
       .set('Accept', 'application/json')
@@ -53,7 +56,7 @@ describe('With an empty database', function () {
         errorDetail: 'No Arguments after id 0 found'
       });
     });
-    it('with after_id = 10, respond with code 400 and error message', function () {
+    it('with after_id = 10, respond with code 400 and error message', function (): any {
       return request(app)
       .get('/argument')
       .query({
@@ -66,7 +69,7 @@ describe('With an empty database', function () {
         errorDetail: 'No Arguments after id 10 found'
       });
     });
-    it('with limit = 10, respond with code 400 and error message', function () {
+    it('with limit = 10, respond with code 400 and error message', function (): any {
       return request(app)
       .get('/argument')
       .query({
@@ -79,7 +82,7 @@ describe('With an empty database', function () {
         errorDetail: 'No Arguments after id 0 found'
       });
     });
-    it('with after_id = 10 and limit = 10, respond with code 400 and error message', function () {
+    it('with after_id = 10 and limit = 10, respond with code 400 and error message', function (): any {
       return request(app)
       .get('/argument')
       .query({
@@ -94,7 +97,7 @@ describe('With an empty database', function () {
       });
     });
 
-    it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function () {
+    it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function (): any {
       let id: number = 0;
 
       return request(app)
@@ -112,8 +115,8 @@ describe('With an empty database', function () {
 
   });
 
-  describe ('POST Argument', function () {
-    it('with valid new argument, respond with code 200 and error message', function () {
+  describe ('POST Argument', function (): void {
+    it('with valid new argument, respond with code 200 and error message', function (): any {
 
       let newArg = new ArgumentParams(
         'My Conclusion',
