@@ -17,7 +17,7 @@ export class Argument {
 
   // *********** CREATE ********** //
   async create(request: Request, response: Response, next: NextFunction): Promise<void> {
-    logger.debug('Rest::Argument::create(request.body: %o', request.body);
+    logger.trace('Rest::Argument::create(request.body: %o', request.body);
     this.af
     .createOne(request.body.conclusion, request.body.reasoning_method, request.body.premises)
     .then((value) => {
@@ -30,7 +30,7 @@ export class Argument {
 
   // *********** READ ********** //
   async many(request: Request, response: Response, next: NextFunction): Promise<void> {
-    logger.debug('Rest::Argument::many');
+    logger.trace('Rest::Argument::many');
     this.af
     .getList(request.query.limit, request.query.after_id)
     .then((value) => {
@@ -42,7 +42,7 @@ export class Argument {
   }
 
   async one(request: Request, response: Response, next: NextFunction): Promise<void> {
-    logger.debug('Rest::Argument::one');
+    logger.trace('Rest::Argument::one');
     this.af
     .getOne(request.params.id)
     .then((value) => {
@@ -55,7 +55,7 @@ export class Argument {
 
 
   async tree(request: Request, response: Response, next: NextFunction): Promise<void> {
-    logger.debug('Rest::Argument::tree');
+    logger.trace('Rest::Argument::tree');
     this.af
     .getTree(request.params.id, request.query.max_depth)
     .then((value) => {
