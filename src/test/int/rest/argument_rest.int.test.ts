@@ -129,12 +129,6 @@ describe('With an empty database', function(): void {
 
 				if (errors.length > 0) throw new Error(errors.map((error) => '\n - ' + error).join(''));
 			});
-			/*.end((err, res) => {
-        if (err) {
-          return err;
-        }
-        expect(TestUtils.DoesArgumentMatchArgElements(newArg, res.body)).to.eql([]);
-      });*/
 		});
 	});
 });
@@ -142,7 +136,7 @@ describe('With an empty database', function(): void {
 describe('With an filled-in database', function(): void {
 	beforeEach(() => {
 		return MyConnectionManager.SetCurrentConnection('testing').then((connection) => {
-			CreateNode(connection, 4);
+			return CreateNode(connection, 4);
 		});
 	});
 
