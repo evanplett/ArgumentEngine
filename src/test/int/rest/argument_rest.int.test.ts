@@ -151,7 +151,7 @@ describe('With an filled-in database', function(): void {
 				.get('/argument')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
-				.expect(400, {
+				.expect(200, {
 					errorCode: 400,
 					errorDetail: 'No Arguments after id 0 found'
 				});
