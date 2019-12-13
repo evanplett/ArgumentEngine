@@ -146,15 +146,16 @@ describe('With an filled-in database', function(): void {
 	});
 
 	describe('GET Argument', function(): void {
-		it('with no parameters, respond with code 400 and error message', function(): any {
+		it('with no parameters, respond with code 200 and error message', function(): any {
 			return request(app)
 				.get('/argument')
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
-				.expect(200, {
-					errorCode: 400,
-					errorDetail: 'No Arguments after id 0 found'
-				});
+				.expect(200)
+				.expect((response) => {
+				  expect(response.length).to.be.equal(10)
+				  
+				})
 		});
 	});
 });
