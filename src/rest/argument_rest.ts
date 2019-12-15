@@ -44,7 +44,7 @@ export class Argument {
   async one(request: Request, response: Response, next: NextFunction): Promise<void> {
     logger.trace('Rest::Argument::one');
     this.af
-    .getOne(request.params.id)
+    .getOne(Number(request.params.id))
     .then((value) => {
       response.status(200).json(value);
     })
@@ -57,7 +57,7 @@ export class Argument {
   async tree(request: Request, response: Response, next: NextFunction): Promise<void> {
     logger.trace('Rest::Argument::tree');
     this.af
-    .getTree(request.params.id, request.query.max_depth)
+    .getTree(Number(request.params.id), request.query.max_depth)
     .then((value) => {
       response.status(200).json(value);
     })

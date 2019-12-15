@@ -43,7 +43,7 @@ export class Statement {
 
   async one(request: Request, response: Response, next: NextFunction): Promise<void> {
     this.sf
-    .getOne(request.params.id)
+    .getOne(Number(request.params.id))
     .then((value) => {
       response.status(200).json(value);
     })
@@ -55,7 +55,7 @@ export class Statement {
 
   async tree(request: Request, response: Response, next: NextFunction): Promise<void> {
     this.sf
-    .getTree(request.params.id, request.query.max_depth)
+    .getTree(Number(request.params.id), request.query.max_depth)
     .then((value) => {
       response.status(200).json(value);
     })
