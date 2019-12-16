@@ -9,8 +9,6 @@ import { TestUtils, ArgumentParams } from './test_utils';
 
 import * as request from 'supertest';
 
-import { expect } from 'chai';
-
 import { RestApp } from '../../../rest/app';
 const app = RestApp();
 
