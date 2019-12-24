@@ -10,6 +10,8 @@ import { TestUtils, ArgumentParams } from './test_utils';
 import * as request from 'supertest';
 
 import { RestApp } from '../../../rest/app';
+import expect from 'expect';
+
 const app = RestApp();
 
 async function CreateNode(
