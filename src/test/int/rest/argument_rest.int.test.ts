@@ -155,7 +155,7 @@ describe('With an filled-in database', function(): void {
 				.expect('Content-Type', /json/)
 				.expect(200)
 				.expect((response) => {
-				  expect(response.body.length).to.equal( { 'id' : '5' });
+				  expect(response.body.length).to.equal(15);
 				});
 		});
 	});
