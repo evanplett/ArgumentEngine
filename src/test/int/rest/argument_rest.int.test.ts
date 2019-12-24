@@ -10,7 +10,7 @@ import { TestUtils, ArgumentParams } from './test_utils';
 import * as request from 'supertest';
 
 import { RestApp } from '../../../rest/app';
-import expect from 'expect';
+import { expect } from 'chai';
 
 const app = RestApp();
 
@@ -155,7 +155,7 @@ describe('With an filled-in database', function(): void {
 				.expect('Content-Type', /json/)
 				.expect(200)
 				.expect((response) => {
-				  expect(response).toBe(10);
+				  expect(response).to.equal(5);
 				});
 		});
 	});
