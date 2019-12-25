@@ -158,7 +158,7 @@ describe('With an filled-in database', function(): void {
 				  expect(response.body.length).to.equal(15);
 				})
 				.expect((response) => {
-				  expect(response.body).to.equal(15);
+				  expect(response.body).to.equal({ 'bob' : '15');
 				});
 		});
 	});
