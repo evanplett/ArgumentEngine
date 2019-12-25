@@ -159,13 +159,7 @@ describe('With an filled-in database', function(): void {
 				}); /* ignore
 				.expect((response) => {
 				  expect(response).to.equal({ 'bob' : '15'});
-				  
-				  
 				  let count = response.body.reduce((acc, cur) => cur.id === id ? ++acc : acc, 0);
-				  
-				  
-				  
-				  
 				});*/
 		});
 		
@@ -181,6 +175,5 @@ describe('With an filled-in database', function(): void {
 					errorDetail: 'No Argument with id 0 found'
 				});
 		});
-		
 	});
 });
