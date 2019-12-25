@@ -164,7 +164,7 @@ describe('With an filled-in database', function(): void {
 		*/});
 
 		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
-			let id: number = 0;
+			let id: number = 1;
 
 			return request(app)
 				.get(`/argument/${id}`)
