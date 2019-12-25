@@ -170,7 +170,7 @@ describe('With an filled-in database', function(): void {
 				.get(`/argument/${id}`)
 				.type('json')
 				.accept('json')
-				.expect(400, {
+				.expect(200, {
 					errorCode: 400,
 					errorDetail: 'No Argument with id 0 found'
 				});
