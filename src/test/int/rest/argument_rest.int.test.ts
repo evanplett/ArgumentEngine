@@ -156,10 +156,31 @@ describe('With an filled-in database', function(): void {
 				.expect(200)
 				.expect((response) => {
 				  expect(response.body.length).to.equal(15);
-				})
+				}); /* ignore
 				.expect((response) => {
 				  expect(response).to.equal({ 'bob' : '15'});
+				  
+				  
+				  let count = response.body.reduce((acc, cur) => cur.id === id ? ++acc : acc, 0);
+				  
+				  
+				  
+				  
+				});*/
+		});
+		
+		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
+			let id: number = 0;
+
+			return request(app)
+				.get(`/argument/${id}`)
+				.type('json')
+				.accept('json')
+				.expect(400, {
+					errorCode: 400,
+					errorDetail: 'No Argument with id 0 found'
 				});
 		});
+		
 	});
 });
