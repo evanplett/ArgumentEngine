@@ -160,8 +160,8 @@ describe('With an filled-in database', function(): void {
 				.expect((response) => {
 				  expect(response).to.equal({ 'bob' : '15'});
 				  let count = response.body.reduce((acc, cur) => cur.id === id ? ++acc : acc, 0);
-				});*/
-		});
+				});
+		*/});
 		
 		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
 			let id: number = 0;
