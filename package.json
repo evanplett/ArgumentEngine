@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "build-ts": "tsc",
-    "postbuild-ts": "npm run lint && npm test && npm run json-schema",
+    "postbuild-ts": "npm run lint && npm run json-schema && npm test",
     "lint": "tslint -t verbose -c  external/excelmicro_typescript_linting/tslint.json 'src/**/*.ts'",
     "json-schema": "typescript-json-schema 'src/business_model_typeorm/entity/*.ts' '*' --out dist/json-schema",
     "start": "run-p serve test",
