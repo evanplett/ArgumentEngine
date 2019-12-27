@@ -7,6 +7,7 @@
 ## Status
 
 accepted - 6/27/2019
+
 superseded by choose_typeorm - 7/2/2019
 
 ## Context
