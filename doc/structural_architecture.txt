@@ -25,6 +25,7 @@ package BusinessObjects {
 note right of BusinessObjects: Handles the nitty gritty\nof the data model.
 
 Interfaces --> Façade
+note on link: JSON:API
 Façade --> BusinessObjects
 BusinessObjects --> Database
 
