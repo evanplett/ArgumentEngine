@@ -21,6 +21,8 @@ import {
   logFacade as logger
 } from '../log_config';
 
+import { Serializer } from 'jsonapi-serializer';
+
 export class FacadeArgument {
   static readonly DEFAULT_LIMIT: number = 100;
   static readonly DEFAULT_AFTER_ID: number = 0;
@@ -80,7 +82,13 @@ export class FacadeArgument {
 
   getOne(id: number): Promise < ModelArgument > {
     logger.trace('Façade::Argument::getOne');
-    return this.ac.one(id)
+
+
+    return this.ac.one(id).then(result =>
+        {return new Serializer('Argument',{
+            attributes: ['id','reasoning_method']
+        }).serialize(result); }
+        )
     .catch(error => {
       return Promise.reject(new Error(400, `No Argument with id ${id} found`));
     });
