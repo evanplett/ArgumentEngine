@@ -83,9 +83,16 @@ export class FacadeArgument {
   getOne(id: number): Promise < ModelArgument > {
     logger.trace('Façade::Argument::getOne');
 
-
     return this.ac.one(id).then(result => { return new Serializer('Argument', {
-            attributes: ['conclusion', 'premises', 'reasoning_method']
+            attributes: ['conclusion', 'premises', 'reasoning_method'],
+            typeForAttribute: function(attribute: string): string | undefined {
+                switch (attribute) {
+                    case 'conclusion':
+                        return 'Statement';
+                    default:
+                        return undefined;
+                }
+            }
         }).serialize(result); })
     .catch(error => {
       return Promise.reject(new Error(400, `No Argument with id ${id} found`));
