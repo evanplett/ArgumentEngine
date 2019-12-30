@@ -85,7 +85,7 @@ export class FacadeArgument {
 
     return this.ac.one(id).then(result => { return new Serializer('Argument', {
             attributes: ['conclusion', 'premises', 'reasoning_method'],
-            typeForAttribute: function(attribute: string): string | undefined {
+            typeForAttribute: attribute => {
                 switch (attribute) {
                     case 'conclusion':
                         return 'Statement';
