@@ -87,10 +87,7 @@ export class FacadeArgument {
             attributes: ['conclusion', 'premises', 'reasoning_method'],
             pluralizeType: false,
             typeForAttribute: attribute => {
-                if (attribute === 'conclusion')
-                    return 'Statement';
-                else
-                    return undefined;
+                return 'Statement';
             }
         }).serialize(result); })
     .catch(error => {
