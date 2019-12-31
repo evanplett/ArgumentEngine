@@ -84,10 +84,9 @@ export class FacadeArgument {
     logger.trace('Façade::Argument::getOne');
 
     return this.ac.one(id).then(result => { return new Serializer('Argument', {
-            attributes: ['conclusion', 'premises', 'reasoning_method'],
             pluralizeType: false,
-            typeForAttribute: (attribute, record) => {
-                return 'Statement';
+            conclusion: {
+                ref: 'id'
             }
         }).serialize(result); })
     .catch(error => {
