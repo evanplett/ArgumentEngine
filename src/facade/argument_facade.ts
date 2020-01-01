@@ -89,6 +89,12 @@ export class FacadeArgument {
             conclusion: {
                 ref: 'id',
                 attributes: ['text']
+            },
+            typeForAttribute: attribute => {
+                if (attribute === 'conclusion')
+                    return 'Statement';
+                else
+                    return undefined;
             }
         }).serialize(result); })
     .catch(error => {
