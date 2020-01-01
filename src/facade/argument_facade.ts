@@ -86,7 +86,10 @@ export class FacadeArgument {
     return this.ac.one(id).then(result => { return new Serializer('Argument', {
             pluralizeType: false,
             conclusion: {
-                ref: 'id'
+                ref: statement => {
+                    return statement.id;
+                },
+                attributes: ['text']
             }
         }).serialize(result); })
     .catch(error => {
