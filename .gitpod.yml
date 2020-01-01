@@ -1,3 +1,5 @@
 vscode:
   extensions:
     - remimarsal.prettier-now@1.4.9:iAgF7m2jxPymtH0QKLnfGg==
+image:
+  file: .gitpod.dockerfile
