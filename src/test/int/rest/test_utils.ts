@@ -20,6 +20,20 @@ export class ArgumentParams {
   }
 }
 
+enum DB_STATE {
+    EMPTY_DB,
+    FULL_DV
+}
+
+
+export class TestCase {
+    
+    state : DB_STATE;
+    precondition;
+    expectedResult;
+
+}
+
 
 export class TestUtils {
 
