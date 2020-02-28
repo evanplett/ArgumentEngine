@@ -141,7 +141,8 @@ describe('With an empty database', function(): void {
 
 describe('With an filled-in database', function(): void {
 	beforeEach(() => {
-		return MyConnectionManager.SetCurrentConnection('testing').then((connection) => {
+        let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
+        return MyConnectionManager.SetCurrentConnection(dbToUse).then((connection) => {
 			return CreateNode(connection, 4);
 		});
 	});

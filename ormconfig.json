@@ -56,6 +56,8 @@
    "dropSchema": true,
    "host": "localhost",
    "port": 5432,
+   "username": "gitpod",
+   "password": "gitpod",
    "database": "postgres",
    "synchronize": true,
    "logging": false,
