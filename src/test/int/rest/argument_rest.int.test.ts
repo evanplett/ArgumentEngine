@@ -45,7 +45,11 @@ async function CreateNode(
 
 describe('With an empty database', function(): void {
 	beforeEach(() => {
-		return MyConnectionManager.SetCurrentConnection('testing');
+        if (process.env.USER = 'gitpod') {
+            return MyConnectionManager.SetCurrentConnection('gitpod');
+        } else {
+            return MyConnectionManager.SetCurrentConnection('testing');
+        }
 	});
 
 	afterEach(() => {
