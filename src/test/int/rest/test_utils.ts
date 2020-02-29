@@ -20,20 +20,56 @@ export class ArgumentParams {
   }
 }
 
-enum DB_STATE {
-    EMPTY_DB,
-    FULL_DV
-}
 
 
 export class TestCase {
-    
-    state : DB_STATE;
-    precondition;
-    expectedResult;
+    state : TestCase.DB_STATE;
+    testCondition = class {
+        request = class {
+            request_type: TestCase.REQUEST_TYPE;
+            request_url: string;
+
+            constructor(request_type: TestCase.REQUEST_TYPE, 
+                request_url: string) {
+
+            }
+        }
+        query: object;
+    }
+    expectedResult = class {
+        response_code: number;
+        response_object: object;
+
+        constructor(response_code: number, response_object: object) {
+            this.response_code = response_code;
+            this.response_object = response_object;
+        }
+    }
+
+    constructor(state: TestCase.DB_STATE, 
+                request_type: TestCase.REQUEST_TYPE, 
+                request_url: string,
+                response_code: number,
+                response_object: object) {
+
+    }
 
 }
 
+export module TestCase {
+
+    export enum DB_STATE {
+        EMPTY_DB,
+        FULL_DB
+    }
+
+    export enum REQUEST_TYPE {
+        GET,
+        POST,
+        PUSH,
+        DELETE
+    }
+}
 
 export class TestUtils {
 
