@@ -11,6 +11,26 @@ import * as request from 'supertest';
 
 import { RestApp } from '../../../rest/app';
 import { expect } from 'chai';
+import { TestCase, DB_STATE, REQUEST_TYPE } from './test_case';
+
+const testCases: TestCase[] = [
+    {
+        description: 'A test case',
+        testCondition:
+        {
+            state: DB_STATE.EMPTY_DB,
+            request: {
+                request_type: REQUEST_TYPE.GET,
+                request_url: ''
+        }},
+        expectedResult: {
+            response_code: 200,
+            response_object: {}
+        }
+    }
+];
+
+
 
 const app = RestApp();
 
