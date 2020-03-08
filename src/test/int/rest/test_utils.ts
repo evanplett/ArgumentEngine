@@ -6,7 +6,9 @@ import {
   ModelStatement
 } from '../../../business_model_typeorm/entity/Statement';
 
-import './test_case';
+import { APIRequest, TestCase,TestCondition, DB_STATE, REQUEST_TYPE } from './test_case';
+
+import * as request from 'supertest';
 
 export class ArgumentParams {
 
@@ -55,6 +57,17 @@ export class TestUtils {
     return TestUtils.DoesArgumentMatch(argElements.conclusion, argElements.premises, argElements.reasoning_method, argument);
   }
 
-
+  static CreateHTTPMethod(testRequest: APIRequest, superTest: request.SuperTest<request.Test>): request.Test {
+      switch (testRequest.request_type) {
+            case REQUEST_TYPE.GET:
+                return superTest.get(testRequest.request_url);
+            case REQUEST_TYPE.DELETE:
+                return superTest.delete(testRequest.request_url);
+            case REQUEST_TYPE.POST:
+                return superTest.post(testRequest.request_url);
+            case REQUEST_TYPE.PUT:
+                return superTest.put(testRequest.request_url);
+      }
+  }
 
 }

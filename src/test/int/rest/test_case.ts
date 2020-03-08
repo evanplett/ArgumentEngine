@@ -6,7 +6,7 @@ export enum DB_STATE {
 export enum REQUEST_TYPE {
     GET,
     POST,
-    PUSH,
+    PUT,
     DELETE
 }
 
@@ -23,10 +23,13 @@ export class APIRequest {
 export class TestCondition {
     state: DB_STATE;
     request: APIRequest;
+    query: object;
 
-    constructor(state: DB_STATE, request_type: REQUEST_TYPE, request_url: string) {
+    constructor(state: DB_STATE, request_type: REQUEST_TYPE, request_url: string, query?: object) {
         this.state = state;
         this.request = new APIRequest(request_type, request_url);
+
+        this.query = query ? query : {};
     }
 }
 
@@ -50,9 +53,10 @@ export class TestCase {
                 request_type: REQUEST_TYPE,
                 request_url: string,
                 response_code: number,
-                response_object: object) {
+                response_object: object,
+                 query?: object) {
         this.description = description;
-        this.testCondition = new TestCondition(state, request_type, request_url);
+        this.testCondition = new TestCondition(state, request_type, request_url, query);
         this.expectedResult = new TestResult(response_code, response_object);
     }
 }

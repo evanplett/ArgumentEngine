@@ -156,49 +156,67 @@ describe('With an empty database', function(): void {
 				if (errors.length > 0) throw new Error(errors.map((error) => '\n - ' + error).join(''));
 			});
 		});
-	});
+    });
+    
+    describe('Test Cases From Array', function(): void {
+        testCases.forEach(function(testCase) {
+            it(testCase.description, function() {
+
+                return TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app))
+                    .query(testCase.testCondition.query)
+                    .type('json')
+                    .accept('json')
+                    .expect(400, {
+                        errorCode: 400,
+                        errorDetail: 'No Argument with id 0 found'
+                    });
+            })
+        })
+
+    });
 });
 
-describe('With an filled-in database', function(): void {
-	beforeEach(() => {
-        let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
-        return MyConnectionManager.SetCurrentConnection(dbToUse).then((connection) => {
-			return CreateNode(connection, 4);
-		});
-	});
 
-	afterEach(() => {
-		let conn = MyConnectionManager.GetCurrentConnection();
-		return conn.close();
-	});
+// describe('With an filled-in database', function(): void {
+// 	beforeEach(() => {
+//         let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
+//         return MyConnectionManager.SetCurrentConnection(dbToUse).then((connection) => {
+// 			return CreateNode(connection, 4);
+// 		});
+// 	});
 
-	describe('GET Argument', function(): void {
-		it('with no parameters, respond with code 200 and error message', function(): any {
-			return request(app)
-				.get('/argument')
-				.set('Accept', 'application/json')
-				.expect('Content-Type', /json/)
-				.expect(200)
-				.expect((response) => {
-				  expect(response.body.length).to.equal(15);
-				}); /* ignore
-				.expect((response) => {
-				  expect(response).to.equal({ 'bob' : '15'});
-				  let count = response.body.reduce((acc, cur) => cur.id === id ? ++acc : acc, 0);
-				});
-		*/});
+// 	afterEach(() => {
+// 		let conn = MyConnectionManager.GetCurrentConnection();
+// 		return conn.close();
+// 	});
 
-		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
-			let id: number = 0;
+// 	describe('GET Argument', function(): void {
+// 		it('with no parameters, respond with code 200 and error message', function(): any {
+// 			return request(app)
+// 				.get('/argument')
+// 				.set('Accept', 'application/json')
+// 				.expect('Content-Type', /json/)
+// 				.expect(200)
+// 				.expect((response) => {
+// 				  expect(response.body.length).to.equal(15);
+// 				}); /* ignore
+// 				.expect((response) => {
+// 				  expect(response).to.equal({ 'bob' : '15'});
+// 				  let count = response.body.reduce((acc, cur) => cur.id === id ? ++acc : acc, 0);
+// 				});
+// 		*/});
 
-			return request(app)
-				.get(`/argument/${id}`)
-				.type('json')
-				.accept('json')
-				.expect(200, {
-					errorCode: 400,
-					errorDetail: 'No Argument with id 0 found'
-				});
-		});
-	});
-});
+// 		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
+// 			let id: number = 0;
+
+// 			return request(app)
+// 				.get(`/argument/${id}`)
+// 				.type('json')
+// 				.accept('json')
+// 				.expect(200, {
+// 					errorCode: 400,
+// 					errorDetail: 'No Argument with id 0 found'
+// 				});
+// 		});
+// 	});
+// });
