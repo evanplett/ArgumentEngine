@@ -22,12 +22,53 @@ const testCases: TestCase[] = [
             request: {
                 request_type: REQUEST_TYPE.GET,
                 request_url: ''
-        }},
+            },
+            query: {}
+        },
         expectedResult: {
-            response_code: 200,
+            response_code: 404,
             response_object: {}
         }
-    }
+    },
+
+
+
+
+
+
+
+
+    {
+        description: 'with no parameters, respond with code 400 and error message',
+        testCondition:
+        {
+            state: DB_STATE.EMPTY_DB,
+            request: {
+                request_type: REQUEST_TYPE.GET,
+                request_url: '/argument'
+            },
+            query: {}
+        },
+        expectedResult: {
+            response_code: 400,
+            response_object: {
+                errorCode: 400,
+                errorDetail: 'No Arguments after id 0 found'
+            }
+        }
+    },
+
+    new TestCase('with after_id = 10, respond with code 400 and error message',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.GET,
+                 '/argument',
+                 {limit: '10'},
+                 400,
+                 {
+					errorCode: 400,
+					errorDetail: 'No Arguments after id 0 found'
+				})
+
 ];
 
 
@@ -157,21 +198,36 @@ describe('With an empty database', function(): void {
 			});
 		});
     });
-    
-    describe('Test Cases From Array', function(): void {
-        testCases.forEach(function(testCase) {
-            it(testCase.description, function() {
 
-                return TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app))
+	describe('Test Cases From Array', function(): void {
+        testCases.forEach(function(testCase: TestCase): void {
+            it(testCase.description, function(): request.Test | undefined {
+                const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
+
+                if (httpMethod) {
+                    return httpMethod
                     .query(testCase.testCondition.query)
                     .type('json')
-                    .accept('json')
-                    .expect(400, {
-                        errorCode: 400,
-                        errorDetail: 'No Argument with id 0 found'
+                    .set('Accept', 'application/json')
+				    // .expect('Content-Type', /json/) Need to add this back in but 404 still comes as HTML
+                    .expect(testCase.expectedResult.response_code)
+                    .expect((res) => {
+
+                        const difference = TestUtils.CompareResponseToExpected(res.body, testCase.expectedResult.response_object);
+
+                        if (Object.keys(difference).length !== 0) {
+                            const expectedString = JSON.stringify(testCase.expectedResult.response_object);
+                            const resultString = JSON.stringify(res.body);
+                            const differenceString = JSON.stringify(difference);
+
+                            throw new Error(`Expected: ${expectedString} \nResult: ${resultString}`);
+                        }
                     });
-            })
-        })
+                } else {
+                    return undefined;
+                }
+            });
+        });
 
     });
 });

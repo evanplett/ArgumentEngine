@@ -25,11 +25,10 @@ export class TestCondition {
     request: APIRequest;
     query: object;
 
-    constructor(state: DB_STATE, request_type: REQUEST_TYPE, request_url: string, query?: object) {
+    constructor(state: DB_STATE, request_type: REQUEST_TYPE, request_url: string, query: object) {
         this.state = state;
         this.request = new APIRequest(request_type, request_url);
-
-        this.query = query ? query : {};
+        this.query = query;
     }
 }
 
@@ -52,9 +51,9 @@ export class TestCase {
                 state: DB_STATE,
                 request_type: REQUEST_TYPE,
                 request_url: string,
+                query: object,
                 response_code: number,
-                response_object: object,
-                 query?: object) {
+                response_object: object) {
         this.description = description;
         this.testCondition = new TestCondition(state, request_type, request_url, query);
         this.expectedResult = new TestResult(response_code, response_object);

@@ -6,7 +6,9 @@ import {
   ModelStatement
 } from '../../../business_model_typeorm/entity/Statement';
 
-import { APIRequest, TestCase,TestCondition, DB_STATE, REQUEST_TYPE } from './test_case';
+import { APIRequest, TestCase, TestCondition, DB_STATE, REQUEST_TYPE } from './test_case';
+
+import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
 
 import * as request from 'supertest';
 
@@ -57,7 +59,7 @@ export class TestUtils {
     return TestUtils.DoesArgumentMatch(argElements.conclusion, argElements.premises, argElements.reasoning_method, argument);
   }
 
-  static CreateHTTPMethod(testRequest: APIRequest, superTest: request.SuperTest<request.Test>): request.Test {
+  static CreateHTTPMethod(testRequest: APIRequest, superTest: request.SuperTest<request.Test>): request.Test| undefined {
       switch (testRequest.request_type) {
             case REQUEST_TYPE.GET:
                 return superTest.get(testRequest.request_url);
@@ -67,7 +69,13 @@ export class TestUtils {
                 return superTest.post(testRequest.request_url);
             case REQUEST_TYPE.PUT:
                 return superTest.put(testRequest.request_url);
+            default:
+                return undefined;
       }
+  }
+
+  static CompareResponseToExpected(response: object, expected: object): object {
+    return diff(response, expected);
   }
 
 }
