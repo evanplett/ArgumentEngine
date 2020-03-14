@@ -21,41 +21,48 @@ export class APIRequest {
 }
 
 export class TestCondition {
-    state: DB_STATE;
     request: APIRequest;
     data: object;
+    description: string;
 
-    constructor(state: DB_STATE, request_type: REQUEST_TYPE, request_url: string, data: object) {
-        this.state = state;
+    constructor(request_type: REQUEST_TYPE, request_url: string, data: object, description: string) {
         this.request = new APIRequest(request_type, request_url);
         this.data = data;
+        this.description = description;
     }
 }
 
 export class TestResult {
     response_code: number;
     response_object: object;
+    description: string;
 
-    constructor(response_code: number, response_object: object) {
+    constructor(response_code: number, response_object: object, description: string) {
         this.response_code = response_code;
         this.response_object = response_object;
+        this.description = description;
     }
 }
 
 export class TestCase {
-    description: string;
+    state: DB_STATE;
     testCondition: TestCondition;
     expectedResult: TestResult;
 
-    constructor(description: string,
+    constructor(conditionDescription: string,
                 state: DB_STATE,
                 request_type: REQUEST_TYPE,
                 request_url: string,
                 data: object,
                 response_code: number,
-                response_object: object) {
-        this.description = description;
-        this.testCondition = new TestCondition(state, request_type, request_url, data);
-        this.expectedResult = new TestResult(response_code, response_object);
+                response_object: object,
+                resultDescription: string) {
+        this.state = state;
+        this.testCondition = new TestCondition(request_type, request_url, data, conditionDescription);
+        this.expectedResult = new TestResult(response_code, response_object, resultDescription);
+    }
+
+    GetDescription(): string {
+        return 'With ' + this.testCondition.description + ", respond with " + this.expectedResult.description;
     }
 }

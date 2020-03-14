@@ -11,9 +11,31 @@ import * as request from 'supertest';
 
 import { RestApp } from '../../../rest/app';
 import { expect } from 'chai';
-import { TestCase, DB_STATE, REQUEST_TYPE } from './test_case';
+import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult } from './test_case';
 
-const testCases: TestCase[] = [
+let testCases: TestCase[] = [];
+
+
+let bob = new Map([
+[ DB_STATE.EMPTY_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')],
+[ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+]);
+
+
+
+
+TestUtils.AddTestCases(testCases,
+    new TestCondition(REQUEST_TYPE.GET,
+        '',
+        {},
+        'no URL'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')],
+        [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+        ])
+);
+
+const testCasesold: TestCase[] = [
     // get
     new TestCase('With no URL',
                  DB_STATE.EMPTY_DB,

@@ -10,7 +10,7 @@ import {
 import { Connection } from 'typeorm';
 
 
-import { APIRequest, TestCase, TestCondition, DB_STATE, REQUEST_TYPE } from './test_case';
+import { APIRequest, TestCase, TestCondition, DB_STATE, REQUEST_TYPE, TestResult } from './test_case';
 
 import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
 
@@ -111,5 +111,10 @@ export class TestUtils {
         });
     }
 
+  static AddTestCases(testCases: TestCase[], condition: TestCondition, results: Map<DB_STATE,TestResult>) {
+      results.forEach(result => {
+          testCases.push({testCondition: condition, expectedResult: result} as TestCase);
+      })
+  }
 
 }
