@@ -14,61 +14,70 @@ import { expect } from 'chai';
 import { TestCase, DB_STATE, REQUEST_TYPE } from './test_case';
 
 const testCases: TestCase[] = [
-    {
-        description: 'A test case',
-        testCondition:
-        {
-            state: DB_STATE.EMPTY_DB,
-            request: {
-                request_type: REQUEST_TYPE.GET,
-                request_url: ''
-            },
-            query: {}
-        },
-        expectedResult: {
-            response_code: 404,
-            response_object: {}
-        }
-    },
+    // get
+    new TestCase('With no URL',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.GET,
+                 '',
+                 {},
+                 404,
+                 {}),
 
+    new TestCase('with no parameters, respond with code 400 and error message',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.GET,
+                 '/argument',
+                 {},
+                 400,
+                 {  errorCode: 400,
+					errorDetail: 'No Arguments after id 0 found'}),
 
-
-
-
-
-
-
-    {
-        description: 'with no parameters, respond with code 400 and error message',
-        testCondition:
-        {
-            state: DB_STATE.EMPTY_DB,
-            request: {
-                request_type: REQUEST_TYPE.GET,
-                request_url: '/argument'
-            },
-            query: {}
-        },
-        expectedResult: {
-            response_code: 400,
-            response_object: {
-                errorCode: 400,
-                errorDetail: 'No Arguments after id 0 found'
-            }
-        }
-    },
+    new TestCase('with limit = 10, respond with code 400 and error message',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.GET,
+                 '/argument',
+                 {  limit: '10'},
+                 400,
+                 {  errorCode: 400,
+                    errorDetail: 'No Arguments after id 0 found'}),
 
     new TestCase('with after_id = 10, respond with code 400 and error message',
                  DB_STATE.EMPTY_DB,
                  REQUEST_TYPE.GET,
                  '/argument',
-                 {limit: '10'},
+                 {  after_id: '10'},
                  400,
-                 {
-					errorCode: 400,
-					errorDetail: 'No Arguments after id 0 found'
-				})
+                 {  errorCode: 400,
+                    errorDetail: 'No Arguments after id 10 found'}),
 
+    new TestCase('with after_id = 10 and limit = 10, respond with code 400 and error message',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.GET,
+                 '/argument',
+                 {  after_id: '10',
+                    limit: '10'},
+                 400,
+                 {  errorCode: 400,
+                    errorDetail: 'No Arguments after id 10 found'}),
+
+    new TestCase('tree with id = 0 and max_depth = 10, respond with code 400 and error message',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.GET,
+                 '/argument/0/tree',
+                 {  max_depth: '10'},
+                 400,
+                 {  errorCode: 400,
+                    errorDetail: 'No Argument with id 0 found'}),
+
+    // post
+    new TestCase('with valid new argument, respond with code 200 and error message',
+                 DB_STATE.EMPTY_DB,
+                 REQUEST_TYPE.POST,
+                 '/argument',
+                 new ArgumentParams('My Conclusion', [ 'Premise 1', 'Premise 2' ], 'Induction'),
+                 200,
+                 {  errorCode: 400,
+                    errorDetail: 'No Argument with id 0 found'})
 ];
 
 
@@ -119,94 +128,15 @@ describe('With an empty database', function(): void {
 	});
 
 	describe('GET Argument', function(): void {
-		it('with no parameters, respond with code 400 and error message', function(): any {
-			return request(app)
-				.get('/argument')
-				.set('Accept', 'application/json')
-				.expect('Content-Type', /json/)
-				.expect(400, {
-					errorCode: 400,
-					errorDetail: 'No Arguments after id 0 found'
-				});
-		});
-		it('with after_id = 10, respond with code 400 and error message', function(): any {
-			return request(app)
-				.get('/argument')
-				.query({
-					after_id: '10'
-				})
-				.set('Accept', 'application/json')
-				.expect('Content-Type', /json/)
-				.expect(400, {
-					errorCode: 400,
-					errorDetail: 'No Arguments after id 10 found'
-				});
-		});
-		it('with limit = 10, respond with code 400 and error message', function(): any {
-			return request(app)
-				.get('/argument')
-				.query({
-					limit: '10'
-				})
-				.type('json')
-				.accept('json')
-				.expect(400, {
-					errorCode: 400,
-					errorDetail: 'No Arguments after id 0 found'
-				});
-		});
-		it('with after_id = 10 and limit = 10, respond with code 400 and error message', function(): any {
-			return request(app)
-				.get('/argument')
-				.query({
-					limit: '10',
-					after_id: '10'
-				})
-				.type('json')
-				.accept('json')
-				.expect(400, {
-					errorCode: 400,
-					errorDetail: 'No Arguments after id 10 found'
-				});
-		});
-
-		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
-			let id: number = 0;
-
-			return request(app)
-				.get(`/argument/${id}/tree`)
-				.query({
-					max_depth: '10'
-				})
-				.type('json')
-				.accept('json')
-				.expect(400, {
-					errorCode: 400,
-					errorDetail: 'No Argument with id 0 found'
-				});
-		});
-	});
-
-	describe('POST Argument', function(): void {
-		it('with valid new argument, respond with code 200 and error message', function(): any {
-			let newArg = new ArgumentParams('My Conclusion', [ 'Premise 1', 'Premise 2' ], 'Induction');
-
-			return request(app).post('/argument').type('json').send(newArg).accept('json').expect(200).expect((res) => {
-				let errors: string[] = TestUtils.DoesArgumentMatchArgElements(newArg, res.body);
-
-				if (errors.length > 0) throw new Error(errors.map((error) => '\n - ' + error).join(''));
-			});
-		});
-    });
-
-	describe('Test Cases From Array', function(): void {
-        testCases.forEach(function(testCase: TestCase): void {
+        testCases
+        .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.GET)
+        .forEach(function(testCase: TestCase): void {
             it(testCase.description, function(): request.Test | undefined {
                 const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
 
                 if (httpMethod) {
                     return httpMethod
-                    .query(testCase.testCondition.query)
+                    .query(testCase.testCondition.data)
                     .type('json')
                     .set('Accept', 'application/json')
 				    // .expect('Content-Type', /json/) Need to add this back in but 404 still comes as HTML
@@ -228,51 +158,31 @@ describe('With an empty database', function(): void {
                 }
             });
         });
+	});
 
+	describe('POST Argument', function(): void {
+        testCases
+        .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.POST)
+        .forEach(function(testCase: TestCase): void {
+            it(testCase.description, function(): request.Test | undefined {
+                const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
+
+                if (httpMethod) {
+                    return httpMethod
+                    .send(testCase.testCondition.data)
+                    .type('json')
+                    .set('Accept', 'application/json')
+				    // .expect('Content-Type', /json/) Need to add this back in but 404 still comes as HTML
+                    .expect(testCase.expectedResult.response_code)
+                    .expect((res) => {
+						let errors: string[] =
+                            TestUtils.DoesArgumentMatchArgElements(testCase.testCondition.data as ArgumentParams, res.body);
+						if (errors.length > 0) throw new Error(errors.map((error) => '\n - ' + error).join(''));
+                    });
+                } else {
+                    return undefined;
+                }
+            });
+        });
     });
 });
-
-
-// describe('With an filled-in database', function(): void {
-// 	beforeEach(() => {
-//         let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
-//         return MyConnectionManager.SetCurrentConnection(dbToUse).then((connection) => {
-// 			return CreateNode(connection, 4);
-// 		});
-// 	});
-
-// 	afterEach(() => {
-// 		let conn = MyConnectionManager.GetCurrentConnection();
-// 		return conn.close();
-// 	});
-
-// 	describe('GET Argument', function(): void {
-// 		it('with no parameters, respond with code 200 and error message', function(): any {
-// 			return request(app)
-// 				.get('/argument')
-// 				.set('Accept', 'application/json')
-// 				.expect('Content-Type', /json/)
-// 				.expect(200)
-// 				.expect((response) => {
-// 				  expect(response.body.length).to.equal(15);
-// 				}); /* ignore
-// 				.expect((response) => {
-// 				  expect(response).to.equal({ 'bob' : '15'});
-// 				  let count = response.body.reduce((acc, cur) => cur.id === id ? ++acc : acc, 0);
-// 				});
-// 		*/});
-
-// 		it('tree with id = 0 and max_depth = 10, respond with code 400 and error message', function(): any {
-// 			let id: number = 0;
-
-// 			return request(app)
-// 				.get(`/argument/${id}`)
-// 				.type('json')
-// 				.accept('json')
-// 				.expect(200, {
-// 					errorCode: 400,
-// 					errorDetail: 'No Argument with id 0 found'
-// 				});
-// 		});
-// 	});
-// });
