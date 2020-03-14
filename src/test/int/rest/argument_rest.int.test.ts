@@ -80,108 +80,84 @@ const testCases: TestCase[] = [
                     errorDetail: 'No Argument with id 0 found'})
 ];
 
-
-
 const app = RestApp();
 
-async function CreateNode(
-	connection: Connection,
-	max_level: number,
-	current_level: number = 0,
-	path: string = ''
-): Promise<ModelStatement> {
-	let conclusion: ModelStatement = connection.manager.create(ModelStatement, { text: 'Conclusion ' + path });
+[DB_STATE.EMPTY_DB, DB_STATE.FULL_DB].forEach(dbState => {
+    describe(`With an ${dbState} database`, function(): void {
+        const emptyDbTestCases = testCases.filter(testCase => testCase.testCondition.state === dbState);
 
-	await connection.manager.save(conclusion);
-
-	if (current_level < max_level) {
-		let leftNode: ModelStatement = await CreateNode(connection, max_level, current_level + 1, path + 'L');
-
-		let rightNode: ModelStatement = await CreateNode(connection, max_level, current_level + 1, path + 'R');
-
-		let argument: ModelArgument = connection.manager.create(ModelArgument, {
-			conclusion: conclusion,
-			premises: [ leftNode, rightNode ],
-			reasoning_method: ReasoningMethod.Induction
-		});
-
-		await connection.manager.save(argument);
-	}
-
-	return new Promise<ModelStatement>((resolve) => {
-		resolve(conclusion);
-	});
-}
-
-describe('With an empty database', function(): void {
-	beforeEach(() => {
-        if (process.env.USER = 'gitpod') {
-            return MyConnectionManager.SetCurrentConnection('gitpod');
-        } else {
-            return MyConnectionManager.SetCurrentConnection('testing');
-        }
-	});
-
-	afterEach(() => {
-		let conn = MyConnectionManager.GetCurrentConnection();
-		return conn.close();
-	});
-
-	describe('GET Argument', function(): void {
-        testCases
-        .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.GET)
-        .forEach(function(testCase: TestCase): void {
-            it(testCase.description, function(): request.Test | undefined {
-                const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
-
-                if (httpMethod) {
-                    return httpMethod
-                    .query(testCase.testCondition.data)
-                    .type('json')
-                    .set('Accept', 'application/json')
-				    .expect('Content-Type', /json/)
-                    .expect(testCase.expectedResult.response_code)
-                    .expect((res) => {
-
-                        const difference = TestUtils.CompareResponseToExpected(res.body, testCase.expectedResult.response_object);
-
-                        if (Object.keys(difference).length !== 0) {
-                            const expectedString = JSON.stringify(testCase.expectedResult.response_object);
-                            const resultString = JSON.stringify(res.body);
-                            const differenceString = JSON.stringify(difference);
-
-                            throw new Error(`Expected: ${expectedString} \nResult: ${resultString}`);
-                        }
-                    });
+        beforeEach(() => {
+            let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
+            return MyConnectionManager.SetCurrentConnection(dbToUse).then((connection): Promise<any> => {
+                if (dbState === DB_STATE.FULL_DB) {
+                    return TestUtils.CreateNode(connection, 4);
                 } else {
-                    return undefined;
+                    return Promise.resolve();
                 }
             });
         });
-	});
 
-	describe('POST Argument', function(): void {
-        testCases
-        .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.POST)
-        .forEach(function(testCase: TestCase): void {
-            it(testCase.description, function(): request.Test | undefined {
-                const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
+        afterEach(() => {
+            let conn = MyConnectionManager.GetCurrentConnection();
+            return conn.close();
+        });
 
-                if (httpMethod) {
-                    return httpMethod
-                    .send(testCase.testCondition.data)
-                    .type('json')
-                    .set('Accept', 'application/json')
-				    .expect('Content-Type', /json/)
-                    .expect(testCase.expectedResult.response_code)
-                    .expect((res) => {
-						let errors: string[] =
-                            TestUtils.DoesArgumentMatchArgElements(testCase.testCondition.data as ArgumentParams, res.body);
-						if (errors.length > 0) throw new Error(errors.map((error) => '\n - ' + error).join(''));
-                    });
-                } else {
-                    return undefined;
-                }
+        describe('GET Argument', function(): void {
+            emptyDbTestCases
+            .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.GET)
+            .forEach(function(testCase: TestCase): void {
+                it(testCase.description, function(): request.Test | undefined {
+                    const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
+
+                    if (httpMethod) {
+                        return httpMethod
+                        .query(testCase.testCondition.data)
+                        .type('json')
+                        .set('Accept', 'application/json')
+                        .expect('Content-Type', /json/)
+                        .expect(testCase.expectedResult.response_code)
+                        .expect((res) => {
+
+                            const difference = TestUtils.CompareResponseToExpected(res.body, testCase.expectedResult.response_object);
+
+                            if (Object.keys(difference).length !== 0) {
+                                const expectedString = JSON.stringify(testCase.expectedResult.response_object);
+                                const resultString = JSON.stringify(res.body);
+                                const differenceString = JSON.stringify(difference);
+
+                                throw new Error(`Expected: ${expectedString} \nResult: ${resultString}`);
+                            }
+                        });
+                    } else {
+                        return undefined;
+                    }
+                });
+            });
+        });
+
+        describe('POST Argument', function(): void {
+            emptyDbTestCases
+            .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.POST)
+            .forEach(function(testCase: TestCase): void {
+                it(testCase.description, function(): request.Test | undefined {
+                    const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
+
+                    if (httpMethod) {
+                        return httpMethod
+                        .send(testCase.testCondition.data)
+                        .type('json')
+                        .set('Accept', 'application/json')
+                        .expect('Content-Type', /json/)
+                        .expect(testCase.expectedResult.response_code)
+                        .expect((res) => {
+                            let errors: string[] =
+                                TestUtils.DoesArgumentMatchArgElements(testCase.testCondition.data as ArgumentParams, res.body);
+                            if (errors.length > 0) throw new Error(errors.map((error) => '\n - ' + error).join(''));
+                        });
+                    } else {
+                        return undefined;
+                    }
+                });
             });
         });
     });

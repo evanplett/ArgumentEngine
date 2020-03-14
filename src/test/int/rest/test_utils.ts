@@ -1,10 +1,14 @@
 import {
-  ModelArgument
+  ModelArgument,
+  ReasoningMethod
 } from '../../../business_model_typeorm/entity/Argument';
 
 import {
   ModelStatement
 } from '../../../business_model_typeorm/entity/Statement';
+
+import { Connection } from 'typeorm';
+
 
 import { APIRequest, TestCase, TestCondition, DB_STATE, REQUEST_TYPE } from './test_case';
 
@@ -77,5 +81,35 @@ export class TestUtils {
   static CompareResponseToExpected(response: object, expected: object): object {
     return diff(response, expected);
   }
+
+  static async CreateNode(
+        connection: Connection,
+        max_level: number,
+        current_level: number = 0,
+        path: string = ''
+    ): Promise<ModelStatement> {
+        let conclusion: ModelStatement = connection.manager.create(ModelStatement, { text: 'Conclusion ' + path });
+
+        await connection.manager.save(conclusion);
+
+        if (current_level < max_level) {
+            let leftNode: ModelStatement = await TestUtils.CreateNode(connection, max_level, current_level + 1, path + 'L');
+
+            let rightNode: ModelStatement = await TestUtils.CreateNode(connection, max_level, current_level + 1, path + 'R');
+
+            let argument: ModelArgument = connection.manager.create(ModelArgument, {
+                conclusion: conclusion,
+                premises: [ leftNode, rightNode ],
+                reasoning_method: ReasoningMethod.Induction
+            });
+
+            await connection.manager.save(argument);
+        }
+
+        return new Promise<ModelStatement>((resolve) => {
+            resolve(conclusion);
+        });
+    }
+
 
 }
