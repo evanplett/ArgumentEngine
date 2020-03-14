@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {Request, Response} from 'express';
+import {Request, Response, NextFunction} from 'express';
 
 
 export function MapRoutesOnApp(app: express.Application, routes: any  ): void {
@@ -13,5 +13,17 @@ export function MapRoutesOnApp(app: express.Application, routes: any  ): void {
                 res.json(result);
             }
         });
+    });
+}
+
+export function HandleErrors(app: express.Application): void {
+    // 404
+    app.use(function(req: Request, res: Response, next: NextFunction): Response {
+        return res.status(404).send({ message: 'Route \'' + req.url + '\' not found.' });
+    });
+
+    // 500 - Any server error
+    app.use(function(err: any, req: Request, res: Response, next: NextFunction): Response {
+        return res.status(500).send({ error: err });
     });
 }

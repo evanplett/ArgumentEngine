@@ -21,7 +21,7 @@ const testCases: TestCase[] = [
                  '',
                  {},
                  404,
-                 {}),
+                 { message: 'Route \'/\' not found.'}),
 
     new TestCase('with no parameters, respond with code 400 and error message',
                  DB_STATE.EMPTY_DB,
@@ -139,7 +139,7 @@ describe('With an empty database', function(): void {
                     .query(testCase.testCondition.data)
                     .type('json')
                     .set('Accept', 'application/json')
-				    // .expect('Content-Type', /json/) Need to add this back in but 404 still comes as HTML
+				    .expect('Content-Type', /json/)
                     .expect(testCase.expectedResult.response_code)
                     .expect((res) => {
 
@@ -172,7 +172,7 @@ describe('With an empty database', function(): void {
                     .send(testCase.testCondition.data)
                     .type('json')
                     .set('Accept', 'application/json')
-				    // .expect('Content-Type', /json/) Need to add this back in but 404 still comes as HTML
+				    .expect('Content-Type', /json/)
                     .expect(testCase.expectedResult.response_code)
                     .expect((res) => {
 						let errors: string[] =
