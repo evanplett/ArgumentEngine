@@ -31,7 +31,7 @@ export class ArgumentParams {
 
 export class TestUtils {
 
-  // eeturns an array of strings that describe the differences
+  // returns an array of strings that describe the differences
   static DoesArgumentMatch(conclusion: string, premises: string[], reasoning_method: string, argument: ModelArgument): string [] {
 
     let errors: string [] = [];
@@ -111,10 +111,10 @@ export class TestUtils {
         });
     }
 
-  static AddTestCases(testCases: TestCase[], condition: TestCondition, results: Map<DB_STATE,TestResult>) {
-      results.forEach(result => {
-          testCases.push({testCondition: condition, expectedResult: result} as TestCase);
-      })
+  static AddTestCases(testCases: TestCase[], condition: TestCondition, results: Map<DB_STATE, TestResult>): void {
+      results.forEach( (result, db_state) => {
+          testCases.push(new TestCase(db_state, condition, result));
+      });
   }
 
 }

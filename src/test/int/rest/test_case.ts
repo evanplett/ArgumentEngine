@@ -1,6 +1,6 @@
 export enum DB_STATE {
-    EMPTY_DB,
-    FULL_DB
+    EMPTY_DB = 'Empty Database',
+    FULL_DB = 'Full Database'
 }
 
 export enum REQUEST_TYPE {
@@ -49,20 +49,26 @@ export class TestCase {
     testCondition: TestCondition;
     expectedResult: TestResult;
 
-    constructor(conditionDescription: string,
-                state: DB_STATE,
-                request_type: REQUEST_TYPE,
-                request_url: string,
-                data: object,
-                response_code: number,
-                response_object: object,
-                resultDescription: string) {
+    constructor(state: DB_STATE, condition: TestCondition, result:  TestResult) {
         this.state = state;
-        this.testCondition = new TestCondition(request_type, request_url, data, conditionDescription);
-        this.expectedResult = new TestResult(response_code, response_object, resultDescription);
+        this.testCondition = condition;
+        this.expectedResult = result;
     }
 
+    // constructor(conditionDescription: string,
+    //             state: DB_STATE,
+    //             request_type: REQUEST_TYPE,
+    //             request_url: string,
+    //             data: object,
+    //             response_code: number,
+    //             response_object: object,
+    //             resultDescription: string) {
+    //     this.state = state;
+    //     this.testCondition = new TestCondition(request_type, request_url, data, conditionDescription);
+    //     this.expectedResult = new TestResult(response_code, response_object, resultDescription);
+    // }
+
     GetDescription(): string {
-        return 'With ' + this.testCondition.description + ", respond with " + this.expectedResult.description;
+        return 'With ' + this.testCondition.description + ', respond with ' + this.expectedResult.description;
     }
 }

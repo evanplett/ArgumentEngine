@@ -15,98 +15,94 @@ import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult } from './t
 
 let testCases: TestCase[] = [];
 
-
-let bob = new Map([
-[ DB_STATE.EMPTY_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')],
-[ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
-]);
-
-
-
-
-TestUtils.AddTestCases(testCases,
-    new TestCondition(REQUEST_TYPE.GET,
+// get
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.GET,
         '',
         {},
         'no URL'),
     new Map([
-        [ DB_STATE.EMPTY_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')],
-        [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
-        ])
+        [ DB_STATE.EMPTY_DB, new TestResult(404, { message: 'Route \'/\' not found.'}, '404 and error message')],
+        [ DB_STATE.FULL_DB, new TestResult(404, { message: 'Route \'/\' not found.'}, '404 and error message')]
+    ])
 );
 
-const testCasesold: TestCase[] = [
-    // get
-    new TestCase('With no URL',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.GET,
-                 '',
-                 {},
-                 404,
-                 { message: 'Route \'/\' not found.'}),
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.GET,
+        '/argument',
+        {},
+        'argument with no parameters'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            400,
+            {  errorCode: 400,
+               errorDetail: 'No Arguments after id 0 found'},
+            'code 400 and error message')],
+        // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+    ])
+);
 
-    new TestCase('with no parameters, respond with code 400 and error message',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.GET,
-                 '/argument',
-                 {},
-                 400,
-                 {  errorCode: 400,
-					errorDetail: 'No Arguments after id 0 found'}),
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.GET,
+        '/argument',
+        { limit: '10'},
+        'argument with limit = 10'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            400,
+            {  errorCode: 400,
+               errorDetail: 'No Arguments after id 0 found'},
+            'code 400 and error message')],
+        // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+    ])
+);
 
-    new TestCase('with limit = 10, respond with code 400 and error message',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.GET,
-                 '/argument',
-                 {  limit: '10'},
-                 400,
-                 {  errorCode: 400,
-                    errorDetail: 'No Arguments after id 0 found'}),
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.GET,
+        '/argument/0/tree',
+        { max_depth: '10'},
+        'argument tree with id = 0 and max_depth = 10'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            400,
+            {  errorCode: 400,
+               errorDetail: 'No Argument with id 0 found'},
+            'code 400 and error message')],
+        // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+    ])
+);
 
-    new TestCase('with after_id = 10, respond with code 400 and error message',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.GET,
-                 '/argument',
-                 {  after_id: '10'},
-                 400,
-                 {  errorCode: 400,
-                    errorDetail: 'No Arguments after id 10 found'}),
-
-    new TestCase('with after_id = 10 and limit = 10, respond with code 400 and error message',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.GET,
-                 '/argument',
-                 {  after_id: '10',
-                    limit: '10'},
-                 400,
-                 {  errorCode: 400,
-                    errorDetail: 'No Arguments after id 10 found'}),
-
-    new TestCase('tree with id = 0 and max_depth = 10, respond with code 400 and error message',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.GET,
-                 '/argument/0/tree',
-                 {  max_depth: '10'},
-                 400,
-                 {  errorCode: 400,
-                    errorDetail: 'No Argument with id 0 found'}),
-
-    // post
-    new TestCase('with valid new argument, respond with code 200 and error message',
-                 DB_STATE.EMPTY_DB,
-                 REQUEST_TYPE.POST,
-                 '/argument',
-                 new ArgumentParams('My Conclusion', [ 'Premise 1', 'Premise 2' ], 'Induction'),
-                 200,
-                 {  errorCode: 400,
-                    errorDetail: 'No Argument with id 0 found'})
-];
+// post
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.POST,
+        '/argument',
+        new ArgumentParams('My Conclusion', [ 'Premise 1', 'Premise 2' ], 'Induction'),
+        'argument from valid new argument'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            200,
+            {  errorCode: 400,
+               errorDetail: 'No Argument with id 0 found'},
+            'code 200 and error message')],
+        // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+    ])
+);
 
 const app = RestApp();
 
 [DB_STATE.EMPTY_DB, DB_STATE.FULL_DB].forEach(dbState => {
-    describe(`With an ${dbState} database`, function(): void {
-        const emptyDbTestCases = testCases.filter(testCase => testCase.testCondition.state === dbState);
+    describe(`With a(n) ${dbState} database`, function(): void {
+        const testCasesForDbState = testCases.filter(testCase => testCase.state === dbState);
 
         beforeEach(() => {
             let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
@@ -125,10 +121,10 @@ const app = RestApp();
         });
 
         describe('GET Argument', function(): void {
-            emptyDbTestCases
+            testCasesForDbState
             .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.GET)
             .forEach(function(testCase: TestCase): void {
-                it(testCase.description, function(): request.Test | undefined {
+                it(testCase.GetDescription(), function(): request.Test | undefined {
                     const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
 
                     if (httpMethod) {
@@ -158,10 +154,10 @@ const app = RestApp();
         });
 
         describe('POST Argument', function(): void {
-            emptyDbTestCases
+            testCasesForDbState
             .filter(testCase => testCase.testCondition.request.request_type === REQUEST_TYPE.POST)
             .forEach(function(testCase: TestCase): void {
-                it(testCase.description, function(): request.Test | undefined {
+                it(testCase.GetDescription(), function(): request.Test | undefined {
                     const httpMethod = TestUtils.CreateHTTPMethod(testCase.testCondition.request, request(app));
 
                     if (httpMethod) {
