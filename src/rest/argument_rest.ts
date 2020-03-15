@@ -17,7 +17,7 @@ export class Argument {
 
   // *********** CREATE ********** //
   async create(request: Request, response: Response, next: NextFunction): Promise<void> {
-    logger.trace('Rest::Argument::create(request.body: ' + request.body);
+    logger.trace('Rest::Argument::create(request.body: ' + JSON.stringify(request.body));
     this.af
     .createOne(request.body.conclusion, request.body.reasoning_method, request.body.premises)
     .then((value) => {
