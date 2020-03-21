@@ -40,4 +40,4 @@ jobs:
     - run: npm run build-ts --if-present
       env:
         CI: true
-        User: github 
+        TestHost: github 
