@@ -122,6 +122,8 @@ export class TestUtils {
   }
 
   static DetermineTestingDB(): string {
+    logger.info('process.env.USER = ' + process.env.USER);
+
     if (process.env.USER === 'gitpod') {
         logger.info('Using Gitpod test database');
         return 'gitpod';
