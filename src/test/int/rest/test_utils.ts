@@ -117,4 +117,14 @@ export class TestUtils {
       });
   }
 
+  static DetermineTestingDB(): string {
+      switch (process.env.USER) {
+          case 'gitpod':
+            return 'gitpod';
+          case 'github':
+            return 'github';
+          default:
+            return 'testing';
+      }
+  }
 }

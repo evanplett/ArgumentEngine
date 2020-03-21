@@ -75,5 +75,31 @@
       "migrationsDir": "dst/business_model_typeorm/migration",
       "subscribersDir": "dst/business_model_typeorm/subscriber"
    }
+},
+{
+   "name": "github",
+   "type": "postgres",
+   "dropSchema": true,
+   "host": "localhost",
+   "port": 5432,
+   "username": "postgres",
+   "password": "postgres",
+   "database": "postgres",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "dist/business_model_typeorm/entity/**/*.js"
+   ],
+   "migrations": [
+      "dist/business_model_typeorm/migration/**/*.js"
+   ],
+   "subscribers": [
+      "dist/business_model_typeorm/subscriber/**/*.js"
+   ],
+   "cli": {
+      "entitiesDir": "dst/business_model_typeorm/entity",
+      "migrationsDir": "dst/business_model_typeorm/migration",
+      "subscribersDir": "dst/business_model_typeorm/subscriber"
+   }
 }
 ]

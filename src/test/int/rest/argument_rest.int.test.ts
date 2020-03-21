@@ -105,8 +105,7 @@ const app = RestApp();
         const testCasesForDbState = testCases.filter(testCase => testCase.state === dbState);
 
         beforeEach(() => {
-            let dbToUse = process.env.USER = 'gitpod' ? 'gitpod' : 'testing';
-            return MyConnectionManager.SetCurrentConnection(dbToUse).then((connection): Promise<any> => {
+            return MyConnectionManager.SetCurrentConnection(TestUtils.DetermineTestingDB()).then((connection): Promise<any> => {
                 if (dbState === DB_STATE.FULL_DB) {
                     return TestUtils.CreateNode(connection, 4);
                 } else {
