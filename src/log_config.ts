@@ -21,6 +21,7 @@ export const logDatamodel = new Category('data_model', logArgumentEngineBase);
 
 export const logDatamodelTypeorm = new Category('typeorm', logDatamodel);
 
+export const logTesting = new Category('testing', logArgumentEngineBase);
 
 
 

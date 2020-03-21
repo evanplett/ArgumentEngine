@@ -16,6 +16,10 @@ import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-ob
 
 import * as request from 'supertest';
 
+import {
+  logTesting as logger
+} from '../../../log_config';
+
 export class ArgumentParams {
 
   conclusion: string;
@@ -120,11 +124,14 @@ export class TestUtils {
   static DetermineTestingDB(): string {
       switch (process.env.USER) {
           case 'gitpod':
+            logger.info('Using Gitpod test database');
             return 'gitpod';
           case 'github':
+            logger.info('Using Github test database');
             return 'github';
           default:
-            return 'testing';
+            logger.info('Using Heroku test database');
+            return 'heroku-testing';
       }
   }
 }

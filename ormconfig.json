@@ -25,7 +25,7 @@
    }
 },
 {
-   "name": "testing",
+   "name": "heroku-testing",
    "type": "postgres",
    "dropSchema": true,
    "host": "ec2-174-129-253-125.compute-1.amazonaws.com",
