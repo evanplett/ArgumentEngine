@@ -122,16 +122,15 @@ export class TestUtils {
   }
 
   static DetermineTestingDB(): string {
-      switch (process.env.USER) {
-          case 'gitpod':
-            logger.info('Using Gitpod test database');
-            return 'gitpod';
-          case 'github':
-            logger.info('Using Github test database');
-            return 'github';
-          default:
-            logger.info('Using Heroku test database');
-            return 'heroku-testing';
-      }
+    if (process.env.USER === 'gitpod') {
+        logger.info('Using Gitpod test database');
+        return 'gitpod';
+    } else if (process.env.USER === 'github') {
+        logger.info('Using Github test database');
+        return 'github';
+    } else {
+        logger.info('Using Heroku test database');
+        return 'heroku-testing';
+    }
   }
 }
