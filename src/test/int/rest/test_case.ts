@@ -1,3 +1,5 @@
+import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
+
 export enum DB_STATE {
     EMPTY_DB = 'Empty Database',
     FULL_DB = 'Full Database'
@@ -32,14 +34,40 @@ export class TestCondition {
     }
 }
 
+interface TestResultAssesment {
+    Compare(actualResult: object): string;
+}
+
+export class DiffComparison implements TestResultAssesment {
+    expectedResult: object;
+
+    constructor(expectedResult: object) {
+        this.expectedResult = expectedResult;
+    }
+
+    Compare(actualResult: object): string {
+        const difference = diff(actualResult, this.expectedResult);
+
+        if (Object.keys(difference).length !== 0) {
+            const expectedString = JSON.stringify(this.expectedResult);
+            const resultString = JSON.stringify(actualResult);
+            const differenceString = JSON.stringify(difference);
+
+            return `Expected: ${expectedString} \nResult: ${resultString} \nDifference" ${differenceString}`;
+        } else {
+            return '';
+        }
+    }
+}
+
 export class TestResult {
     response_code: number;
-    response_object: object;
+    assessment: TestResultAssesment;
     description: string;
 
-    constructor(response_code: number, response_object: object, description: string) {
+    constructor(response_code: number, assessment: TestResultAssesment, description: string) {
         this.response_code = response_code;
-        this.response_object = response_object;
+        this.assessment = assessment;
         this.description = description;
     }
 }
@@ -54,19 +82,6 @@ export class TestCase {
         this.testCondition = condition;
         this.expectedResult = result;
     }
-
-    // constructor(conditionDescription: string,
-    //             state: DB_STATE,
-    //             request_type: REQUEST_TYPE,
-    //             request_url: string,
-    //             data: object,
-    //             response_code: number,
-    //             response_object: object,
-    //             resultDescription: string) {
-    //     this.state = state;
-    //     this.testCondition = new TestCondition(request_type, request_url, data, conditionDescription);
-    //     this.expectedResult = new TestResult(response_code, response_object, resultDescription);
-    // }
 
     GetDescription(): string {
         return 'With ' + this.testCondition.description + ', respond with ' + this.expectedResult.description;

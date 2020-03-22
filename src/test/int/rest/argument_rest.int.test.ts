@@ -11,7 +11,7 @@ import * as request from 'supertest';
 
 import { RestApp } from '../../../rest/app';
 import { expect } from 'chai';
-import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult } from './test_case';
+import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult, DiffComparison } from './test_case';
 
 let testCases: TestCase[] = [];
 
@@ -24,8 +24,14 @@ TestUtils.AddTestCases(
         {},
         'no URL'),
     new Map([
-        [ DB_STATE.EMPTY_DB, new TestResult(404, { message: 'Route \'/\' not found.'}, '404 and error message')],
-        [ DB_STATE.FULL_DB, new TestResult(404, { message: 'Route \'/\' not found.'}, '404 and error message')]
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            404,
+            new DiffComparison({ message: 'Route \'/\' not found.'}),
+            '404 and error message')],
+        [ DB_STATE.FULL_DB, new TestResult(
+            404,
+            new DiffComparison({ message: 'Route \'/\' not found.'}),
+            '404 and error message')]
     ])
 );
 
@@ -39,10 +45,9 @@ TestUtils.AddTestCases(
     new Map([
         [ DB_STATE.EMPTY_DB, new TestResult(
             400,
-            {  errorCode: 400,
-               errorDetail: 'No Arguments after id 0 found'},
+            new DiffComparison({  errorCode: 400, errorDetail: 'No Arguments after id 0 found'}),
             'code 400 and error message')],
-        // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+        // [ DB_STATE.FULL_DB, new TestResult(200, { message: 'Route \'/\' not found.'}, '404 and error message')]
     ])
 );
 
@@ -56,8 +61,7 @@ TestUtils.AddTestCases(
     new Map([
         [ DB_STATE.EMPTY_DB, new TestResult(
             400,
-            {  errorCode: 400,
-               errorDetail: 'No Arguments after id 0 found'},
+            new DiffComparison({  errorCode: 400, errorDetail: 'No Arguments after id 0 found'}),
             'code 400 and error message')],
         // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
     ])
@@ -73,8 +77,7 @@ TestUtils.AddTestCases(
     new Map([
         [ DB_STATE.EMPTY_DB, new TestResult(
             400,
-            {  errorCode: 400,
-               errorDetail: 'No Argument with id 0 found'},
+            new DiffComparison({  errorCode: 400, errorDetail: 'No Argument with id 0 found'}),
             'code 400 and error message')],
         // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
     ])
@@ -91,8 +94,7 @@ TestUtils.AddTestCases(
     new Map([
         [ DB_STATE.EMPTY_DB, new TestResult(
             200,
-            {  errorCode: 400,
-               errorDetail: 'No Argument with id 0 found'},
+            new DiffComparison({  errorCode: 400, errorDetail: 'No Argument with id 0 found'}),
             'code 200 and error message')],
         // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
     ])
@@ -134,15 +136,9 @@ const app = RestApp();
                         .expect('Content-Type', /json/)
                         .expect(testCase.expectedResult.response_code)
                         .expect((res) => {
-
-                            const difference = TestUtils.CompareResponseToExpected(res.body, testCase.expectedResult.response_object);
-
-                            if (Object.keys(difference).length !== 0) {
-                                const expectedString = JSON.stringify(testCase.expectedResult.response_object);
-                                const resultString = JSON.stringify(res.body);
-                                const differenceString = JSON.stringify(difference);
-
-                                throw new Error(`Expected: ${expectedString} \nResult: ${resultString}`);
+                            const difference = testCase.expectedResult.assessment.Compare(res.body);
+                            if (difference.length !== 0) {
+                                throw new Error(difference);
                             }
                         });
                     } else {
