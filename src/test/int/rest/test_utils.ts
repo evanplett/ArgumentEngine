@@ -123,12 +123,12 @@ export class TestUtils {
 
   static DetermineTestingDB(): string {
     logger.info('process.env.USER = ' + process.env.USER);
-    logger.info('process.env.TestHost = ' + process.env.TestHost);
+    logger.info('process.env.GITHUB_ACTIONS = ' + process.env.GITHUB_ACTIONS);
 
     if (process.env.USER === 'gitpod') {
         logger.info('Using Gitpod test database');
         return 'gitpod';
-    } else if (process.env.TestHost === 'github') {
+    } else if (process.env.GITHUB_ACTIONS) {
         logger.info('Using Github test database');
         return 'github';
     } else {
