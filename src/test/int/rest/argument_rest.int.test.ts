@@ -11,7 +11,9 @@ import * as request from 'supertest';
 
 import { RestApp } from '../../../rest/app';
 import { expect } from 'chai';
-import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult, DiffComparison } from './test_case';
+import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult } from './test_case';
+
+import { DiffComparison, ConditionComparison, ConditionLength } from './test_case_assesments';
 
 let testCases: TestCase[] = [];
 
@@ -47,7 +49,10 @@ TestUtils.AddTestCases(
             400,
             new DiffComparison({  errorCode: 400, errorDetail: 'No Arguments after id 0 found'}),
             'code 400 and error message')],
-        // [ DB_STATE.FULL_DB, new TestResult(200, { message: 'Route \'/\' not found.'}, '404 and error message')]
+         [ DB_STATE.FULL_DB, new TestResult(
+            200,
+            new ConditionComparison([ new ConditionLength() ]),
+            '404 and error message')]
     ])
 );
 

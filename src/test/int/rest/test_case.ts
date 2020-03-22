@@ -1,4 +1,4 @@
-import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
+import * as Assesment from './test_case_assesments';
 
 export enum DB_STATE {
     EMPTY_DB = 'Empty Database',
@@ -34,38 +34,12 @@ export class TestCondition {
     }
 }
 
-interface TestResultAssesment {
-    Compare(actualResult: object): string;
-}
-
-export class DiffComparison implements TestResultAssesment {
-    expectedResult: object;
-
-    constructor(expectedResult: object) {
-        this.expectedResult = expectedResult;
-    }
-
-    Compare(actualResult: object): string {
-        const difference = diff(actualResult, this.expectedResult);
-
-        if (Object.keys(difference).length !== 0) {
-            const expectedString = JSON.stringify(this.expectedResult);
-            const resultString = JSON.stringify(actualResult);
-            const differenceString = JSON.stringify(difference);
-
-            return `Expected: ${expectedString} \nResult: ${resultString} \nDifference" ${differenceString}`;
-        } else {
-            return '';
-        }
-    }
-}
-
 export class TestResult {
     response_code: number;
-    assessment: TestResultAssesment;
+    assessment: Assesment.TestResultAssesment;
     description: string;
 
-    constructor(response_code: number, assessment: TestResultAssesment, description: string) {
+    constructor(response_code: number, assessment: Assesment.TestResultAssesment, description: string) {
         this.response_code = response_code;
         this.assessment = assessment;
         this.description = description;
