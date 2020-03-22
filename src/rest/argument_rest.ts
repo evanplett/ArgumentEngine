@@ -12,6 +12,10 @@ import {
   logArgumentEngineBase as logger
 } from '../log_config';
 
+import {
+    ArgumentSerializer
+} from '../serialization/argument_serializer';
+
 export class Argument {
   private af: FacadeArgument = new FacadeArgument();
 
@@ -46,7 +50,7 @@ export class Argument {
     this.af
     .getOne(Number(request.params.id))
     .then((value) => {
-      response.status(200).json(value);
+      response.status(200).json(ArgumentSerializer.serialize(value));
     })
     .catch((error) => {
       response.status(400).send(error);
