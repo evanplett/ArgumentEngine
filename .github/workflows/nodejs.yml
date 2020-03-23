@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
+if: "!contains(github.event.head_commit.message, 'WIP:')"
 on:
   push:
     branches: [ master, Increment1 ]
