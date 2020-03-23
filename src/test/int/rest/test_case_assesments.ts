@@ -28,14 +28,35 @@ export class DiffComparison implements TestResultAssesment {
 }
 
 interface Condition {
-    errorText: string;
+    ErrorText(): string;
     Check(actualResult: object): boolean;
 }
 
 export class ConditionLength implements Condition {
+    expectedLength: number;
+    actualLength: number;
 
-    errorText: string;
+    constructor(expectedLength: number) { this.expectedLength = expectedLength; }
+
+    ErrorText(): string {
+        return `Expected length ${this.expectedLength} does not equal actual length ${this.actualLength}`;
+    }
+
     Check(actualResult: object): boolean {
+        this.actualLength = Object.keys(actualResult).length;
+        return this.expectedLength === this.actualLength;
+    }
+}
+
+export class ConditionShowResult implements Condition {
+    result: object;
+
+    ErrorText(): string {
+        return `Expected length ${this.expectedLength} does not equal actual length ${this.actualLength}`;
+    }
+
+    Check(actualResult: object): boolean {
+        this.result = actualResult;
         return false;
     }
 }
@@ -52,7 +73,7 @@ export class ConditionComparison implements TestResultAssesment {
 
         this.conditions.forEach(condition => {
             if (!condition.Check(actualResult)) {
-                errors += condition.errorText + '\n';
+                errors += condition.ErrorText() + '\n';
             }
         });
 

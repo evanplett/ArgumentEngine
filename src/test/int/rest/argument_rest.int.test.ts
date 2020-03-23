@@ -51,7 +51,7 @@ TestUtils.AddTestCases(
             'code 400 and error message')],
          [ DB_STATE.FULL_DB, new TestResult(
             200,
-            new ConditionComparison([ new ConditionLength() ]),
+            new ConditionComparison([ new ConditionLength(15) ]),
             '404 and error message')]
     ])
 );
