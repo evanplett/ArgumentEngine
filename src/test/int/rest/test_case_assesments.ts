@@ -52,7 +52,7 @@ export class ConditionShowResult implements Condition {
     result: object;
 
     ErrorText(): string {
-        return `Expected length ${this.expectedLength} does not equal actual length ${this.actualLength}`;
+        return 'Result: \n' + JSON.stringify(this.result, null, 2);
     }
 
     Check(actualResult: object): boolean {

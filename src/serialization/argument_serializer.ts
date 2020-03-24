@@ -5,5 +5,8 @@ import {
 } from 'jsonapi-serializer';
 
 export const ArgumentSerializer = new JSONAPISerializer('argument', {
-  attributes: ['conclusion', 'premises', 'reasoning_method']
+  attributes: ['conclusion', 'premises', 'reasoning_method'],
+  conclusion: {
+      
+  }
 });

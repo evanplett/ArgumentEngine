@@ -13,7 +13,12 @@ import { RestApp } from '../../../rest/app';
 import { expect } from 'chai';
 import { TestCase, DB_STATE, REQUEST_TYPE, TestCondition, TestResult } from './test_case';
 
-import { DiffComparison, ConditionComparison, ConditionLength } from './test_case_assesments';
+import {
+    DiffComparison,
+    ConditionComparison,
+    ConditionLength,
+    ConditionShowResult
+} from './test_case_assesments';
 
 let testCases: TestCase[] = [];
 
@@ -52,9 +57,29 @@ TestUtils.AddTestCases(
          [ DB_STATE.FULL_DB, new TestResult(
             200,
             new ConditionComparison([ new ConditionLength(15) ]),
-            '404 and error message')]
+            'A set of 15 elements')]
     ])
 );
+
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.GET,
+        '/argument/1',
+        {},
+        'argument id 1 with no parameters'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            400,
+            new DiffComparison({  errorCode: 400, errorDetail: 'No Argument with id 1 found'}),
+            'code 400 and error message')],
+         [ DB_STATE.FULL_DB, new TestResult(
+            200,
+            new ConditionComparison([ new ConditionShowResult() ]),
+            'One element')]
+    ])
+);
+
 
 TestUtils.AddTestCases(
     testCases,
@@ -68,7 +93,10 @@ TestUtils.AddTestCases(
             400,
             new DiffComparison({  errorCode: 400, errorDetail: 'No Arguments after id 0 found'}),
             'code 400 and error message')],
-        // [ DB_STATE.FULL_DB, new TestResult(404,{ message: 'Route \'/\' not found.'},'404 and error message')]
+        // [ DB_STATE.FULL_DB, new TestResult(
+        //     200,
+        //     new ConditionComparison([ new ConditionLength(15), new ConditionShowResult() ]),
+        //     '404 and error message')]
     ])
 );
 
