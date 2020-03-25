@@ -58,7 +58,7 @@ export class ArgumentController {
   }
 
   one(id: number): Promise < ModelArgument > {
-    logger.trace('Controller::Argument::one');
+    logger.trace(`Controller::Argument::one(id = ${id})`);
     return this.argumentRepository.findOneOrFail(id, {
       relations: ['conclusion', 'premises']
     });

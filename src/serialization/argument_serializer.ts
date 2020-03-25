@@ -7,6 +7,6 @@ import {
 export const ArgumentSerializer = new JSONAPISerializer('argument', {
   attributes: ['conclusion', 'premises', 'reasoning_method'],
   conclusion: {
-      
+      ref: 'id'
   }
 });

@@ -104,6 +104,25 @@ TestUtils.AddTestCases(
     testCases,
     new TestCondition(
         REQUEST_TYPE.GET,
+        '/argument/1/tree',
+        { max_depth: '2'},
+        'argument tree with id = 1 and max_depth = 2'),
+    new Map([
+        [ DB_STATE.EMPTY_DB, new TestResult(
+            400,
+            new DiffComparison({  errorCode: 400, errorDetail: 'No Argument with id 1 found'}),
+            'code 400 and error message')],
+        [ DB_STATE.FULL_DB, new TestResult(
+            200,
+            new ConditionComparison([ new ConditionShowResult() ]),
+            'element tree')]
+    ])
+);
+
+TestUtils.AddTestCases(
+    testCases,
+    new TestCondition(
+        REQUEST_TYPE.GET,
         '/argument/0/tree',
         { max_depth: '10'},
         'argument tree with id = 0 and max_depth = 10'),
