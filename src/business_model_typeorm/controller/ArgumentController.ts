@@ -26,8 +26,7 @@ export class ArgumentController {
 
   // *********** CREATE ********** //
   createOne(conclusion: ModelStatement, reasoning_method: ReasoningMethod, premises: ModelStatement[]): Promise < ModelArgument > {
-
-    logger.trace('Controller::Argument::createOne');
+    logger.trace(`Argument::createOne(conclusion: ${conclusion}, reasoning_method: ${reasoning_method}, premises: ${premises})`);
     return this.argumentRepository.save(this.argumentRepository.create(
       {
         conclusion: conclusion,
@@ -35,16 +34,18 @@ export class ArgumentController {
         reasoning_method: reasoning_method
       }))
     .then(newArgument => {
+      logger.trace('Argument::createOne - Returning value \'' + JSON.stringify(newArgument.id) + '\'');
       return this.one(newArgument.id);
     })
     .catch((error) => {
+      logger.trace('Argument::createOne - Returning error \'' + JSON.stringify(error) + '\'');
       return Promise.reject(new Error(400, `Unable to create Argument: ${error}`));
     });
   }
 
   // *********** READ ********** //
   many(afterId: number, maxCount: number): Promise < ModelArgument[] > {
-    logger.trace('Controller::Argument::many');
+    logger.trace(`Argument::many(afterId: ${afterId}, maxCount: ${maxCount})`);
     return this.argumentRepository.find({
       where: {
         id: MoreThan(afterId)
@@ -58,7 +59,7 @@ export class ArgumentController {
   }
 
   one(id: number): Promise < ModelArgument > {
-    logger.trace(`Controller::Argument::one(id = ${id})`);
+    logger.trace(`Argument::one(id = ${id})`);
     return this.argumentRepository.findOneOrFail(id, {
       relations: ['conclusion', 'premises']
     });

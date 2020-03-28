@@ -112,10 +112,10 @@ TestUtils.AddTestCases(
             400,
             new DiffComparison({  errorCode: 400, errorDetail: 'No Argument with id 1 found'}),
             'code 400 and error message')],
-        [ DB_STATE.FULL_DB, new TestResult(
-            200,
-            new ConditionComparison([ new ConditionShowResult() ]),
-            'element tree')]
+        // [ DB_STATE.FULL_DB, new TestResult(
+        //     200,
+        //     new ConditionComparison([ new ConditionShowResult() ]),
+        //     'element tree')]
     ])
 );
 

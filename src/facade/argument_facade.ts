@@ -42,7 +42,7 @@ export class FacadeArgument {
     reasoning_method: string,
     premises: (string | number)[]
   ): Promise < ModelArgument > {
-    logger.trace(`Façade::Argument::createOne(conclusion: ${conclusion} | reasoning_method: ${reasoning_method} | premises: ${premises})`);
+    logger.trace(`Argument::createOne(conclusion: ${conclusion} , reasoning_method: ${reasoning_method} | premises: ${premises})`);
     let conclusionStatement: Promise < ModelStatement > =
     typeof conclusion === 'string' ? this.fs.createOne(conclusion) : this.fs.getOne(conclusion);
 
@@ -58,47 +58,57 @@ export class FacadeArgument {
       premisStatements,
       methodOfReasoning])
     .then(([conclusionValue, premisValues, reasoningMethodValue]) => {
+      logger.trace('Argument::createOne - Returning promise of new Argument');
       return this.ac.createOne(conclusionValue, reasoningMethodValue, premisValues);
     })
     .catch((error) => {
+      logger.trace('Argument::createOne - Returning error \'' + JSON.stringify(error) + '\'');
       return Promise.reject(new Error(400, `Unable to create Argument: ${error}`));
     });
   }
 
   // *********** READ ********** //
   getList(limit?: number, after_id?: number): Promise < ModelArgument[] > {
-    logger.trace('Façade::Argument::getList');
+    logger.trace(`Argument::getList(limit: ${limit}, after_id: ${after_id})`);
     limit = limit && limit > 0 ? limit : FacadeArgument.DEFAULT_LIMIT;
     after_id = after_id && after_id >= 0 ? after_id : FacadeArgument.DEFAULT_AFTER_ID;
 
     return this.ac.many(after_id, limit)
     .then(list => {
       if (list.length > 0) {
+        logger.trace('Argument::getList - Returning list \'' + JSON.stringify(list) + '\'');
         return Promise.resolve(list);
       } else {
-        return Promise.reject(new Error(400, `No Arguments after id ${after_id} found`));
+        const error: Error = new Error(400, `No Arguments after id ${after_id} found`);
+        logger.trace('Argument::getList - Returning error \'' + JSON.stringify(error) + '\'');
+        return Promise.reject(error);
       }
     });
   }
 
   getOne(id: number): Promise < ModelArgument > {
-    logger.trace('Façade::Argument::getOne');
+    logger.trace(`Argument::getOne(id: ${id})`);
 
-    return this.ac.one(id).then(result => { return ArgumentSerializer.serialize(result); })
+    return this.ac.one(id)
+    .then(result => {
+      logger.trace('Argument::getOne - Returning result \'' + JSON.stringify(result) + '\'');
+      return ArgumentSerializer.serialize(result);
+    })
     .catch(error => {
+      logger.trace('Argument::getOne - Returning error \'' + JSON.stringify(error) + '\'');
       return Promise.reject(new Error(400, `No Argument with id ${id} found`));
     });
   }
 
   getTree(id: number, max_depth?: number): Promise < ArgumentTreeNode > {
-    logger.trace('Façade::Argument::getTree');
+    logger.trace(`Argument::getTree(id: ${id}, max_depth: ${max_depth})`);
     max_depth = max_depth && max_depth > 0 ? max_depth : FacadeArgument.DEFAULT_MAX_DEPTH;
 
     return this.getTreeNode(id, max_depth);
   }
 
   getTreeNode(id: number, max_depth: number, current_depth: number = 0): Promise < ArgumentTreeNode > {
-    logger.trace('Façade::Argument::getTreeNode');
+    logger.trace(`Argument::getTreeNode(id: ${id}, max_depth: ${max_depth}, current_depth: ${current_depth})`);
     return this.getOne(id)
     .then(argument => {
       if (current_depth >= max_depth) {
