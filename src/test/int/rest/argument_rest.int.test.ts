@@ -17,7 +17,8 @@ import {
     DiffComparison,
     ConditionComparison,
     ConditionLength,
-    ConditionShowResult
+    ConditionShowResult,
+    ConditionFunctionList
 } from './test_case_assesments';
 
 let testCases: TestCase[] = [];
@@ -75,7 +76,14 @@ TestUtils.AddTestCases(
             'code 400 and error message')],
          [ DB_STATE.FULL_DB, new TestResult(
             200,
-            new ConditionComparison([ new ConditionShowResult() ]),
+            new ConditionComparison([
+                new ConditionFunctionList( [
+                    result => {
+                        return (result as {data: {type: string}}).data.type !== 'Argument' ? 'data.type != Argument' : '';
+                    },
+                ]),
+                // new ConditionShowResult()
+            ]),
             'One element')]
     ])
 );

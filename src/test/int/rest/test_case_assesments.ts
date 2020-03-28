@@ -48,6 +48,31 @@ export class ConditionLength implements Condition {
     }
 }
 
+export class ConditionFunctionList implements Condition {
+    functionList: Array<(result: object) => string>;
+    errorsList: string[];
+
+    constructor(functionList: Array<(result: object) => string>) {
+        this.functionList = functionList;
+        this.errorsList = [];
+    }
+
+    ErrorText(): string {
+        return this.errorsList.join('\n');
+    }
+
+    Check(actualResult: object): boolean {
+        this.functionList.forEach(func => {
+            const error: string = func(actualResult);
+            if (error.length > 0) {
+                this.errorsList.push(error);
+            }
+        });
+
+        return this.errorsList.length === 0;
+    }
+}
+
 export class ConditionShowResult implements Condition {
     result: object;
 

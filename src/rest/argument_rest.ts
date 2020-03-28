@@ -12,10 +12,6 @@ import {
   logApiRest as logger
 } from '../log_config';
 
-import {
-    ArgumentSerializer
-} from '../serialization/argument_serializer';
-
 export class Argument {
   private af: FacadeArgument = new FacadeArgument();
 
@@ -55,7 +51,7 @@ export class Argument {
     .getOne(Number(request.params.id))
     .then((value) => {
       logger.trace('Argument::one - Returning value \'' + JSON.stringify(value) + '\'');
-      response.status(200).json(ArgumentSerializer.serialize(value));
+      response.status(200).json(value);
     })
     .catch((error) => {
       logger.trace('Argument::one - Returning error \'' + JSON.stringify(error) + '\'');
