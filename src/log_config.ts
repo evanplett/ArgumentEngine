@@ -7,7 +7,7 @@ import {
 } from 'typescript-logging';
 
 
-CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Trace));
+CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Warn));
 
 export const logArgumentEngineBase = new Category('argument_engine');
 export const logFacade = new Category('façade', logArgumentEngineBase);

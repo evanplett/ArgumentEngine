@@ -79,10 +79,25 @@ TestUtils.AddTestCases(
             new ConditionComparison([
                 new ConditionFunctionList( [
                     result => {
-                        return (result as {data: {type: string}}).data.type !== 'Argument' ? 'data.type != Argument' : '';
-                    },
-                ]),
-                // new ConditionShowResult()
+                        return (result as {data: {type: string}}).data.type !== 'Argument' ? 'data.type != Argument' : ''; },
+                    result => {
+                        return (result as {data: {id: string}}).data.id !== '1' ? 'data.id != 1' : ''; },
+                    result => {
+                        return (result as {data: {relationships: {conclusion: {data: {type: string}}}}})
+                            .data.relationships.conclusion.data.type !== 'Statement' ?
+                                'data.relationships.conclusion.data.type != Argument' : ''; },
+                    result => {
+                        return (result as {data: {relationships: {conclusion: {data: {id: string}}}}})
+                            .data.relationships.conclusion.data.id !== '4' ?
+                                'data.relationships.conclusion.data.id != 4' : ''; },
+                    result => {
+                        return (result as {data: {relationships: {premises: {data: any[]}}}})
+                            .data.relationships.premises.data.length !== 2 ?
+                                'data.relationships.premises.data.length != 2' : ''; },
+                    result => {
+                        return (result as {included: any[]})
+                            .included.length !== 3 ? 'included.length != 3' : ''; },
+                ])
             ]),
             'One element')]
     ])
